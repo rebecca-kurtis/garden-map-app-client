@@ -1,5 +1,3 @@
-import react from "react";
-
 import styles from "../styles/Header.module.css";
 import logo from "../images/CCG_logo.png";
 

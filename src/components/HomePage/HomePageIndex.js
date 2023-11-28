@@ -2,7 +2,7 @@ import react from "react";
 
 export default function HomePageIndex() {
   return (
-    <div>
+    <div className="homePageContainer" style={{height: "90vh"}}>
       Home Page
     </div>
   );
