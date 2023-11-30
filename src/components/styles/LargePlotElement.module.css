@@ -1,0 +1,21 @@
+.LargePlotElementContainer {
+  display: flex;
+  /* padding: 20px; */
+  flex-direction: column;
+}
+
+.LargePlotElement {
+  background-image: url("../images/Large_plot_updated.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 200px;
+  width: 150px;
+  background-position: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.iconElement {
+  padding-top: 100px;
+  justify-content: center;
+}
