@@ -3,14 +3,24 @@
   flex-direction: row;
   padding-top: 30px;
   justify-content: center;
+  column-gap: 20px;
 }
 
 .sec3Column {
   display: flex;
-  padding: 20px;
+  /* padding: 20px; */
+  /* column-gap: 300px; */
 }
 
-.sec3Column4 {
-  display: flex;
-  padding: 20px;
+.sec3row {
+display: flex;
+flex-direction: column;
+row-gap: 20px;
 }
+
+.sec3row4 {
+  display: flex;
+flex-direction: column;
+row-gap: 2px;
+}
+
