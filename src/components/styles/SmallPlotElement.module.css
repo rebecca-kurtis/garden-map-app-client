@@ -1,0 +1,25 @@
+.smallPlotElementContainer {
+  display: flex;
+  /* padding: 20px; */
+  flex-direction: column;
+}
+
+.smallPlotElement {
+  background-image: url("../images/temp_small_block.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 80px;
+  width: 80px;
+  background-position: center;
+  justify-content: center;
+  align-content: center;
+  /* -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1); */
+}
+
+.iconElement {
+  padding-top: 40px;
+  justify-content: center;
+}

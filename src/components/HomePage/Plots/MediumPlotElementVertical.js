@@ -1,9 +1,8 @@
-import styles from '../../styles/MediumPlotElement.module.css';
+import styles from '../../styles/MediumPlotElementVertical.module.css';
 
-export default function MediumPlotElement() {
+export default function MediumPlotElementVertical() {
   return (
     <div className={styles.mediumPlotElementContainer}>
-      mediumPlotElement
       <div className={styles.mediumPlotElement}>
         <div className={styles.iconElement}>icon</div>
       </div>
