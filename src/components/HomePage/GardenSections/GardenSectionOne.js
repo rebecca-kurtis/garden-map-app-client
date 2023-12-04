@@ -44,7 +44,7 @@ export default function GardenSectionOne() {
           <LargePlotElement />
         </div>
         <div className={styles.sec1row6col2}>
-          <div className={styles.sec1row6col1row}>
+          <div className={styles.sec1row6col2row}>
               <SmallPlotElement />
               <SmallPlotElement />
           </div>
