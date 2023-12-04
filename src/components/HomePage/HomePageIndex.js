@@ -16,6 +16,7 @@ export default function HomePageIndex() {
         <hr className={styles.dividerLine}></hr>
         <div className={styles.mapContainerRow}>
           <div className={styles.spaceBlocker}/>
+          <hr className={styles.dividerLineVertical}></hr>
         <GardenSectionThree />
         </div>
       </div>

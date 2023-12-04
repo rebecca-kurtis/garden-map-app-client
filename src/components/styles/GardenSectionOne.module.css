@@ -1,0 +1,51 @@
+.gardenSectionOneContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  /* justify-content: center; */
+}
+
+.sec1row1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.sec1row2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-content: right;
+  column-gap: 55px;
+  padding-right: 30px;
+}
+
+.sec1row3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-content: center;
+  column-gap: 15px;
+}
+
+.sec1row4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-content: center;
+  column-gap: 15px;
+}
+
+.sec1row5 {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  column-gap: 100px;
+}
+
+.sec1row6col1row {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
