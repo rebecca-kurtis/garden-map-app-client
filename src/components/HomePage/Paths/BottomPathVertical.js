@@ -1,4 +1,4 @@
-import styles from '../../styles/CircleBlocker.module.css';
+import styles from '../../styles/BottomPathVertical.module.css';
 
 export default function BottomPathVertical() {
   return (
