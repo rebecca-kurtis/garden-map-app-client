@@ -1,4 +1,4 @@
-import styles from '../../styles/LargePlotElement.module.css';
+import styles from '../../styles/HomePage/LargePlotElement.module.css';
 
 
 export default function LargePlotElement() {

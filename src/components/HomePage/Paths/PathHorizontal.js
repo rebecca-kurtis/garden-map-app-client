@@ -1,4 +1,4 @@
-import styles from '../../styles/PathHorizontal.module.css';
+import styles from '../../styles/HomePage/PathHorizontal.module.css';
 
 export default function PathHorizontal() {
   return (

@@ -1,4 +1,4 @@
-import styles from "../styles/HomePageIndex.module.css";
+import styles from "../styles/HomePage/HomePageIndex.module.css";
 import GardenSectionOne from "./GardenSections/GardenSectionOne";
 import GardenSectionThree from "./GardenSections/GardenSectionThree";
 import GardenSectionTwo from "./GardenSections/GardenSectionTwo";

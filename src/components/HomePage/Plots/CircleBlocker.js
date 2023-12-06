@@ -1,4 +1,4 @@
-import styles from '../../styles/CircleBlocker.module.css';
+import styles from '../../styles/HomePage/CircleBlocker.module.css';
 
 export default function CircleBlocker() {
   return (

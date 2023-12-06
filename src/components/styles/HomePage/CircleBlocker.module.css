@@ -6,7 +6,7 @@
 
 .circleBlocker {
   display: flex;
-  background-image: url("../images/Circle_blocker.png");
+  background-image: url("../../images/Circle_blocker.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 50px;

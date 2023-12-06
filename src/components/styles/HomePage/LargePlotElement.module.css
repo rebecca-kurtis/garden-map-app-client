@@ -1,15 +1,15 @@
-.mediumPlotElementContainer {
+.LargePlotElementContainer {
   display: flex;
   /* padding: 20px; */
   flex-direction: column;
 }
 
-.mediumPlotElement {
-  background-image: url("../images/Large_plot_updated.png");
+.LargePlotElement {
+  background-image: url("../../images/Large_plot_updated.png");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100px;
-  width: 50px;
+  height: 180px;
+  width: 90px;
   background-position: center;
   justify-content: center;
   align-content: center;

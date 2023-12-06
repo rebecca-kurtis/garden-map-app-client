@@ -5,7 +5,7 @@
 }
 
 .smallPlotElement {
-  background-image: url("../images/temp_small_block.png");
+  background-image: url("../../images/temp_small_block.png");
   background-size: cover;
   background-repeat: no-repeat;
   height: 75px;

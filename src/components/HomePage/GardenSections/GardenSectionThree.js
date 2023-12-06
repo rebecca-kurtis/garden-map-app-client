@@ -1,4 +1,4 @@
-import styles from '../../styles/GardenSectionThree.module.css';
+import styles from '../../styles/HomePage/GardenSectionThree.module.css';
 import LargePlotElement from '../Plots/LargePlotElement';
 import MediumPlotElementHorizontal from '../Plots/MediumPlotElementHorizontal';
 import MediumPlotElement from '../Plots/MediumPlotElementVertical';

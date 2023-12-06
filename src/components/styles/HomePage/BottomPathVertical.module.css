@@ -6,7 +6,7 @@
 
 .bottomPathVertical {
   display: flex;
-  background-image: url("../images/Bottom-path-vertical-updated.png");
+  background-image: url("../../images/Bottom-path-vertical-updated.png");
   background-size: contain;
   background-repeat: no-repeat;
   height: 500px;

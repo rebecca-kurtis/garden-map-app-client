@@ -1,4 +1,4 @@
-import styles from '../../styles/MediumPlotElementHorizontal.module.css';
+import styles from '../../styles/HomePage/MediumPlotElementHorizontal.module.css';
 
 export default function MediumPlotElementHorizontal() {
   return (

@@ -1,4 +1,4 @@
-import styles from '../../styles/SmallPlotElement.module.css';
+import styles from '../../styles/HomePage/SmallPlotElement.module.css';
 
 export default function SmallPlotElement() {
   return (

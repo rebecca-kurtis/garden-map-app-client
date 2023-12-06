@@ -1,4 +1,4 @@
-import styles from '../../styles/GardenSectionTwo.module.css';
+import styles from '../../styles/HomePage/GardenSectionTwo.module.css';
 import CircleBlocker from '../Plots/CircleBlocker';
 import LargePlotElement from '../Plots/LargePlotElement';
 import MediumPlotElementHorizontal from '../Plots/MediumPlotElementHorizontal';

@@ -1,4 +1,4 @@
-import styles from '../../styles/MediumPlotElementVertical.module.css';
+import styles from '../../styles/HomePage/MediumPlotElementVertical.module.css';
 
 export default function MediumPlotElementVertical() {
   return (

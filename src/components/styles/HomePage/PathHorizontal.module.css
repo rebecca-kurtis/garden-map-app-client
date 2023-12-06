@@ -1,16 +1,16 @@
-.topPathVerticalContainer {
+.pathHorizontalContainer {
   display: flex;
   /* padding: 20px; */
-  flex-direction: column;
+  flex-direction: row;
 }
 
-.topPathVertical {
+.pathHorizontal {
   display: flex;
-  background-image: url("../images/Top-Path-Vertical-Updated.png");
+  background-image: url("../../images/Path_horizontal.png");
   background-size: contain;
   background-repeat: no-repeat;
-  height: 800px;
-  width: 150px;
+  height: 150px;
+  width: 650px;
   background-position: center;
   justify-content: center;
   align-self: flex-end;

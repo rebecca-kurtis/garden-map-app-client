@@ -1,4 +1,4 @@
-import styles from '../../styles/BottomPathVertical.module.css';
+import styles from '../../styles/HomePage/BottomPathVertical.module.css';
 
 export default function BottomPathVertical() {
   return (
