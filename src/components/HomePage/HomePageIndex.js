@@ -3,6 +3,7 @@ import GardenSectionOne from "./GardenSections/GardenSectionOne";
 import GardenSectionThree from "./GardenSections/GardenSectionThree";
 import GardenSectionTwo from "./GardenSections/GardenSectionTwo";
 import BottomPathVertical from "./Paths/BottomPathVertical";
+import PathHorizontal from "./Paths/PathHorizontal";
 import TopPathVertical from "./Paths/TopPathVertical";
 
 export default function HomePageIndex() {
@@ -15,7 +16,7 @@ export default function HomePageIndex() {
           <TopPathVertical />
           <GardenSectionTwo />
         </div>
-        <hr className={styles.dividerLine}></hr>
+        <PathHorizontal />
         <div className={styles.mapContainerRow}>
           <div className={styles.spaceBlocker} />
           <BottomPathVertical />

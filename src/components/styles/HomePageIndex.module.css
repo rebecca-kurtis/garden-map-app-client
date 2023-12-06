@@ -1,8 +1,12 @@
 .homePageContainer {
   display: flex;
   height: fit-content;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .mapContainer {
@@ -13,6 +17,8 @@
 .mapContainerRow {
  display: flex;
  flex-direction: row;
+ justify-content: center;
+ width: 90%;
 }
 .dividerLine {
   border: 2px solid black; 
