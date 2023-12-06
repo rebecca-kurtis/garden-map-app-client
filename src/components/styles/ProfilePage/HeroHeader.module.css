@@ -1,0 +1,28 @@
+.heroHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+
+.heroHeaderImageContainer img {
+  max-width: 500px;
+  max-height: 500px;
+  display: cover;
+}
+
+.heroHeaderNameContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  text-align: center;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.heroHeaderNameContainer h1 {
+  font-size: 35px;
+  font-weight: 750;
+  padding-left: 60px;
+  padding-top: 40px;
+}
