@@ -1,0 +1,18 @@
+.topPathVerticalContainer {
+  display: flex;
+  /* padding: 20px; */
+  flex-direction: column;
+}
+
+.topPathVertical {
+  display: flex;
+  background-image: url("../images/Top-Path-Vertical-Updated.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 800px;
+  width: 150px;
+  background-position: center;
+  justify-content: center;
+  align-self: flex-end;
+
+}
