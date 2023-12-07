@@ -1,17 +1,19 @@
-.aboutSectionContainer {
+.tipsSectionContainer {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 1000px;
   color: #fff;
   font-family: 'Montserrat', sans-serif;
-  padding-left: 80px;
+  padding: 40px;
+  text-align: left;
+  justify-content: center;
 }
 
-.aboutSectionContainer h2 {
+.tipsSectionContainer h2 {
   font-size: 25px;
 }
 
-.aboutSectionContainer p {
+.tipsSectionContainer p {
   flex-wrap: wrap;
   font-size: 17px;
 }

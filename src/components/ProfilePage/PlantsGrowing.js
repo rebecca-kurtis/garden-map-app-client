@@ -1,9 +1,9 @@
-import react from "react";
+import styles from "../styles/ProfilePage/PlantsGrowing.module.css";
 
 export default function PlantsGrowing() {
   return (
-    <div>
-      Home Page
+    <div className={styles.plantsGrowingContainer}>
+      
     </div>
   );
 }
