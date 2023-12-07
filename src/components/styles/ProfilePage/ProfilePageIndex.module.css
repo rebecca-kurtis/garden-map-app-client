@@ -1,0 +1,10 @@
+.profilePageContainer {
+  display: flex;
+  flex-direction: column;  
+}
+
+.aboutSectionIndexContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

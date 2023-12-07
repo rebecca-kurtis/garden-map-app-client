@@ -1,0 +1,16 @@
+.aboutSectionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.aboutSectionContainer h2 {
+  font-size: 25px;
+}
+
+.aboutSectionContainer p {
+  flex-wrap: wrap;
+  font-size: 17px;
+}
