@@ -52,7 +52,51 @@ let client = new pg.Client(process.env.POSTGRES_URL);
 
 // Get all users
 app.get("/users", (req, res) => {
-  db.query("SELECT * FROM products", (error, results) => {
+  db.query("SELECT * FROM users", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+// Get all plants
+app.get("/plants", (req, res) => {
+  db.query("SELECT * FROM plants", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+// Get all gardens
+app.get("/gardens", (req, res) => {
+  db.query("SELECT * FROM gardens", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+// Get all plots
+app.get("/plots", (req, res) => {
+  db.query("SELECT * FROM plots", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+// Get all photos
+app.get("/photos", (req, res) => {
+  db.query("SELECT * FROM photos", (error, results) => {
     if (error) {
       throw error;
     }
