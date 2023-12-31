@@ -9,7 +9,6 @@ import TopPathVertical from "./Paths/TopPathVertical";
 export default function HomePageIndex() {
   return (
     <div className={styles.homePageContainer}>
-      Home Page
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerRow}>
           <GardenSectionOne />

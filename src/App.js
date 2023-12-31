@@ -15,7 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePageIndex />} />
-        <Route path="/:name" element={<ProfilePageIndex />} />
+        <Route path="/users/name" element={<ProfilePageIndex />} />
 
       </Routes>
       <Footer />
