@@ -19,7 +19,7 @@ app.use(express.json());
 
 //example code
 // var conString = "INSERT_YOUR_POSTGRES_URL_HERE" //Can be found in the Details page
-let client = new pg.Client(process.env.POSTGRES_URL);
+// let client = new pg.Client(process.env.POSTGRES_URL);
 
 // client.connect(function(err) {
 //   if(err) {
@@ -97,6 +97,17 @@ app.get("/plots", (req, res) => {
 // Get all photos
 app.get("/photos", (req, res) => {
   db.query("SELECT * FROM photos", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+// Get all plantedPlants
+app.get("/plantedPlants", (req, res) => {
+  db.query("SELECT * FROM plantedPlants", (error, results) => {
     if (error) {
       throw error;
     }
