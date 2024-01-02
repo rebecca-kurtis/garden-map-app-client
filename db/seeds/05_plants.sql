@@ -1,119 +1,119 @@
 INSERT INTO plants (name, photo_url)
-VALUES ('apple', 'src/components/images/Plantplants/apple.png');
+VALUES ('apple', 'apple');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('artichoke', 'src/components/images/Plantplants/artichoke.png');
+VALUES ('artichoke', 'artichoke');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('asparagus', 'src/components/images/Plantplants/artichoke.png');
+VALUES ('asparagus', 'asparagus');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('basil', 'src/components/images/Plantplants/basil.png');
+VALUES ('basil', 'basil');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('beet', 'src/components/images/Plantplants/beet.png');
+VALUES ('beet', 'beet');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('bok-choy', 'src/components/images/Plantplants/bok-choy.png');
+VALUES ('bok-choy', 'bok-choy');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('broccoli', 'src/components/images/Plantplants/broccoli.png');
+VALUES ('broccoli', 'broccoli');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cabbage', 'src/components/images/Plantplants/cabbage.png');
+VALUES ('cabbage', 'cabbage');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('carrot', 'src/components/images/Plantplants/carrot.png');
+VALUES ('carrot', 'carrot');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cauliflower', 'src/components/images/Plantplants/cauliflower.png');
+VALUES ('cauliflower', 'cauliflower');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('celery', 'src/components/images/Plantplants/celery.png');
+VALUES ('celery', 'celery');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chard', 'src/components/images/Plantplants/chard.png');
+VALUES ('chard', 'chard');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chili-pepper', 'src/components/images/Plantplants/chili-pepper.png');
+VALUES ('chili-pepper', 'chili-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chinese-cabbage', 'src/components/images/Plantplants/chinese-cabbage.png');
+VALUES ('chinese-cabbage', 'chinese-cabbage');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('corn', 'src/components/images/Plantplants/corn.png');
+VALUES ('corn', 'corn');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cucumber', 'src/components/images/Plantplants/cucumber.png');
+VALUES ('cucumber', 'cucumber');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('dill', 'src/components/images/Plantplants/dill.png');
+VALUES ('dill', 'dill');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('eggplant', 'src/components/images/Plantplants/eggplant.png');
+VALUES ('eggplant', 'eggplant');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('garlic', 'src/components/images/Plantplants/garlic.png');
+VALUES ('garlic', 'garlic');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('ginger', 'src/components/images/Plantplants/ginger.png');
+VALUES ('ginger', 'ginger');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-beans', 'src/components/images/Plantplants/green-beans.png');
+VALUES ('green-beans', 'green-beans');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-onion', 'src/components/images/Plantplants/green-onion.png');
+VALUES ('green-onion', 'green-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-pepper', 'src/components/images/Plantplants/green-pepper.png');
+VALUES ('green-pepper', 'green-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('kale', 'src/components/images/Plantplants/kale.png');
+VALUES ('kale', 'kale');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('lettuce', 'src/components/images/Plantplants/lettuce.png');
+VALUES ('lettuce', 'lettuce');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('mushroom', 'src/components/images/Plantplants/mushroom.png');
+VALUES ('mushroom', 'mushroom');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('mustard-greens', 'src/components/images/Plantplants/mustard-greens.png');
+VALUES ('mustard-greens', 'mustard-greens');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('pea', 'src/components/images/Plantplants/pea.png');
+VALUES ('pea', 'pea');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('potato', 'src/components/images/Plantplants/potato.png');
+VALUES ('potato', 'potato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('pumpkin', 'src/components/images/Plantplants/pumpkin.png');
+VALUES ('pumpkin', 'pumpkin');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('radish', 'src/components/images/Plantplants/radish.png');
+VALUES ('radish', 'radish');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('raspberries', 'src/components/images/Plantplants/raspberries.png');
+VALUES ('raspberries', 'raspberries');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('red-onion', 'src/components/images/Plantplants/red-onion.png');
+VALUES ('red-onion', 'red-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('spinach', 'src/components/images/Plantplants/spinach.png');
+VALUES ('spinach', 'spinach');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('strawberry', 'src/components/images/Plantplants/strawberry.png');
+VALUES ('strawberry', 'strawberry');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('sweet-potato', 'src/components/images/Plantplants/sweet-potato.png');
+VALUES ('sweet-potato', 'sweet-potato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('tomato', 'src/components/images/Plantplants/tomato.png');
+VALUES ('tomato', 'tomato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('yellow-onion', 'src/components/images/Plantplants/yellow-onion.png');
+VALUES ('yellow-onion', 'yellow-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('yellow-pepper', 'src/components/images/Plantplants/yellow-pepper.png');
+VALUES ('yellow-pepper', 'yellow-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('zucchini', 'src/components/images/Plantplants/zucchini.png');
+VALUES ('zucchini', 'zucchini');

@@ -33,13 +33,13 @@ export default function HomePageIndex(props) {
         <div className={styles.mapContainerRow}>
           <GardenSectionOne plantInfo={props.plants} plants={gardenSectionOneInfo}/>
           <TopPathVertical />
-          <GardenSectionTwo />
+          {/* <GardenSectionTwo /> */}
         </div>
         <PathHorizontal />
         <div className={styles.mapContainerRow}>
           <div className={styles.spaceBlocker} />
           <BottomPathVertical />
-          <GardenSectionThree />
+          {/* <GardenSectionThree /> */}
         </div>
       </div>
     </div>

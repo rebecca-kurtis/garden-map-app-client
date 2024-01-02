@@ -20,9 +20,10 @@ export default function GardenSectionOne(props) {
     }
     for (let plantInfoObject in props.plantInfo) {
       // console.log('plant info', props.plantInfo[plantInfoObject]);
-      if (plantedPlantsArraySectionOne[plantObject].plant_id === props.plantInfo[plantInfoObject].plant_id) {
+      let conditionOne = plantedPlantsArraySectionOne[plantObject].plot_id === 1;
+      if (conditionOne && plantedPlantsArraySectionOne[plantObject].plant_id === props.plantInfo[plantInfoObject].plant_id) {
         // console.log('num3', plantedPlantsArray[plantObject].plot_id)
-        plotOnePlants.push(props.plantInfo[plantInfoObject]);
+        plotOnePlants.push(props.plantInfo[plantInfoObject].photo_url);
         
       }
       
@@ -37,8 +38,8 @@ export default function GardenSectionOne(props) {
   return (
     <div className={styles.gardenSectionOneContainer}>
       <div className={styles.sec1row1}>
-        <MediumPlotElementHorizontal plotOne={plotOne} plotOnePlants={plotOnePlants}/>
-        <MediumPlotElementHorizontal />
+        <MediumPlotElementHorizontal plants={plotOne} icons={plotOnePlants}/>
+        {/* <MediumPlotElementHorizontal /> */}
         <CircleBlocker />
       </div>
       <div className={styles.sec1row2}>
@@ -46,12 +47,12 @@ export default function GardenSectionOne(props) {
         <SmallPlotElement />
       </div>
       <div className={styles.sec1row3}>
-        <MediumPlotElementHorizontal />
-        <MediumPlotElementHorizontal />
+        {/* <MediumPlotElementHorizontal /> */}
+        {/* <MediumPlotElementHorizontal /> */}
       </div>
       <div className={styles.sec1row4}>
-        <MediumPlotElementHorizontal />
-        <MediumPlotElementHorizontal />
+        {/* <MediumPlotElementHorizontal /> */}
+        {/* <MediumPlotElementHorizontal /> */}
       </div>
       <div className={styles.sec1row5}>
         <div className={styles.sec1row5col1}>
