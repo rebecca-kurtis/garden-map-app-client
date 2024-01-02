@@ -13,19 +13,25 @@ export default function HomePageIndex(props) {
 
   console.log('props', props)
   const plantedPlantsArray = props.plantedPlants;
+  const gardenSectionOneInfo = [];
 
   for (let plantObject in plantedPlantsArray) {
-    for (let key of plantObject) {
-      console.log('key2', plantObject[key]);
-    }
-    console.log('key', plantObject);
-    console.log(plantObject.plot_id)
+      console.log('plantedPlantsArray object', plantedPlantsArray[plantObject].plot_id)
+      if (plantedPlantsArray[plantObject].plot_id >= 1 && plantedPlantsArray[plantObject].plot_id <= 5) {
+        console.log('num3', plantedPlantsArray[plantObject].plot_id)
+        gardenSectionOneInfo.push(plantedPlantsArray[plantObject]);
+        
+      }
+      // console.log(gardenSectionOneInfo);
   }
+  console.log(gardenSectionOneInfo);
+
+
   return (
     <div className={styles.homePageContainer}>
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerRow}>
-          <GardenSectionOne />
+          <GardenSectionOne plantInfo={props.plants} plants={gardenSectionOneInfo}/>
           <TopPathVertical />
           <GardenSectionTwo />
         </div>

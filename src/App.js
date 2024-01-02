@@ -19,7 +19,8 @@ import getAllPlantedPlants from "./helpers/getAllPlantedPlants";
 
 function App() {
   let [users, setUsers] = useState([]);
-  let [plantedPlants, setPlantedPlants] = useState(null);
+  let [plantedPlants, setPlantedPlants] = useState([]);
+  let [plants, setPlants] = useState([])
 
   // const usersRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/users";
 
@@ -46,13 +47,20 @@ function App() {
       // console.log('users from inside', users)
     });
 
+    getAllPlants()
+    .then((data) => {
+      setPlants(data);
+      // console.log('data from inside', data)
+      // console.log('users from inside', users)
+    });
+
   }, []);
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<HomePageIndex plantedPlants={plantedPlants}/>} />
+          <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
           <Route path="/users/name" element={<ProfilePageIndex />} />
         </Routes>
         <Footer />

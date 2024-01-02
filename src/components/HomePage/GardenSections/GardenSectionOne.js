@@ -4,11 +4,40 @@ import LargePlotElement from '../Plots/LargePlotElement';
 import MediumPlotElementHorizontal from '../Plots/MediumPlotElementHorizontal';
 import SmallPlotElement from '../Plots/SmallPlotElement';
 
-export default function GardenSectionOne() {
+export default function GardenSectionOne(props) {
+
+  const plantedPlantsArraySectionOne = props.plants;
+  // console.log('test', plantedPlantsArraySectionOne);
+  // console.log('test2', props.plantInfo)
+  const plotOne = [];
+  const plotOnePlants = [];
+
+  for (let plantObject in plantedPlantsArraySectionOne) {
+    if (plantedPlantsArraySectionOne[plantObject].plot_id === 1) {
+      // console.log('num3', plantedPlantsArray[plantObject].plot_id)
+      plotOne.push(plantedPlantsArraySectionOne[plantObject]);
+      
+    }
+    for (let plantInfoObject in props.plantInfo) {
+      // console.log('plant info', props.plantInfo[plantInfoObject]);
+      if (plantedPlantsArraySectionOne[plantObject].plant_id === props.plantInfo[plantInfoObject].plant_id) {
+        // console.log('num3', plantedPlantsArray[plantObject].plot_id)
+        plotOnePlants.push(props.plantInfo[plantInfoObject]);
+        
+      }
+      
+    }
+    // console.log(plotOne);
+    // console.log(plotOnePlants);
+    
+}
+
+
+
   return (
     <div className={styles.gardenSectionOneContainer}>
       <div className={styles.sec1row1}>
-        <MediumPlotElementHorizontal />
+        <MediumPlotElementHorizontal plotOne={plotOne} plotOnePlants={plotOnePlants}/>
         <MediumPlotElementHorizontal />
         <CircleBlocker />
       </div>
