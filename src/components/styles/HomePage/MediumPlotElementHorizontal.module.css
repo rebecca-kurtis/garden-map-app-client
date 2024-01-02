@@ -20,6 +20,11 @@
 }
 
 .iconElement {
-  padding-top: 50px;
-  justify-content: center;
+ padding-top: 15px;
+ justify-content: center;
+ align-content: center;
+}
+
+.iconImage {
+  height: 20px;
 }
