@@ -146,9 +146,9 @@ export default function GardenSectionThree(props) {
         <div className={styles.sec3row4}>
           <MediumPlotElement icons={plot34Plants}/>
           <CircleBlocker />
-          {/* <MediumPlotElement /> */}
+          <MediumPlotElement icons={plot33Plants}/>
           <CircleBlocker />
-          {/* <MediumPlotElement /> */}
+          <MediumPlotElement icons={plot32Plants}/>
           <CircleBlocker />
         </div>
       </div>
