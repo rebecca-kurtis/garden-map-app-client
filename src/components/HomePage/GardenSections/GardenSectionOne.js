@@ -9,6 +9,7 @@ export default function GardenSectionOne(props) {
   // console.log('test', plantedPlantsArraySectionOne);
   // console.log('test2', props.plantInfo)
   
+  const plot10Plants = [];
   const plot14 = [];
   const plot14Plants = [];
   const plot15 = [];
@@ -21,6 +22,7 @@ export default function GardenSectionOne(props) {
   const plot19Plants = [];
   const plot20Plants = [];
   const plot21Plants = [];
+  const plot22Plants = [];
   const plot23Plants = [];
   const plot24Plants = [];
   const plot25Plants = [];
@@ -52,6 +54,13 @@ export default function GardenSectionOne(props) {
     //   plot44.push(plantedPlantsArraySectionOne[plantObject]);
     // }
     for (let plantInfoObject in props.plantInfo) {
+      if (
+        plantedPlantsArraySectionOne[plantObject].plot_id === 10 &&
+        plantedPlantsArraySectionOne[plantObject].plant_id ===
+          props.plantInfo[plantInfoObject].plant_id
+      ) {
+        plot10Plants.push(props.plantInfo[plantInfoObject].photo_url);
+      }
       if (
         plantedPlantsArraySectionOne[plantObject].plot_id === 14 &&
         plantedPlantsArraySectionOne[plantObject].plant_id ===
@@ -107,6 +116,13 @@ export default function GardenSectionOne(props) {
           props.plantInfo[plantInfoObject].plant_id
       ) {
         plot21Plants.push(props.plantInfo[plantInfoObject].photo_url);
+      }
+      if (
+        plantedPlantsArraySectionOne[plantObject].plot_id === 22 &&
+        plantedPlantsArraySectionOne[plantObject].plant_id ===
+          props.plantInfo[plantInfoObject].plant_id
+      ) {
+        plot22Plants.push(props.plantInfo[plantInfoObject].photo_url);
       }
       if (
         plantedPlantsArraySectionOne[plantObject].plot_id === 23 &&
@@ -181,7 +197,7 @@ export default function GardenSectionOne(props) {
         </div>
         <div className={styles.sec1row5col2}>
           <CircleBlocker />
-          <LargePlotElement />
+          <LargePlotElement icons={plot10Plants}/>
         </div>
       </div>
       <div className={styles.sec1row6}>
@@ -190,7 +206,7 @@ export default function GardenSectionOne(props) {
             <CircleBlocker />
             <CircleBlocker />
           </div>
-          <LargePlotElement />
+          <LargePlotElement icons={plot22Plants}/>
         </div>
         <div className={styles.sec1row6col2}>
           <div className={styles.sec1row6col2row}>

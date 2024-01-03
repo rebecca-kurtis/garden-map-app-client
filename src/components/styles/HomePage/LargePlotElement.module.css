@@ -16,6 +16,13 @@
 }
 
 .iconElement {
-  padding-top: 100px;
-  justify-content: center;
-}
+  padding-top: 50px;
+  padding-left: 23px;
+  /* justify-content: center; */
+  /* align-content: center; */
+  width: 40px;
+ }
+ 
+ .iconImage {
+   height: 20px;
+ }
