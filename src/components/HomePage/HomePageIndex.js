@@ -17,7 +17,7 @@ export default function HomePageIndex(props) {
 
   for (let plantObject in plantedPlantsArray) {
       console.log('plantedPlantsArray object', plantedPlantsArray[plantObject].plot_id)
-      if (plantedPlantsArray[plantObject].plot_id >= 1 && plantedPlantsArray[plantObject].plot_id <= 5) {
+      if (plantedPlantsArray[plantObject].plot_id >= 1 && plantedPlantsArray[plantObject].plot_id <= 26) {
         console.log('num3', plantedPlantsArray[plantObject].plot_id)
         gardenSectionOneInfo.push(plantedPlantsArray[plantObject]);
         
