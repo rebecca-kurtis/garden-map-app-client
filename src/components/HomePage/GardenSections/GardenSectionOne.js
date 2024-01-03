@@ -6,7 +6,7 @@ import SmallPlotElement from "../Plots/SmallPlotElement";
 
 export default function GardenSectionOne(props) {
   const plantedPlantsArraySectionOne = props.plants;
-  // console.log('test', plantedPlantsArraySectionOne);
+  console.log('test', plantedPlantsArraySectionOne);
   // console.log('test2', props.plantInfo)
   
   const plot10Plants = [];
