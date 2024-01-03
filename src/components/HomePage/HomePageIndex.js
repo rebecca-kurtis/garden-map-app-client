@@ -16,15 +16,15 @@ export default function HomePageIndex(props) {
   const gardenSectionOneInfo = [];
 
   for (let plantObject in plantedPlantsArray) {
-      console.log('plantedPlantsArray object', plantedPlantsArray[plantObject].plot_id)
-      if (plantedPlantsArray[plantObject].plot_id >= 1 && plantedPlantsArray[plantObject].plot_id <= 26) {
-        console.log('num3', plantedPlantsArray[plantObject].plot_id)
+      // console.log('plantedPlantsArray object', plantedPlantsArray[plantObject].plot_id)
+      if (plantedPlantsArray[plantObject].plot_id >= 10 && plantedPlantsArray[plantObject].plot_id <= 44) {
+        // console.log('num3', plantedPlantsArray[plantObject].plot_id)
         gardenSectionOneInfo.push(plantedPlantsArray[plantObject]);
         
       }
       // console.log(gardenSectionOneInfo);
   }
-  console.log(gardenSectionOneInfo);
+  // console.log(gardenSectionOneInfo);
 
 
   return (
