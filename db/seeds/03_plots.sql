@@ -64,7 +64,28 @@ INSERT INTO plots (user_id, garden_id)
 VALUES (32, 1);
 INSERT INTO plots (user_id, garden_id)
 VALUES (33, 1);
-
+INSERT INTO plots (user_id, garden_id)
+VALUES (2, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (4, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (6, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (34, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (34, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (3, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (22, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (21, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (5, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (26, 1);
+INSERT INTO plots (user_id, garden_id)
+VALUES (23, 1);
 
 
 

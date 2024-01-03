@@ -238,4 +238,115 @@ INSERT INTO plantedPlants (plot_id, plant_id)
 VALUES (30, 14);
 INSERT INTO plantedPlants (plot_id, plant_id)
 VALUES (30, 5);
-
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (31, 4);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (31, 16);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (31, 34);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (31, 35);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (32, 14);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (32, 2);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (32, 3);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (32, 25);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (33, 1);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (33, 12);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (33, 28);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (33, 37);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (34, 5);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (34, 6);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (34, 26);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (34, 31);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (35, 7);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (35, 26);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (35, 32);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (35, 35);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (36, 10);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (36, 1);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (36, 32);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (36, 23);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (37, 9);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (37, 15);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (37, 39);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (37, 21);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (38, 8);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (38, 26);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (38, 14);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (38, 39);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (39, 13);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (39, 19);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (39, 36);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (39, 22);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (40, 16);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (40, 12);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (40, 17);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (40, 19);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (41, 40);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (41, 17);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (41, 28);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (41, 30);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (42, 6);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (42, 22);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (42, 25);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (42, 34);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (43, 6);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (43, 32);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (43, 11);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (43, 21);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (44, 5);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (44, 13);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (44, 24);
+INSERT INTO plantedPlants (plot_id, plant_id)
+VALUES (44, 37);
