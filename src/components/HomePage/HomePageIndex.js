@@ -40,7 +40,7 @@ export default function HomePageIndex(props) {
         <div className={styles.mapContainerRow}>
           <GardenSectionOne plantInfo={props.plants} plants={plantedPlantsArray}/>
           <TopPathVertical />
-          {/* <GardenSectionTwo /> */}
+          <GardenSectionTwo plantInfo={props.plants} plants={plantedPlantsArray}/>
         </div>
         <PathHorizontal />
         <div className={styles.mapContainerRow}>
