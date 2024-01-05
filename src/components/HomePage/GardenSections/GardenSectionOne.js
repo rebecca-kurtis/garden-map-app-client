@@ -155,7 +155,7 @@ export default function GardenSectionOne(props) {
 
   function onClickHandler (id) {
     // console.log('I was clicked!')
-    window.open(`/users/${id}`);
+    window.open(`/plots/${id}`);
 
   }
 
