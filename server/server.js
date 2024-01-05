@@ -61,6 +61,29 @@ app.get("/users", (req, res) => {
   });
 });
 
+// Get all plots/id
+app.get("/plots/:id", (req, res) => {
+
+  const userId = req.params.id;
+  db.query(
+    `SELECT users.user_id AS user_id, 
+    CONCAT (users.first_name, ' ', users.last_name) AS user_name,
+    users.description AS description,
+    plantedPlants.plant_id AS ppPlantId
+    FROM users
+    JOIN plots on users.user_id = plots.user_id
+    JOIN plantedPlants on plots.plot_id = plantedPlants.plot_id
+    WHERE plots.plot_id = $1 
+    GROUP BY users.user_id, description, ppPlantId 
+    ORDER BY user_id;`, [userId]
+    , (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).send(results.rows);
+  });
+});
+
 // Get all plants
 app.get("/plants", (req, res) => {
   db.query("SELECT * FROM plants", (error, results) => {

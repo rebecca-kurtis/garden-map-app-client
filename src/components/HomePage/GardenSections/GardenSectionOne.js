@@ -38,21 +38,6 @@ export default function GardenSectionOne(props) {
     //   // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
     //   plot14.push(plantedPlantsArraySectionOne[plantObject]);
     // }
-    // if (plantedPlantsArraySectionOne[plantObject].plot_id === 15) {
-    //   // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
-    //   plot15.push(plantedPlantsArraySectionOne[plantObject]);
-    // }
-    // if (plantedPlantsArraySectionOne[plantObject].plot_id === 18) {
-    //   // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
-    //   plot18.push(plantedPlantsArraySectionOne[plantObject]);
-    // }
-    // if (plantedPlantsArraySectionOne[plantObject].plot_id === 43) {
-    //   // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
-    //   plot43.push(plantedPlantsArraySectionOne[plantObject]);
-    // }
-    // if (plantedPlantsArraySectionOne[plantObject].plot_id === 44) {
-    //   plot44.push(plantedPlantsArraySectionOne[plantObject]);
-    // }
     for (let plantInfoObject in props.plantInfo) {
       if (
         plantedPlantsArraySectionOne[plantObject].plot_id === 10 &&
@@ -166,14 +151,18 @@ export default function GardenSectionOne(props) {
         plot44Plants.push(props.plantInfo[plantInfoObject].photo_url);
       }
     }
-    // console.log(plot43);
-    // console.log(plot43Plants);
+  }
+
+  function onClickHandler (id) {
+    // console.log('I was clicked!')
+    window.open(`/users/${id}`);
+
   }
 
   return (
     <div className={styles.gardenSectionOneContainer}>
       <div className={styles.sec1row1}>
-        <MediumPlotElementHorizontal plants={plot43} icons={plot43Plants} />
+        <MediumPlotElementHorizontal onclick={onClickHandler} plants={plot43} icons={plot43Plants} />
         <MediumPlotElementHorizontal plants={plot44} icons={plot44Plants}/>
         <CircleBlocker />
       </div>
