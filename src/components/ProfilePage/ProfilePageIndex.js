@@ -39,15 +39,17 @@ export default function ProfilePageIndex() {
 
   if (isLoading) {
     return (
-      <div  className="loadingContainer">
+      <div className="">
+        <div  className={styles.loadingContainer}>
       <TailSpin
-      type="ThreeDots"
-      color="#00b22d"
+      // type="ThreeDots"
+      color="#000"
       height={100}
       width={100}
        //3 secs
     />
     </div>
+        </div>
     )
   } else {
 

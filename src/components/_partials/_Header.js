@@ -8,7 +8,7 @@ export default function Header() {
         <img src={logo} className="img-logo" alt="logo" />
       </div>
       <div className={styles.buttonContainer}>
-        <button className="header-button">Visit our main website</button>
+        <a  href="/"><button className="header-button">Visit our main website</button></a>
       </div>
     </div>
   );
