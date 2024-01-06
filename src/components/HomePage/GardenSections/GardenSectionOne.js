@@ -34,10 +34,10 @@ export default function GardenSectionOne(props) {
   const plot44Plants = [];
 
   for (let plantObject in plantedPlantsArraySectionOne) {
-    // if (plantedPlantsArraySectionOne[plantObject].plot_id === 14) {
-    //   // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
-    //   plot14.push(plantedPlantsArraySectionOne[plantObject]);
-    // }
+    if (plantedPlantsArraySectionOne[plantObject].plot_id === 14) {
+      // console.log('plot43', plantedPlantsArraySectionOne[plantObject])
+      plot14.push(plantedPlantsArraySectionOne[plantObject]);
+    }
     for (let plantInfoObject in props.plantInfo) {
       if (
         plantedPlantsArraySectionOne[plantObject].plot_id === 10 &&
@@ -159,34 +159,35 @@ export default function GardenSectionOne(props) {
 
   }
 
+
   return (
     <div className={styles.gardenSectionOneContainer}>
       <div className={styles.sec1row1}>
-        <MediumPlotElementHorizontal onclick={onClickHandler} plants={plot43} icons={plot43Plants} />
-        <MediumPlotElementHorizontal plants={plot44} icons={plot44Plants}/>
+        <MediumPlotElementHorizontal onclick={onClickHandler} plotID={43} icons={plot43Plants} />
+        <MediumPlotElementHorizontal onclick={onClickHandler} plotID={44} icons={plot44Plants}/>
         <CircleBlocker />
       </div>
       <div className={styles.sec1row2}>
-        <SmallPlotElement icons={plot23Plants}/>
-        <SmallPlotElement icons={plot24Plants}/>
+        <SmallPlotElement onclick={onClickHandler} icons={plot23Plants}/>
+        <SmallPlotElement onclick={onClickHandler} icons={plot24Plants}/>
       </div>
       <div className={styles.sec1row3}>
-      <MediumPlotElementHorizontal plants={plot18} icons={plot18Plants} />
-      <MediumPlotElementHorizontal plants={plot14} icons={plot14Plants} />
+      <MediumPlotElementHorizontal onclick={onClickHandler} plotID={18} icons={plot18Plants} />
+      <MediumPlotElementHorizontal onclick={onClickHandler} plotID={14} icons={plot14Plants} />
       </div>
       <div className={styles.sec1row4}>
-      <MediumPlotElementHorizontal plants={plot16} icons={plot16Plants} />
-      <MediumPlotElementHorizontal plants={plot15} icons={plot15Plants} />
+      <MediumPlotElementHorizontal onclick={onClickHandler} plotID={16} icons={plot16Plants} />
+      <MediumPlotElementHorizontal onclick={onClickHandler} plotID={15} icons={plot15Plants} />
       </div>
       <div className={styles.sec1row5}>
         <div className={styles.sec1row5col1}>
-        <SmallPlotElement icons={plot17Plants}/>
-        <SmallPlotElement icons={plot26Plants}/>
-        <SmallPlotElement icons={plot25Plants}/>
+        <SmallPlotElement onclick={onClickHandler} icons={plot17Plants}/>
+        <SmallPlotElement onclick={onClickHandler} icons={plot26Plants}/>
+        <SmallPlotElement onclick={onClickHandler} icons={plot25Plants}/>
         </div>
         <div className={styles.sec1row5col2}>
           <CircleBlocker />
-          <LargePlotElement icons={plot10Plants}/>
+          <LargePlotElement onclick={onClickHandler} icons={plot10Plants}/>
         </div>
       </div>
       <div className={styles.sec1row6}>
@@ -195,14 +196,14 @@ export default function GardenSectionOne(props) {
             <CircleBlocker />
             <CircleBlocker />
           </div>
-          <LargePlotElement icons={plot22Plants}/>
+          <LargePlotElement onclick={onClickHandler} icons={plot22Plants}/>
         </div>
         <div className={styles.sec1row6col2}>
           <div className={styles.sec1row6col2row}>
-          <SmallPlotElement icons={plot20Plants}/>
-          <SmallPlotElement icons={plot21Plants}/>
+          <SmallPlotElement onclick={onClickHandler} icons={plot20Plants}/>
+          <SmallPlotElement onclick={onClickHandler} icons={plot21Plants}/>
           </div>
-          <SmallPlotElement icons={plot19Plants}/>
+          <SmallPlotElement onclick={onClickHandler} icons={plot19Plants}/>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import styles from "../styles/ProfilePage/ProfilePageIndex.module.css"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom"
+import { TailSpin } from 'react-loader-spinner'
 
 import HeroHeader from "./HeroHeader";
 import PlantsGrowing from "./PlantsGrowing";
@@ -12,6 +13,8 @@ import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 export default function ProfilePageIndex() {
 
   const [profileInfo, setProfileInfo] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
   const id = useParams();
   console.log('id', id.id)
   const plot_id = id.id
@@ -22,23 +25,41 @@ export default function ProfilePageIndex() {
     .then((data) => {
       setProfileInfo(data);
       console.log('data from inside', data)
+      setLoading(false);
       // console.log('users from inside', users)
     });
 
    
 
-  }, []);
+  },[] );
 
+  console.log('profileInfo', profileInfo);
+  // console.log('prfofile, name', profileInfo[0].user_name);
+  // const userName = profileInfo[0].user_name;
 
-  return (
-    <div className={styles.profilePageContainer}>
-      <HeroHeader />
+  if (isLoading) {
+    return (
+      <div  className="loadingContainer">
+      <TailSpin
+      type="ThreeDots"
+      color="#00b22d"
+      height={100}
+      width={100}
+       //3 secs
+    />
+    </div>
+    )
+  } else {
+
+    return (
+      <div className={styles.profilePageContainer}>
+      <HeroHeader  profileInfo={profileInfo}/>
       <div className={styles.aboutSectionIndexContainer}>
         <PlantsGrowing />
-        <AboutSection />
+        <AboutSection profileInfo={profileInfo}/>
       </div>
       <TipsSection />
       <ShareSection />
     </div>
-  );
+)}
 }
