@@ -3,3 +3,29 @@
   flex-direction: column;
   width: 500px;
 }
+
+.plantsGrowingContainer h2 {
+  color: #fff;
+  font-size: 25px;
+
+}
+
+.plantsGrowingLiContainer {
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  font-size: 17px;
+
+}
+
+.plantsGrowingIconImage {
+  height: 30px;
+  padding-right: 10px;
+}
+
+.roundCircleLi {
+  font-size: 10px;
+  padding-right: 13px;
+  color: #000;
+}

@@ -1,119 +1,119 @@
 INSERT INTO plants (name, photo_url)
-VALUES ('apple', 'apple');
+VALUES ('Apple', 'apple');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('artichoke', 'artichoke');
+VALUES ('Artichoke', 'artichoke');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('asparagus', 'asparagus');
+VALUES ('Asparagus', 'asparagus');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('basil', 'basil');
+VALUES ('Basil', 'basil');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('beet', 'beet');
+VALUES ('Beet', 'beet');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('bok-choy', 'bok-choy');
+VALUES ('Bok Choy', 'bok-choy');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('broccoli', 'broccoli');
+VALUES ('Broccoli', 'broccoli');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cabbage', 'cabbage');
+VALUES ('Cabbage', 'cabbage');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('carrot', 'carrot');
+VALUES ('Carrot', 'carrot');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cauliflower', 'cauliflower');
+VALUES ('Cauliflower', 'cauliflower');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('celery', 'celery');
+VALUES ('Celery', 'celery');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chard', 'chard');
+VALUES ('Chard', 'chard');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chili-pepper', 'chili-pepper');
+VALUES ('Chili Pepper', 'chili-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('chinese-cabbage', 'chinese-cabbage');
+VALUES ('Chinese Cabbage', 'chinese-cabbage');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('corn', 'corn');
+VALUES ('Corn', 'corn');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('cucumber', 'cucumber');
+VALUES ('Cucumber', 'cucumber');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('dill', 'dill');
+VALUES ('Dill', 'dill');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('eggplant', 'eggplant');
+VALUES ('Eggplant', 'eggplant');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('garlic', 'garlic');
+VALUES ('Garlic', 'garlic');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('ginger', 'ginger');
+VALUES ('Ginger', 'ginger');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-beans', 'green-beans');
+VALUES ('Green Beans', 'green-beans');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-onion', 'green-onion');
+VALUES ('Green Onion', 'green-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('green-pepper', 'green-pepper');
+VALUES ('Green Pepper', 'green-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('kale', 'kale');
+VALUES ('Kale', 'kale');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('lettuce', 'lettuce');
+VALUES ('Lettuce', 'lettuce');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('mushroom', 'mushroom');
+VALUES ('Mushroom', 'mushroom');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('mustard-greens', 'mustard-greens');
+VALUES ('Mustard Greens', 'mustard-greens');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('pea', 'pea');
+VALUES ('Pea', 'pea');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('potato', 'potato');
+VALUES ('Potato', 'potato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('pumpkin', 'pumpkin');
+VALUES ('Pumpkin', 'pumpkin');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('radish', 'radish');
+VALUES ('Radish', 'radish');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('raspberries', 'raspberries');
+VALUES ('Raspberries', 'raspberries');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('red-onion', 'red-onion');
+VALUES ('Red Onion', 'red-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('spinach', 'spinach');
+VALUES ('Spinach', 'spinach');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('strawberry', 'strawberry');
+VALUES ('Strawberry', 'strawberry');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('sweet-potato', 'sweet-potato');
+VALUES ('Sweet Potato', 'sweet-potato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('tomato', 'tomato');
+VALUES ('Tomato', 'tomato');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('yellow-onion', 'yellow-onion');
+VALUES ('Yellow Onion', 'yellow-onion');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('yellow-pepper', 'yellow-pepper');
+VALUES ('Yellow Pepper', 'yellow-pepper');
 
 INSERT INTO plants (name, photo_url)
-VALUES ('zucchini', 'zucchini');
+VALUES ('Zucchini', 'zucchini');
