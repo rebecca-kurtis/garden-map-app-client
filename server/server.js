@@ -61,6 +61,17 @@ app.get("/users", (req, res) => {
   });
 });
 
+// Get all tips
+app.get("/tips", (req, res) => {
+  db.query("SELECT * FROM tips", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
 // Get all plots/id
 app.get("/plots/:id", (req, res) => {
 

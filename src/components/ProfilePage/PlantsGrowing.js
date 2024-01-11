@@ -1,7 +1,7 @@
 import styles from "../styles/ProfilePage/PlantsGrowing.module.css";
 
 export default function PlantsGrowing(props) {
-  console.log("plants plants props", props);
+  // console.log("plants plants props", props);
   const plantsArray = props.plants;
   const plantInfoArray = props.plantInfo;
   const plantsIcons = [];
@@ -29,7 +29,7 @@ export default function PlantsGrowing(props) {
       // console.log('2', props.plantInfo[plantInfoObject])
     }
   }
-  console.log('plantsicons', plantsIcons);
+  // console.log('plantsicons', plantsIcons);
   // console.log('plantsarray', plantsArray);
   const mappedIcons = plantsIcons.map((array) => (
     <li className={styles.plantsGrowingLiContainer}>

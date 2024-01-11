@@ -1,7 +1,7 @@
 import styles from "../styles/ProfilePage/ProfilePageIndex.module.css"
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom"
-import { TailSpin } from 'react-loader-spinner'
+import { TailSpin } from 'react-loader-spinner';
 
 import HeroHeader from "./HeroHeader";
 import PlantsGrowing from "./PlantsGrowing";
@@ -9,6 +9,8 @@ import AboutSection from "./AboutSection";
 import TipsSection from "./TipsSection";
 import ShareSection from "./ShareSection";
 import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
+import getAllTips from "../../helpers/getAllTips";
+
 
 export default function ProfilePageIndex(props) {
 
@@ -22,6 +24,7 @@ export default function ProfilePageIndex(props) {
   useEffect(() => {
 
     getPlotProfileInfo(plot_id)
+    // getAllTips()
     .then((data) => {
       setProfileInfo(data);
       console.log('data from inside', data)
