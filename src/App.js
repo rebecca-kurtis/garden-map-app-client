@@ -61,7 +61,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
-          <Route path="/plots/:id" element={<ProfilePageIndex />} />
+          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

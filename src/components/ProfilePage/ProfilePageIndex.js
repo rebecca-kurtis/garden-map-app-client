@@ -10,7 +10,7 @@ import TipsSection from "./TipsSection";
 import ShareSection from "./ShareSection";
 import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 
-export default function ProfilePageIndex() {
+export default function ProfilePageIndex(props) {
 
   const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ export default function ProfilePageIndex() {
       <div className={styles.profilePageContainer}>
       <HeroHeader  profileInfo={profileInfo}/>
       <div className={styles.aboutSectionIndexContainer}>
-        <PlantsGrowing />
+        <PlantsGrowing plotID={plot_id} plantInfo={props.plants} plants={props.plantedPlants}/>
         <AboutSection profileInfo={profileInfo}/>
       </div>
       <TipsSection />
