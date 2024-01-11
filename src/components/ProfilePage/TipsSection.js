@@ -8,26 +8,26 @@ import { TailSpin } from 'react-loader-spinner';
 export default function TipsSection() {
 
   const [profileInfo, setProfileInfo] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
 
   const id = useParams();
   console.log('id', id.id)
   const plot_id = id.id
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    // getPlotProfileInfo(plot_id)
-    getAllTips()
-    .then((data) => {
-      setProfileInfo(data);
-      console.log('data from inside', data)
-      setLoading(false);
-      // console.log('users from inside', users)
-    });
+  //   // getPlotProfileInfo(plot_id)
+  //   getAllTips()
+  //   .then((data) => {
+  //     setProfileInfo(data);
+  //     console.log('data from inside', data)
+  //     setLoading(false);
+  //     // console.log('users from inside', users)
+  //   });
 
    
 
-  },[] );
+  // },[] );
   if (isLoading) {
     return (
       <div className="">

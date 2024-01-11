@@ -27,7 +27,7 @@ export default function ProfilePageIndex(props) {
     // getAllTips()
     .then((data) => {
       setProfileInfo(data);
-      console.log('data from inside', data)
+      // console.log('data from inside', data)
       setLoading(false);
       // console.log('users from inside', users)
     });

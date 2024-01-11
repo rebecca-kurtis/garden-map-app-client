@@ -75,7 +75,7 @@ app.get("/tips", (req, res) => {
 // Get all plots/id
 app.get("/plots/:id", (req, res) => {
 
-  const userId = req.params.id;
+  const plotId = req.params.id;
   db.query(
     `SELECT users.user_id AS user_id, 
     CONCAT (users.first_name, ' ', users.last_name) AS user_name,
@@ -85,8 +85,8 @@ app.get("/plots/:id", (req, res) => {
     JOIN plots on users.user_id = plots.user_id
     JOIN plantedPlants on plots.plot_id = plantedPlants.plot_id
     WHERE plots.plot_id = $1 
-    GROUP BY users.user_id, description, ppPlantId 
-    ORDER BY user_id;`, [userId]
+    GROUP BY users.user_id, description, ppPlantId
+    ORDER BY user_id;`, [plotId]
     , (error, results) => {
       if (error) {
         throw error;

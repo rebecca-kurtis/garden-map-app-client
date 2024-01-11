@@ -4,7 +4,7 @@ const tipsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SER
 export default async function getAllTips() {
   const { data } = await axios.get(tipsRoute);
   // setData(data);
-  console.log('tips:', data);
+  // console.log('tips:', data);
       // setUsers(data);
       // return usersList;
       return data;
