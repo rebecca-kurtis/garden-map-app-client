@@ -18,3 +18,16 @@
   left:50%;
   transform: translate(-50%,50%);
 }
+
+.homeButton {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  /* width: 170px; */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}

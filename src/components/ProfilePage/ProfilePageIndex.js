@@ -10,6 +10,7 @@ import TipsSection from "./TipsSection";
 import ShareSection from "./ShareSection";
 import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 import getAllTips from "../../helpers/getAllTips";
+import getProfilePageInfo from "../../helpers/getProfilePageInfo";
 
 
 export default function ProfilePageIndex(props) {
@@ -23,11 +24,12 @@ export default function ProfilePageIndex(props) {
 
   useEffect(() => {
 
+    // getProfilePageInfo(plot_id)
     getPlotProfileInfo(plot_id)
     // getAllTips()
     .then((data) => {
       setProfileInfo(data);
-      // console.log('data from inside', data)
+      console.log('data from inside', data)
       setLoading(false);
       // console.log('users from inside', users)
     });
@@ -65,6 +67,8 @@ export default function ProfilePageIndex(props) {
       </div>
       <TipsSection />
       <ShareSection />
+      <a  href="/"><button className={styles.homeButton}>Back to the Garden</button></a>
+
     </div>
 )}
 }
