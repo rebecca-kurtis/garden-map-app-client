@@ -3,6 +3,8 @@ import LargePlotElement from '../Plots/LargePlotElement';
 import MediumPlotElementHorizontal from '../Plots/MediumPlotElementHorizontal';
 import MediumPlotElement from '../Plots/MediumPlotElementVertical';
 import CircleBlocker from '../Plots/CircleBlocker';
+import onClickHandler from '../../../helpers/onClickHandlerPlot';
+
 
 export default function GardenSectionThree(props) {
 
@@ -112,43 +114,42 @@ export default function GardenSectionThree(props) {
         plot34Plants.push(props.plantInfo[plantInfoObject].photo_url);
       }
     }
-    // console.log(plot43);
-    // console.log(plot43Plants);
   }
+
   return (
     <div className={styles.section3Container}>
       <div className={styles.sec3Column}>
         <div className={styles.sec3row}>
-          <LargePlotElement icons={plot6Plants}/>
-          <LargePlotElement icons={plot3Plants}/>
-          <MediumPlotElementHorizontal icons={plot29Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={6} icons={plot6Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={3} icons={plot3Plants}/>
+          <MediumPlotElementHorizontal  onclick={onClickHandler} plotID={3} icons={plot29Plants}/>
 
         </div>
       </div>
       <div className={styles.sec3Column}>
         <div className={styles.sec3row}>
-          <LargePlotElement icons={plot5Plants}/>
-          <LargePlotElement icons={plot2Plants}/>
-          <MediumPlotElementHorizontal icons={plot30Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={5} icons={plot5Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={2} icons={plot2Plants}/>
+          <MediumPlotElementHorizontal  onclick={onClickHandler} plotID={2} icons={plot30Plants}/>
 
         </div>
       </div>
       <div className={styles.sec3Column}>
         <div className={styles.sec3row}>
-          <LargePlotElement icons={plot4Plants}/>
-          <LargePlotElement icons={plot1Plants}/>
-          <MediumPlotElementHorizontal icons={plot31Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={4} icons={plot4Plants}/>
+          <LargePlotElement  onclick={onClickHandler} plotID={1} icons={plot1Plants}/>
+          <MediumPlotElementHorizontal  onclick={onClickHandler} plotID={31} icons={plot31Plants}/>
 
 
         </div>
       </div>
       <div className={styles.sec3Column}>
         <div className={styles.sec3row4}>
-          <MediumPlotElement icons={plot34Plants}/>
+          <MediumPlotElement  onclick={onClickHandler} plotID={34} icons={plot34Plants}/>
           <CircleBlocker />
-          <MediumPlotElement icons={plot33Plants}/>
+          <MediumPlotElement  onclick={onClickHandler} plotID={33} icons={plot33Plants}/>
           <CircleBlocker />
-          <MediumPlotElement icons={plot32Plants}/>
+          <MediumPlotElement  onclick={onClickHandler} plotID={32} icons={plot32Plants}/>
           <CircleBlocker />
         </div>
       </div>
