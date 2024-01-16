@@ -68,8 +68,8 @@ export default function GardenSectionThree(props) {
           props.plantInfo[plantInfoObject].plant_id
       ) {
         plot6Plants.push(props.plantInfo[plantInfoObject].photo_url);
-        console.log('plot6', plot6Plants);
-        console.log('plot6.2', props.plantInfo[plantInfoObject]);
+        // console.log('plot6', plot6Plants);
+        // console.log('plot6.2', props.plantInfo[plantInfoObject]);
       }
       if (
         plantedPlantsArraySectionOne[plantObject].plot_id === 29 &&
