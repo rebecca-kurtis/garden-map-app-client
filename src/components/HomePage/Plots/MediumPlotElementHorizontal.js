@@ -4,7 +4,7 @@ export default function MediumPlotElementHorizontal(props) {
   // console.log('plot props', props)
   const array = props.icons;
   const onClickFunc = props.onclick;
-  console.log('plants test', props.plants)
+  // console.log('plants test', props.plants)
 
   const mappedIcons = array.map(url => <img className={styles.iconImage} src={require('../../images/PlantIcons/' + url + '.png')} alt="icon" />)
   return (

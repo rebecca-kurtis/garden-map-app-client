@@ -11,9 +11,9 @@ import TopPathVertical from "./Paths/TopPathVertical";
 
 export default function HomePageIndex(props) {
 
-  console.log('props', props)
+  // console.log('props', props)
   const plantedPlantsArray = props.plantedPlants;
-  console.log('planttest', plantedPlantsArray)
+  // console.log('planttest', plantedPlantsArray)
   const gardenSectionOneInfo = [];
   const gardenSectionThreeInfo = [];
 

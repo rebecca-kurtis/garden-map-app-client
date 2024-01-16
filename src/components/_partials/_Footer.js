@@ -7,7 +7,7 @@ export default function Footer() {
           <br />
           <span>1 Athlete's Way, Vancouver BC </span>
         </h3>
-        <p>Creekside Community Garden 2023</p>
+        <p>Creekside Community Garden 2024</p>
     </div>
   );
 }

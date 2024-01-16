@@ -28,7 +28,7 @@ export default async function getProfilePageInfo(id) {
 
   return Promise.all([getPlotProfileInfo(id), getAllTips() ])
 .then((data) => {
-  console.log(data);
+  // console.log(data);
   // data[0]; // first promise resolved 
   // data[1];// second promise resolved 
 })

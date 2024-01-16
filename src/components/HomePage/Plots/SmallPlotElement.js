@@ -1,7 +1,7 @@
 import styles from '../../styles/HomePage/SmallPlotElement.module.css';
 
 export default function SmallPlotElement(props) {
-  console.log('plot props', props)
+  // console.log('plot props', props)
   const array = props.icons;
   const onClickFunc = props.onclick;
 

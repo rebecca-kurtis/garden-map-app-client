@@ -17,7 +17,7 @@ export default function ProfilePageIndex(props) {
   const [isLoading, setLoading] = useState(true);
 
   const id = useParams();
-  console.log("id", id.id);
+  // console.log("id", id.id);
   const plot_id = id.id;
 
   useEffect(() => {
@@ -26,13 +26,13 @@ export default function ProfilePageIndex(props) {
       // getAllTips()
       .then((data) => {
         setProfileInfo(data);
-        console.log("data from inside", data);
+        // console.log("data from inside", data);
         setLoading(false);
         // console.log('users from inside', users)
       });
   }, []);
 
-  console.log("profileInfo", profileInfo);
+  // console.log("profileInfo", profileInfo);
   // console.log('prfofile, name', profileInfo[0].user_name);
   // const userName = profileInfo[0].user_name;
 

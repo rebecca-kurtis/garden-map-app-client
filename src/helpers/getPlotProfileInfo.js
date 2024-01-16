@@ -9,7 +9,7 @@ export default async function getPlotProfileInfo(id) {
 
   // const promise1 = await axios.get(plantProfileRoute);
   // setData(data);
-  console.log('plantProfileRoute data:', data);
+  // console.log('plantProfileRoute data:', data);
       // setUsers(data);
       // return usersList;
       return data;
