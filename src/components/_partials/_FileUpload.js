@@ -4,7 +4,7 @@ import axios from "axios";
 
 import React, { Component } from "react";
 
-class App extends Component {
+class FileUpload extends Component {
 	state = {
 		// Initially, no file is selected
 		selectedFile: null,
@@ -94,4 +94,4 @@ class App extends Component {
 	}
 }
 
-export default App;
+export default FileUpload;

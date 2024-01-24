@@ -61,6 +61,27 @@ app.get("/users", (req, res) => {
   });
 });
 
+// Login route 
+app.get("/login", (req, res) => {
+
+  const email = req.body.email;
+
+  db.query(
+    `SELECT users.email,
+    users.password
+    FROM users
+    WHERE users.email = $1 
+    GROUP BY users.first_name, users.last_name, users.email, users.password, users.address, users.city, users.state, users.country, users.postal_code, openOrderID
+    ;`,
+    [email], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
 // Get all tips
 app.get("/tips", (req, res) => {
   db.query("SELECT * FROM tips", (error, results) => {

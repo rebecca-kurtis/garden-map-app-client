@@ -11,6 +11,7 @@ import ShareSection from "./ShareSection";
 import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 import getAllTips from "../../helpers/getAllTips";
 import getProfilePageInfo from "../../helpers/getProfilePageInfo";
+import FileUpload from "../_partials/_FileUpload";
 
 export default function ProfilePageIndex(props) {
   const [profileInfo, setProfileInfo] = useState([]);
@@ -64,6 +65,7 @@ export default function ProfilePageIndex(props) {
         </div>
         <TipsSection profileInfo={profileInfo} />
         <ShareSection />
+        <FileUpload />
         <a href="/">
           <button className={styles.homeButton}>Back to the Garden</button>
         </a>

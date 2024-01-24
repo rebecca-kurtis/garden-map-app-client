@@ -15,7 +15,19 @@
   align-self: center;
 }
 
-.buttonContainer button {
+/* .buttonContainer button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+} */
+
+.headerButton {
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -25,5 +37,6 @@
   border-width: 0;
   /* width: 170px; */
   font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
   font-weight: 600;
 }

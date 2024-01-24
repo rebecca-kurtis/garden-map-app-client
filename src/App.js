@@ -15,6 +15,7 @@ import ProfilePageIndex from "./components/ProfilePage/ProfilePageIndex";
 import getAllUsers from "./helpers/getAllUsers";
 import getAllPlants from "./helpers/getAllPlants";
 import getAllPlantedPlants from "./helpers/getAllPlantedPlants";
+import Login from "./components/_partials/_Login";
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
           <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
+          {/* <Route path="/login" element={<Login/>} /> */}
         </Routes>
         <Footer />
       </BrowserRouter>
