@@ -71,7 +71,7 @@ app.get("/login", (req, res) => {
     users.password
     FROM users
     WHERE users.email = $1 
-    GROUP BY users.first_name, users.last_name, users.email, users.password, users.address, users.city, users.state, users.country, users.postal_code, openOrderID
+    GROUP BY users.email, users.password
     ;`,
     [email], (error, results) => {
     if (error) {
