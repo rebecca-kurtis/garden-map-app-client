@@ -7,13 +7,50 @@
   padding: 40px;
   text-align: left;
   justify-content: center;
+  /* align-items: center; */
 }
 
-.tipsSectionContainer h2 {
+.tipsSectionContainerH2 {
   font-size: 25px;
+  font-weight: 700;
 }
 
 .tipsSectionContainer p {
   flex-wrap: wrap;
   font-size: 17px;
+}
+
+.editTipsHeader {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-content: center;
+  padding-bottom: 10px;
+}
+
+.tipsButton {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  /* width: 170px; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.inputTextTips {
+  height: 150px;
+  width: 100%;
+  padding: 10px;
+  flex-wrap: wrap;
+  font-size: 17px;
+  /* background-color: #57CC99; */
+  border-radius: 10px;
+  border-color: #22577a;
+  border-width: 3px;
 }

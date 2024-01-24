@@ -19,8 +19,8 @@ export default function EditPlantsGrowing(props) {
   }
 
 
-  const mappedIcons = plantsIcons.map((array) => (
-    <li className={styles.plantsGrowingLiContainer}>
+  const mappedIcons = plantsIcons.map((array, index) => (
+    <li className={styles.plantsGrowingLiContainer} key={index}>
       <span className={styles.roundCircleLi}>&#9679;</span>
       <img
         className={styles.plantsGrowingIconImage}
