@@ -12,6 +12,10 @@ import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 import getAllTips from "../../helpers/getAllTips";
 import getProfilePageInfo from "../../helpers/getProfilePageInfo";
 import FileUpload from "../_partials/_FileUpload";
+import EditHeroHeader from "../ProfilePage/EditingComponents/EditHeroHeader";
+import EditAboutSection from "./EditingComponents/EditAboutSection";
+import EditTipsSection from "./EditingComponents/EditTipsSection";
+import EditPlantsGrowing from "./EditingComponents/EditPlantsGrowing";
 
 export default function ProfilePageIndex(props) {
   const [profileInfo, setProfileInfo] = useState([]);
@@ -53,22 +57,46 @@ export default function ProfilePageIndex(props) {
     );
   } else {
     return (
-      <div className={styles.profilePageContainer}>
-        <HeroHeader profileInfo={profileInfo} />
-        <div className={styles.aboutSectionIndexContainer}>
-          <PlantsGrowing
-            plotID={plot_id}
-            plantInfo={props.plants}
-            plants={props.plantedPlants}
-          />
-          <AboutSection profileInfo={profileInfo} />
-        </div>
-        <TipsSection profileInfo={profileInfo} />
-        <ShareSection />
-        <FileUpload />
-        <a href="/">
-          <button className={styles.homeButton}>Back to the Garden</button>
-        </a>
+      <div>
+        {props.user === null && (
+          <div className={styles.profilePageContainer}>
+            <HeroHeader profileInfo={profileInfo} />
+            <div className={styles.aboutSectionIndexContainer}>
+              <PlantsGrowing
+                plotID={plot_id}
+                plantInfo={props.plants}
+                plants={props.plantedPlants}
+              />
+              <AboutSection profileInfo={profileInfo} />
+            </div>
+            <TipsSection profileInfo={profileInfo} />
+            <ShareSection />
+            <FileUpload />
+            <a href="/">
+              <button className={styles.homeButton}>Back to the Garden</button>
+            </a>
+          </div>
+        )}
+
+        {props.user !== null && (
+          <div className={styles.profilePageContainer}>
+            <EditHeroHeader profileInfo={profileInfo} />
+            <div className={styles.aboutSectionIndexContainer}>
+              <EditPlantsGrowing
+                plotID={plot_id}
+                plantInfo={props.plants}
+                plants={props.plantedPlants}
+              />
+              <EditAboutSection profileInfo={profileInfo} />
+            </div>
+            <EditTipsSection profileInfo={profileInfo} />
+            <ShareSection />
+            <FileUpload />
+            <a href="/">
+              <button className={styles.homeButton}>Back to the Garden</button>
+            </a>
+          </div>
+        )}
       </div>
     );
   }

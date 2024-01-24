@@ -62,7 +62,7 @@ app.get("/users", (req, res) => {
 });
 
 // Login route 
-app.get("/login", (req, res) => {
+app.post("/login", (req, res) => {
 
   const email = req.body.email;
 
