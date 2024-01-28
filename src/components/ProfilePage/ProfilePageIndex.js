@@ -16,6 +16,7 @@ import EditTipsSection from "./EditingComponents/EditTipsSection";
 import EditPlantsGrowing from "./EditingComponents/EditPlantsGrowing";
 
 export default function ProfilePageIndex(props) {
+  console.log("local storage:", localStorage)
   const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setLoading] = useState(true);
 

@@ -18,8 +18,12 @@ import getAllPlantedPlants from "./helpers/getAllPlantedPlants";
 import Login from "./components/_partials/_Login";
 
 
+import useLocalStorage from "./hooks/useLocalStorage";
+
+
 function App() {
-  let [users, setUsers] = useState([]);
+  // let [users, setUsers] = useState([]);
+  const [userID, setUserID] = useState(null);
   let [plantedPlants, setPlantedPlants] = useState([]);
   let [plants, setPlants] = useState([])
 
@@ -34,12 +38,12 @@ function App() {
 
   // };
   useEffect(() => {
-    getAllUsers()
-    .then((data) => {
-      setUsers(data);
-      // console.log('data from inside', data)
-      // console.log('users from inside', users)
-    });
+    // getAllUsers()
+    // .then((data) => {
+    //   setUsers(data);
+    //   // console.log('data from inside', data)
+    //   // console.log('users from inside', users)
+    // });
 
     getAllPlantedPlants()
     .then((data) => {
@@ -56,13 +60,34 @@ function App() {
     });
 
   }, []);
+
+ // Set current user state
+ const [user, setUser] = useLocalStorage("user", null);
+
+ function updateUserStorage(currentUserID) {
+  setUser(currentUserID);
+  localStorage.clear();
+  localStorage.setItem("userID", JSON.stringify(currentUserID));
+  console.log("userID in function", userID);
+}
+
+// console.log(updateUserStorage);
+
+
+  // Remove current user state
+  function clearUserStorage() {
+    localStorage.clear();
+    setUser(null);
+  }
+
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
+        <Header user={user} updateUserStorage={updateUserStorage} clearUserStorage={clearUserStorage}/>
         <Routes>
           <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
-          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
+          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} userID={userID}/>} />
           {/* <Route path="/login" element={<Login/>} /> */}
         </Routes>
         <Footer />

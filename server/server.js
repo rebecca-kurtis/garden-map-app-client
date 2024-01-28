@@ -63,22 +63,25 @@ app.get("/users", (req, res) => {
 
 // Login route 
 app.post("/login", (req, res) => {
+  console.log("req.body", req.body)
 
-  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
+
 
   db.query(
-    `SELECT users.email,
-    users.password
+    `SELECT user_id
     FROM users
-    WHERE users.email = $1 
-    GROUP BY users.email, users.password
+    WHERE users.username = $1 
+    AND users.password = $2
+    GROUP BY user_id
     ;`,
-    [email], (error, results) => {
+    [username, password], (error, results) => {
     if (error) {
       throw error;
     }
     console.log('Results:', results)
-    res.status(200).send(results.rows);
+    res.status(200).send(results.rows[0]);
   });
 });
 
