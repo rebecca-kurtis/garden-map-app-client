@@ -10,6 +10,13 @@ export default function Header(props) {
   const clearUserStorage = props.clearUserStorage;
   const user = props.user;
 
+  function logoutHandler() {
+      clearUserStorage();
+      // navigate('/');
+      // closeSide();
+
+  } 
+
   if (user === null) {
     return (
       <div className={styles.headerContainer}>
@@ -37,7 +44,7 @@ export default function Header(props) {
           <a  href="/"><button className={styles.headerButton}>Visit our main website</button></a>
         </div>
         <div className={styles.buttonContainer}>
-        <Login updateUserStorage={updateUserStorage}/>
+        <button className={styles.headerButton} type="submit" onClick={logoutHandler}>Logout</button>
         </div>
         
       </div>
