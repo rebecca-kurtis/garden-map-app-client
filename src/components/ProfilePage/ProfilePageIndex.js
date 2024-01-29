@@ -34,16 +34,18 @@ export default function ProfilePageIndex(props) {
 
   useEffect(() => {
 
+    checkIfUserOwnsPlot(user, plotID)
+      .then((data) => {
+        console.log('data inside hook', data);
+      });
+
     getPlotProfileInfo(plot_id)
       .then((data) => {
+        console.log('data inside func', data);
         setProfileInfo(data);
         setLoading(false);
       });
 
-    checkIfUserOwnsPlot(user, plotID)
-    .then((data) => {
-      console.log('Data', data);
-    })  
   }, []);
 
   if (isLoading) {
