@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./components/_partials/_Header";
 import Footer from "./components/_partials/_Footer";
 import HomePageIndex from "./components/HomePage/HomePageIndex";

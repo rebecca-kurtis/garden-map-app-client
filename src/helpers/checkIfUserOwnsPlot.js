@@ -11,5 +11,4 @@ export default async function checkIfUserOwnsPlot(plotID, userID) {
 
   return data[0];
 
-
 };

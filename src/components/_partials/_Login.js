@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import styles from "../styles/Header.module.css";
 
