@@ -14,6 +14,7 @@ import EditHeroHeader from "../ProfilePage/EditingComponents/EditHeroHeader";
 import EditAboutSection from "./EditingComponents/EditAboutSection";
 import EditTipsSection from "./EditingComponents/EditTipsSection";
 import EditPlantsGrowing from "./EditingComponents/EditPlantsGrowing";
+import checkIfUserOwnsPlot from "../../helpers/checkIfUserOwnsPlot";
 
 export default function ProfilePageIndex(props) {
   console.log("local storage:", localStorage)
@@ -22,6 +23,14 @@ export default function ProfilePageIndex(props) {
 
   const id = useParams();
   const plot_id = id.id;
+  const user = props.user;
+  const plotID = parseInt(plot_id);
+
+  console.log(user);
+  console.log({
+    plotID,
+    user
+  })
 
   useEffect(() => {
 
@@ -30,6 +39,11 @@ export default function ProfilePageIndex(props) {
         setProfileInfo(data);
         setLoading(false);
       });
+
+    checkIfUserOwnsPlot(user, plotID)
+    .then((data) => {
+      console.log('Data', data);
+    })  
   }, []);
 
   if (isLoading) {

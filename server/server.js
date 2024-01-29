@@ -56,10 +56,40 @@ app.get("/users", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
+
+// Check if user owns plot
+app.get("/checkUserRoute", (req, res) => {
+
+  const plotID = req.query.plotID;
+  const userID = req.query.userID;
+  console.log('req body',req.body)
+  console.log('req query',req.query)
+
+
+
+  db.query(`
+  SELECT CAST(
+    EXISTS (
+        SELECT 1
+        FROM plots
+        WHERE user_id = $1
+          AND plot_id = $2
+    ) AS BOOLEAN
+  ) AS user_owns_plot;
+  ;`,
+  [userID, plotID], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.log('Results from checking:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
 
 // Login route 
 app.post("/login", (req, res) => {
@@ -80,7 +110,7 @@ app.post("/login", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows[0]);
   });
 });
@@ -91,7 +121,7 @@ app.get("/tips", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -131,7 +161,7 @@ app.get("/plants", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -142,7 +172,7 @@ app.get("/gardens", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -153,7 +183,7 @@ app.get("/plots", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -164,7 +194,7 @@ app.get("/photos", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -175,7 +205,7 @@ app.get("/plantedPlants", (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('Results:', results)
+    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });

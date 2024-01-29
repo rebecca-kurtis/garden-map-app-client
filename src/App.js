@@ -87,7 +87,7 @@ function App() {
         <Header user={user} updateUserStorage={updateUserStorage} clearUserStorage={clearUserStorage}/>
         <Routes>
           <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
-          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} userID={userID}/>} />
+          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} user={user}/>} />
           {/* <Route path="/login" element={<Login/>} /> */}
         </Routes>
         <Footer />
