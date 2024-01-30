@@ -6,7 +6,7 @@ export default function LargePlotElement(props) {
   const onClickFunc = props.onclick;
 
 
-  const mappedIcons = array.map(url => <img className={styles.iconImage} src={require('../../images/PlantIcons/' + url + '.png')} alt="icon" />)
+  const mappedIcons = array.map((url, index) => <img className={styles.iconImage} key={index} src={require('../../images/PlantIcons/' + url + '.png')} alt="icon" />)
 
   return (
     <div className={styles.LargePlotElementContainer}>

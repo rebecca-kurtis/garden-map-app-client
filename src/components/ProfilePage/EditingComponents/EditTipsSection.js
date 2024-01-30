@@ -8,8 +8,14 @@ export default function EditTipsSection(props) {
 
   //collect all of the tips
   for (const obj in props.profileInfo) {
-    tipsArray.push(props.profileInfo[obj].tdescription);
+    console.log('test obj',props.profileInfo)
+    const tip = props.profileInfo[obj].tdescription;
+    const tipId = props.profileInfo[obj].tip_id;
+    tipsArray.push([
+      tipId, tip
+    ]);
   }
+  console.log(tipsArray);
 
   //create function to remove any tips in tipsArray that are duplicates
   function removeTipsDuplicates(data) {
@@ -22,7 +28,7 @@ export default function EditTipsSection(props) {
   function addTipsToObj(dataArray) {
     const newObj = {};
     dataArray.forEach((tip, index) => {
-      newObj[index] = tip;
+      newObj[tip[0]] = tip[1];
     })
     return newObj;
   }
@@ -38,7 +44,7 @@ export default function EditTipsSection(props) {
   const [mode, setMode] = useState(true);
 
   // Set the value of a single element of the object
-  const setValue = (key, index, value) => {
+  const setValue = (key, value) => {
     setForm({ ...form, [key]: value });
   };
 
@@ -133,7 +139,18 @@ export default function EditTipsSection(props) {
   for (const key in form) {
     editMappedTips.push(
       <li className={styles.plantsGrowingLiContainer} key={key}>
-      <p>{form[key]}</p>
+      {/* <p>{form[key]}</p> */}
+      <textarea
+              className={styles.inputTextTips}
+              type="text"
+              name={"tip"}
+              value={form[key]}
+              onChange={(e) => {
+                console.log('test test', e.target.value);
+                setValue(key, e.target.value)
+              }}
+              required
+            ></textarea>
     </li>
     )
   }
@@ -193,17 +210,17 @@ export default function EditTipsSection(props) {
           <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
         </div>
         Edit Tips Section:
-        {/* <form
+        <form
           onSubmit={handleUserSubmit}
           className={styles.EditAboutSectionForm}
-        > */}
-          {/* {editMappedTips} */}
+        > 
+          {editMappedTips}
 
          
-          {/* <button type="submit" className={styles.tipsButton}>
+          <button type="submit" className={styles.tipsButton}>
             Update
           </button>
-        </form> */}
+        </form>
       </div>
     );
   }
