@@ -65,7 +65,7 @@ export default function EditHeroHeader(props) {
       <div className={styles.heroHeaderImageContainer}>
         <img src={userImage} alt="profile"></img>
       </div>
-      <div className={styles.heroHeaderNameContainer}>
+      <div className={styles.editHeroHeaderNameContainer}>
         <h1>{form.name}</h1>
         <button onClick={handleClick} className={styles.editButton}>Edit</button>
       </div>
@@ -92,7 +92,7 @@ if (mode === false) {
               onChange={(e) => setValue("name", e.target.value)}
               required
             ></input>
-            <button type="submit" className={styles.editButton}>
+            <button type="submit" className={styles.updateButton}>
               Update
             </button>
       </form>

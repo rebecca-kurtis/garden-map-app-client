@@ -3,16 +3,46 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function EditTipsSection(props) {
-  const [form, setForm] = useState({
-    tip: "",
-  });
+
+  const tipsArray = [];
+
+  //collect all of the tips
+  for (const obj in props.profileInfo) {
+    tipsArray.push(props.profileInfo[obj].tdescription);
+  }
+
+  //create function to remove any tips in tipsArray that are duplicates
+  function removeTipsDuplicates(data) {
+    return data.filter((value, index) => data.indexOf(value) === index);
+  }
+  //remove duplicates
+  const newTipsArray = removeTipsDuplicates(tipsArray);
+
+  //create function to add cleaned up tips to new obj to be used in state
+  function addTipsToObj(dataArray) {
+    const newObj = {};
+    dataArray.forEach((tip, index) => {
+      newObj[index] = tip;
+    })
+    return newObj;
+  }
+  // add tips to obj for state
+  const newFormObj = addTipsToObj(newTipsArray);
+  console.log("newform",newFormObj);
+
+  //tips state form set up using above obj for state tips
+  const [form, setForm] = useState(newFormObj);
+
+  console.log("state form", form);
 
   const [mode, setMode] = useState(true);
 
   // Set the value of a single element of the object
-  const setValue = (key, value) => {
+  const setValue = (key, index, value) => {
     setForm({ ...form, [key]: value });
   };
+
+  
   const aboutEditRoute =
     process.env.REACT_APP_SERVER +
     ":" +
@@ -55,37 +85,92 @@ export default function EditTipsSection(props) {
     setMode(false);
   };
 
-  const tipsArray = [];
+  // const tipsArray = [];
 
-  for (const obj in props.profileInfo) {
-    tipsArray.push(props.profileInfo[obj].tdescription);
-  }
-  function removeTipsDuplicates(data) {
-    return data.filter((value, index) => data.indexOf(value) === index);
-  }
+  // for (const obj in props.profileInfo) {
+  //   tipsArray.push(props.profileInfo[obj].tdescription);
+  // }
+  // function removeTipsDuplicates(data) {
+  //   return data.filter((value, index) => data.indexOf(value) === index);
+  // }
+  // console.log('Tips array', tipsArray)
 
-  const newTipsArray = removeTipsDuplicates(tipsArray);
+  // const newTipsArray = removeTipsDuplicates(tipsArray);
 
-  const mappedTips = newTipsArray.map((tip, index) => (
-    <li className={styles.plantsGrowingLiContainer} key={index}>
-      <p>{tip}</p>
+  // function addTipsToObj(dataArray) {
+  //   const newObj = {};
+  //   dataArray.forEach((tip, index) => {
+  //     newObj[index] = tip;
+  //   })
+  //   return newObj;
+  // }
+  // // console.log('newObj', addTipsToState(newTipsArray));
+  // const newFormObj = addTipsToObj(newTipsArray);
+  // console.log("newform",newFormObj);
+  // setForm(newFormObj);
+
+  // function addTipsToFormState() {
+
+  //   const newTipsArray = removeTipsDuplicates(tipsArray);
+  //   const newFormObj = addTipsToObj(newTipsArray);
+  //   setForm(newFormObj);
+  // }
+
+  // console.log(addTipsToFormState)
+
+  const mappedTips = []
+
+  for (const key in form) {
+    mappedTips.push(
+      <li className={styles.plantsGrowingLiContainer} key={key}>
+      <p>{form[key]}</p>
     </li>
-  ));
+    )
+  }
 
-  const editMappedTips = newTipsArray.map((tip, index) => (
-    <li className={styles.plantsGrowingLiContainer} key={index}>
-      {/* <p>{tip}</p> */}
-      <textarea
-              className={styles.inputTextTips}
-              type="text"
-              name="tip"
-              value={tip}
-              placeholder="Update Tip"
-              onChange={(e) => setValue("tip", e.target.value)}
-              required
-            ></textarea>
+  const editMappedTips = []
+
+  for (const key in form) {
+    editMappedTips.push(
+      <li className={styles.plantsGrowingLiContainer} key={key}>
+      <p>{form[key]}</p>
     </li>
-  ));
+    )
+  }
+
+  
+  
+  
+  
+  // form.map((tip, index) => (
+  //   <li className={styles.plantsGrowingLiContainer} key={index}>
+  //     <p>{tip}</p>
+  //   </li>
+  // ));
+
+  // const editMappedTips = newTipsArray.map((tip, index) => (
+  //   // <li className={styles.plantsGrowingLiContainer} key={index}>
+
+  //   <form
+  //         onSubmit={handleUserSubmit}
+  //         className={styles.EditAboutSectionForm}
+  //       >
+  //       <textarea
+  //             className={styles.inputTextTips}
+  //             type="text"
+  //             data-name={`tip${index}`}
+  //             value={form.tip}
+  //             onChange={(e) => setValue("tip", e.target.value)}
+  //             required
+  //           ></textarea>
+         
+  //         <button type="submit" className={styles.tipsButton}>
+  //           Update
+  //         </button>
+  //       </form>
+      
+  //   //  </li>
+  // ));
 
   if (mode === true) {
     return (
@@ -108,15 +193,17 @@ export default function EditTipsSection(props) {
           <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
         </div>
         Edit Tips Section:
-        <form
+        {/* <form
           onSubmit={handleUserSubmit}
           className={styles.EditAboutSectionForm}
-        >
-          <ul>{editMappedTips}</ul>
-          <button type="submit" className={styles.tipsButton}>
+        > */}
+          {/* {editMappedTips} */}
+
+         
+          {/* <button type="submit" className={styles.tipsButton}>
             Update
           </button>
-        </form>
+        </form> */}
       </div>
     );
   }

@@ -10,7 +10,9 @@ export default function MediumPlotElementHorizontal(props) {
   return (
     <div className={styles.mediumPlotElementContainer}>
       <div className={styles.mediumPlotElement} onClick={() => onClickFunc(props.plotID)}>
-        <div className={styles.iconElement}>{mappedIcons}</div>
+        <div className={styles.iconElement}>
+        {/* <p className={styles.plotnum}>1</p> */}
+        {mappedIcons}</div>
       </div>
     </div>
   );

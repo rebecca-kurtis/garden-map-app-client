@@ -80,7 +80,7 @@ if (mode === false) {
               name="description"
               value={form.description}
               placeholder="Enter your username"
-              onChange={(e) => setValue("username", e.target.value)}
+              onChange={(e) => setValue("description", e.target.value)}
               required
             ></textarea>
             <button type="submit" className={styles.saveButton}>
