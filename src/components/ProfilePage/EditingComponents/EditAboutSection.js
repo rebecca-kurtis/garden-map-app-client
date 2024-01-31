@@ -5,11 +5,15 @@ import axios from 'axios';
 export default function EditAboutSection(props) {
 
   // const description = props.profileInfo[0].udescription;
+  console.log('about props', props);
 
 
   const [form, setForm] = useState({
+    userID: props.profileInfo[0].user_id,
     description: props.profileInfo[0].udescription
   });
+
+  console.log('about form', form);
 
   const [mode, setMode] = useState(true);
 
@@ -17,37 +21,38 @@ export default function EditAboutSection(props) {
   const setValue = (key, value) => {
     setForm({...form, [key]: value})
   }
-  const aboutEditRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/updateAbout/:id"
+  const aboutEditRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/updateAbout"
 
   const handleUserSubmit = (e) => {
     e.preventDefault();
-    setForm(form)
-    setMode(true);
+    // setForm(form)
+    // setMode(true);
 
-    // axios.post(usersRoute, form)
-    // .then((response) => {
-    //   console.log('response', response);
-    //   const data = response.data.loginKey;
+    axios.post(aboutEditRoute, form)
+    .then((response) => {
+      console.log('response', response);
+      // const data = response.data.loginKey;
   
-    //   // updateUserStorage(data[0]);
+      // updateUserStorage(data[0]);
 
-    //   setForm(data[0]);
-    //   // toggleAccount();
-    //   // setForm(data[0]);
-    //   // getUserOrderInfo(response.data.cartKey)
-    //   console.log("formData", form);
+      setForm(form)
+      setMode(true);
+      // toggleAccount();
+      // setForm(data[0]);
+      // getUserOrderInfo(response.data.cartKey)
+      console.log("formData", form);
 
-    //   return response.data
-    // })
-    // .catch((error) => {
-    //   if (error.response) {
-    //     alert(`Error! ${error.message}`);
-    //   } else if (error.request) {
-    //     console.log("network error");
-    //   } else {
-    //     console.log(error);
-    //   }
-    // });
+      return response.data
+    })
+    .catch((error) => {
+      if (error.response) {
+        alert(`Error! ${error.message}`);
+      } else if (error.request) {
+        console.log("network error");
+      } else {
+        console.log(error);
+      }
+    });
   };
 
 const handleClick = () => {

@@ -210,6 +210,26 @@ app.get("/plantedPlants", (req, res) => {
   });
 });
 
+//update About Section "/updateAbout"
+app.post("/updateAbout", (req, res) => {
+  console.log('req body about', req.body)
+
+  const userID = req.body.userID;
+  const description = req.body.description;
+
+
+  db.query(`
+  UPDATE users
+  SET description = $1
+  WHERE user_id = $2
+  ;`,[description, userID], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    // console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
