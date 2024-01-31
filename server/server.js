@@ -135,7 +135,8 @@ app.get("/plots/:id", (req, res) => {
     `SELECT DISTINCT
     users.user_id AS user_id, 
     tips.tips_id AS tip_id, 
-    CONCAT (users.first_name, ' ', users.last_name) AS user_name,
+    users.first_name AS fName,
+    users.last_name AS lName,
     users.description AS uDescription,
     tips.description AS tDescription,
     plantedPlants.plant_id AS ppPlantId
@@ -212,17 +213,36 @@ app.get("/plantedPlants", (req, res) => {
 
 //update About Section "/updateAbout"
 app.post("/updateAbout", (req, res) => {
-  console.log('req body about', req.body)
 
   const userID = req.body.userID;
   const description = req.body.description;
-
 
   db.query(`
   UPDATE users
   SET description = $1
   WHERE user_id = $2
   ;`,[description, userID], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    // console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+//update HeroHeader Section Name "/updateName"
+app.post("/updateName", (req, res) => {
+
+  const userID = req.body.userID;
+  const firstName = req.body.first_name;
+  const lastName = req.body.last_name;
+
+
+  db.query(`
+  UPDATE users
+  SET first_name = $1, last_name = $2
+  WHERE user_id = $3
+  ;`,[firstName, lastName, userID], (error, results) => {
     if (error) {
       throw error;
     }

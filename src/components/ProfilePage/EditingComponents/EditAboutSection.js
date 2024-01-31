@@ -4,16 +4,11 @@ import axios from 'axios';
 
 export default function EditAboutSection(props) {
 
-  // const description = props.profileInfo[0].udescription;
-  console.log('about props', props);
-
-
   const [form, setForm] = useState({
     userID: props.profileInfo[0].user_id,
     description: props.profileInfo[0].udescription
   });
 
-  console.log('about form', form);
 
   const [mode, setMode] = useState(true);
 
@@ -25,22 +20,11 @@ export default function EditAboutSection(props) {
 
   const handleUserSubmit = (e) => {
     e.preventDefault();
-    // setForm(form)
-    // setMode(true);
 
     axios.post(aboutEditRoute, form)
     .then((response) => {
-      console.log('response', response);
-      // const data = response.data.loginKey;
-  
-      // updateUserStorage(data[0]);
-
       setForm(form)
       setMode(true);
-      // toggleAccount();
-      // setForm(data[0]);
-      // getUserOrderInfo(response.data.cartKey)
-      console.log("formData", form);
 
       return response.data
     })
@@ -86,7 +70,6 @@ if (mode === false) {
               value={form.description}
               placeholder="Enter your username"
               onChange={(e) => {
-                // console.log('test test', e.target);
                 setValue("description", e.target.value)
               }}
               required

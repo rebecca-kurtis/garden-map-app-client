@@ -50,6 +50,17 @@
   padding-top: 40px;
 }
 
+.formInputsDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  text-align: left;
+  row-gap: 2px;
+  column-gap: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
 .editButton {
   padding: 10px;
   padding-left: 20px;
@@ -87,6 +98,8 @@
 .inputTextName {
   /* height: 150px; */
   /* width: 100%; */
+  display: flex;
+  flex-direction: column;
   padding: 2px;
   flex-wrap: wrap;
   font-size: 17px;
@@ -98,7 +111,7 @@
 
 .EditNameSectionForm {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   column-gap: 10px;
 }
