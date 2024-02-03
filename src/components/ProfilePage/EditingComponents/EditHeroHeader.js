@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function EditHeroHeader(props) {
-  // const fName = props.profileInfo[0].fname;
-  // const lName = props.profileInfo[0].lname;
 
   const [form, setForm] = useState({
     userID: props.profileInfo[0].user_id,
@@ -30,11 +28,8 @@ export default function EditHeroHeader(props) {
 
     axios.post(nameEditRoute, form)
     .then((response) => {
-      console.log('response', response);
       setForm(form);
       setMode(true);
-   
-      console.log("formData", form);
 
       return response.data
     })
@@ -50,7 +45,6 @@ export default function EditHeroHeader(props) {
   };
 
   const handleClick = () => {
-    console.log("click");
     setMode(false);
   };
 

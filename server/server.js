@@ -246,7 +246,31 @@ app.post("/updateName", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
+    res.status(200).send(results.rows);
+  });
+});
+
+//update Tips Section "/updateTips"
+app.post("/updateTips", (req, res) => {
+
+  let tipId = '';
+  let tipDescription = '';
+
+   for (let tip in req.body) {
+    tipId = tip;
+    tipDescription = req.body[tip];
+  }
+
+
+
+  db.query(`
+  UPDATE tips
+  SET description = $1
+  WHERE tips_id = $2
+  ;`,[tipDescription, tipId], (error, results) => {
+    if (error) {
+      throw error;
+    }
     res.status(200).send(results.rows);
   });
 });

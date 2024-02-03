@@ -40,7 +40,6 @@ export default function EditAboutSection(props) {
   };
 
 const handleClick = () => {
-  console.log("click");
   setMode(false);
 }
 

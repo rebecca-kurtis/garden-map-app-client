@@ -3,17 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function EditTipsSection(props) {
-
   const tipsArray = [];
 
   //collect all of the tips
   for (const obj in props.profileInfo) {
-    console.log('test obj',props.profileInfo)
+    console.log("test obj", props.profileInfo);
     const tip = props.profileInfo[obj].tdescription;
     const tipId = props.profileInfo[obj].tip_id;
-    tipsArray.push([
-      tipId, tip
-    ]);
+    tipsArray.push([tipId, tip]);
   }
   console.log(tipsArray);
 
@@ -29,15 +26,17 @@ export default function EditTipsSection(props) {
     const newObj = {};
     dataArray.forEach((tip, index) => {
       newObj[tip[0]] = tip[1];
-    })
+    });
     return newObj;
   }
   // add tips to obj for state
   const newFormObj = addTipsToObj(newTipsArray);
-  console.log("newform",newFormObj);
+  console.log("newform", newFormObj);
 
   //tips state form set up using above obj for state tips
   const [form, setForm] = useState(newFormObj);
+  const [submitForm, setSubmitForm] = useState({});
+  const [keyID, setKeyID] = useState(null);
 
   console.log("state form", form);
 
@@ -48,46 +47,46 @@ export default function EditTipsSection(props) {
     setForm({ ...form, [key]: value });
   };
 
-  
-  const aboutEditRoute =
+  // Set the value of a single element of the object for Submit handler
+  const setValueSubmit = (key, value) => {
+    setSubmitForm({ [key]: value });
+  };
+
+  console.log("submitform", submitForm);
+  console.log("key", keyID);
+
+  const tipsEditRoute =
     process.env.REACT_APP_SERVER +
     ":" +
     process.env.REACT_APP_SERVER_PORT +
-    "/updateAbout/:id";
+    "/updateTips";
 
   const handleUserSubmit = (e) => {
     e.preventDefault();
-    setForm(form);
-    setMode(true);
 
-    // axios.post(usersRoute, form)
-    // .then((response) => {
-    //   console.log('response', response);
-    //   const data = response.data.loginKey;
+    axios
+      .post(tipsEditRoute, submitForm)
+      .then((response) => {
+        console.log("response", response);
+        setForm(form);
+        setMode(true);
 
-    //   // updateUserStorage(data[0]);
-
-    //   setForm(data[0]);
-    //   // toggleAccount();
-    //   // setForm(data[0]);
-    //   // getUserOrderInfo(response.data.cartKey)
-    //   console.log("formData", form);
-
-    //   return response.data
-    // })
-    // .catch((error) => {
-    //   if (error.response) {
-    //     alert(`Error! ${error.message}`);
-    //   } else if (error.request) {
-    //     console.log("network error");
-    //   } else {
-    //     console.log(error);
-    //   }
-    // });
+        return response.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(`Error! ${error.message}`);
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
-  const handleClick = () => {
+  const handleClick = (keyID) => {
     console.log("click");
+    setKeyID(keyID);
     setMode(false);
   };
 
@@ -124,103 +123,80 @@ export default function EditTipsSection(props) {
 
   // console.log(addTipsToFormState)
 
-  const mappedTips = []
+  const mappedTips = [];
 
-  for (const key in form) {
+  for (const keyID in form) {
     mappedTips.push(
-      <li className={styles.plantsGrowingLiContainer} key={key}>
-      <p>{form[key]}</p>
-    </li>
-    )
+      <li className={styles.plantsGrowingLiContainer} key={keyID}>
+        <p>{form[keyID]}</p>
+        <button
+          onClick={() => handleClick(keyID)}
+          className={styles.tipsButton}
+        >
+          Edit
+        </button>
+      </li>
+    );
   }
 
-  const editMappedTips = []
+  const editMappedTips = [];
 
   for (const key in form) {
     editMappedTips.push(
       <li className={styles.plantsGrowingLiContainer} key={key}>
-      {/* <p>{form[key]}</p> */}
-      <textarea
-              className={styles.inputTextTips}
-              type="text"
-              name={"tip"}
-              value={form[key]}
-              onChange={(e) => {
-                console.log('test test', e.target.value);
-                setValue(key, e.target.value)
-              }}
-              required
-            ></textarea>
-    </li>
-    )
+        <form
+          onSubmit={handleUserSubmit}
+          className={styles.EditAboutSectionForm}
+        >
+          <textarea
+            className={styles.inputTextTips}
+            type="text"
+            name={"tip"}
+            value={form[key]}
+            onChange={(e) => {
+              console.log("test test", e.target.value);
+              setValue(key, e.target.value);
+              setValueSubmit(key, e.target.value);
+            }}
+            required
+          ></textarea>
+
+          <button type="submit" className={styles.tipsButton}>
+            Update
+          </button>
+        </form>
+        {/* <p>{form[key]}</p> */}
+      </li>
+    );
   }
 
-  
-  
-  
-  
-  // form.map((tip, index) => (
-  //   <li className={styles.plantsGrowingLiContainer} key={index}>
-  //     <p>{tip}</p>
-  //   </li>
-  // ));
+  console.log("editmappedtips", editMappedTips);
 
-  // const editMappedTips = newTipsArray.map((tip, index) => (
-  //   // <li className={styles.plantsGrowingLiContainer} key={index}>
-
-  //   <form
-  //         onSubmit={handleUserSubmit}
-  //         className={styles.EditAboutSectionForm}
-  //       >
-  //       <textarea
-  //             className={styles.inputTextTips}
-  //             type="text"
-  //             data-name={`tip${index}`}
-  //             value={form.tip}
-  //             onChange={(e) => setValue("tip", e.target.value)}
-  //             required
-  //           ></textarea>
-         
-  //         <button type="submit" className={styles.tipsButton}>
-  //           Update
-  //         </button>
-  //       </form>
-      
-  //   //  </li>
-  // ));
+  function filterByKeyID(obj) {
+    if (obj.key === keyID) {
+      return obj;
+    }
+  }
 
   if (mode === true) {
     return (
       <div className={styles.tipsSectionContainer}>
         <div className={styles.editTipsHeader}>
           <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
-          <button onClick={handleClick} className={styles.tipsButton}>
-            Edit
-          </button>
         </div>
         <ul>{mappedTips}</ul>
       </div>
     );
   }
 
-  if (mode === false) {
+  if (mode === false && keyID) {
     return (
       <div className={styles.tipsSectionContainer}>
         <div className={styles.editTipsHeader}>
           <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
         </div>
         Edit Tips Section:
-        <form
-          onSubmit={handleUserSubmit}
-          className={styles.EditAboutSectionForm}
-        > 
-          {editMappedTips}
-
-         
-          <button type="submit" className={styles.tipsButton}>
-            Update
-          </button>
-        </form>
+        {editMappedTips.filter((obj) => filterByKeyID(obj))}
       </div>
     );
   }
