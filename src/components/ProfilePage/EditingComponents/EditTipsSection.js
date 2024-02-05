@@ -5,16 +5,12 @@ import axios from "axios";
 export default function EditTipsSection(props) {
   const tipsArray = [];
 
-  console.log("props user", props);
-
   //collect all of the tips
   for (const obj in props.profileInfo) {
-    // console.log("test obj", props.profileInfo);
     const tip = props.profileInfo[obj].tdescription;
     const tipId = props.profileInfo[obj].tip_id;
     tipsArray.push([tipId, tip]);
   }
-  // console.log(tipsArray);
 
   //create function to remove any tips in tipsArray that are duplicates
   function removeTipsDuplicates(data) {
@@ -25,25 +21,19 @@ export default function EditTipsSection(props) {
 
   //create function to add cleaned up tips to new obj to be used in state
   function addTipsToObj(dataArray) {
-    // console.log('dataArray', dataArray);
     const newObj = {};
     dataArray.forEach((tip, index) => {
       newObj[tip[0]] = tip[1];
     });
-    // console.log('newObj', newObj);
     return newObj;
   }
   // add tips to obj for state
   const newFormObj = addTipsToObj(newTipsArray);
-  // console.log("newform", newFormObj);
 
   //tips state form set up using above obj for state tips
   const [form, setForm] = useState(newFormObj);
   const [submitForm, setSubmitForm] = useState({});
   const [keyID, setKeyID] = useState(null);
-
-  // console.log("state form", form);
-
   const [mode, setMode] = useState(true);
 
   // Set the value of a single element of the object
@@ -55,9 +45,6 @@ export default function EditTipsSection(props) {
   const setValueSubmit = (key, value) => {
     setSubmitForm({ [key]: value });
   };
-
-  // console.log("submitform", submitForm);
-  // console.log("key", keyID);
 
   const tipsEditRoute =
     process.env.REACT_APP_SERVER +
@@ -71,10 +58,8 @@ export default function EditTipsSection(props) {
     axios
       .post(tipsEditRoute, submitForm)
       .then((response) => {
-        console.log("response", response);
         setForm(form);
         setMode(true);
-
         return response.data;
       })
       .catch((error) => {
@@ -89,7 +74,6 @@ export default function EditTipsSection(props) {
   };
 
   const handleClick = (keyID) => {
-    console.log("click");
     setKeyID(keyID);
     setDeleteValue(keyID);
     setMode(false);
@@ -102,14 +86,9 @@ export default function EditTipsSection(props) {
     "/deleteTip";
 
   const [deleteValue, setDeleteValue] = useState(null);
-  // console.log('deleteValue', deleteValue);
 
   const handleTipDelete = (e) => {
     e.preventDefault();
-
-    // setDeleteValue(keyID)
-
-    // console.log('deleteValue', deleteValue);
 
     axios
       .post(tipsDeleteRoute, {
@@ -117,25 +96,16 @@ export default function EditTipsSection(props) {
         userID: props.userID,
       })
       .then((response) => {
-        // console.log('response from delete', response);
-        // console.log('response data', response.data);
-
         const newDataTipsArray = [];
 
         for (const obj in response.data) {
-          // console.log("test obj", props.profileInfo);
           const tip = response.data[obj].tdescription;
           const tipId = response.data[obj].tip_id;
           newDataTipsArray.push([tipId, tip]);
         }
 
-        // console.log('newDataTipsArray', newDataTipsArray);
-
         const newTipsArray = removeTipsDuplicates(newDataTipsArray);
-        // console.log('newTipsArray', newTipsArray);
-
         const newData = addTipsToObj(newTipsArray);
-        // console.log('newData', newData);
         setForm(newData);
         setMode(true);
 
@@ -170,29 +140,22 @@ export default function EditTipsSection(props) {
   const handleTipCreation = (e) => {
     e.preventDefault();
 
-    console.log("newtipcreationform", newTipCreationForm);
-
     axios
-      .post(tipCreationRoute, {userID: props.userID,
-        description: newTipCreationForm.description})
+      .post(tipCreationRoute, {
+        userID: props.userID,
+        description: newTipCreationForm.description,
+      })
       .then((response) => {
-        console.log("response", response);
         const newDataTipsArray = [];
 
         for (const obj in response.data) {
-          // console.log("test obj", props.profileInfo);
           const tip = response.data[obj].tdescription;
           const tipId = response.data[obj].tip_id;
           newDataTipsArray.push([tipId, tip]);
         }
 
-        // console.log('newDataTipsArray', newDataTipsArray);
-
         const newTipsArray = removeTipsDuplicates(newDataTipsArray);
-        // console.log('newTipsArray', newTipsArray);
-
         const newData = addTipsToObj(newTipsArray);
-        // console.log('newData', newData);
         setForm(newData);
         setMode(true);
 
@@ -240,7 +203,6 @@ export default function EditTipsSection(props) {
             name={"tip"}
             value={form[key]}
             onChange={(e) => {
-              console.log("test test", e.target.value);
               setValue(key, e.target.value);
               setValueSubmit(key, e.target.value || key, form[key]);
             }}
@@ -258,12 +220,9 @@ export default function EditTipsSection(props) {
             Delete
           </button>
         </form>
-        {/* <p>{form[key]}</p> */}
       </li>
     );
   }
-
-  console.log("editmappedtips", editMappedTips);
 
   function filterByKeyID(obj) {
     if (obj.key === keyID) {
@@ -307,10 +266,9 @@ export default function EditTipsSection(props) {
               className={styles.inputTextTips}
               type="text"
               name={"new-tip"}
-              placeholder={'Add New Tip Content Here'}
+              placeholder={"Add New Tip Content Here"}
               onChange={(e) => {
-                console.log("test test", e.target.value);
-                setNewTipCreationForm({description: e.target.value})
+                setNewTipCreationForm({ description: e.target.value });
               }}
               required
             ></textarea>
