@@ -344,6 +344,39 @@ app.post("/deleteTip", (req, res) => {
   });
 });
 
+//delete plantedPlants item
+app.post("/deletePlantedPlant", (req, res) => {
+
+  let deleteValue = req.body.deleteValue;
+  const userID = req.body.userID;
+  console.log('req.body', req.body)
+  
+  db.query(`
+  DELETE FROM tips
+  WHERE tips_id = $1
+  ;`,[deleteValue])
+  .then(() => {
+    newTips = db.query(`
+    SELECT DISTINCT
+    tips.tips_id AS tip_id,
+    tips.description AS tDescription
+    FROM tips
+    WHERE tips.user_id = $1
+    ;`, [userID]);
+    return newTips;
+  })
+  .then((results) => {
+    console.log("queryResults", results);
+    res.status(200).send(results.rows);
+  })
+  .catch((error) => {
+    if (error) {
+      throw error;
+    }
+  });
+});
+
+
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
 });

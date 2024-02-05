@@ -94,6 +94,7 @@ export default function ProfilePageIndex(props) {
                 plotID={plot_id}
                 plantInfo={props.plants}
                 plants={props.plantedPlants}
+                profileInfo={profileInfo}
               />
               <EditAboutSection profileInfo={profileInfo} />
             </div>

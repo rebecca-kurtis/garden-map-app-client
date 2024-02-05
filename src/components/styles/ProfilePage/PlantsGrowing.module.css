@@ -6,10 +6,10 @@
 /* align-content: right; */
 }
 
-.plantsGrowingContainer h2 {
+.plantsGrowingContainerH2 {
   color: #fff;
   font-size: 25px;
-
+  font-weight: 700;
 }
 
 .plantsGrowingLiContainer {
@@ -30,4 +30,34 @@
   font-size: 10px;
   padding-right: 13px;
   color: #000;
+}
+.editPlantsHeader {
+display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  padding-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.editPlantsButton {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  /* width: fit-content; */
+}
+
+.xDeleteLI {
+  font-size: 15px;
+  padding-right: 13px;
+  color: #000;
+  background-color: transparent;
+  border: none;
 }

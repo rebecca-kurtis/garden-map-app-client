@@ -15,10 +15,12 @@ export default function EditPlantsGrowing(props) {
         plantsArray[plotObject].plant_id ===
           plantInfoArray[plantInfoObject].plant_id
       ) {
-        plantsIcons.push([plantInfoArray[plantInfoObject].name, plantInfoArray[plantInfoObject].photo_url]);
+        plantsIcons.push([plantInfoArray[plantInfoObject].name, plantInfoArray[plantInfoObject].photo_url, plantsArray[plotObject].plantedplants_id]);
       }
     }
   }
+
+  console.log('plantinfoarray', plantInfoArray);
   const [form, setForm] = useState({
     plotID: plotID,
   });
@@ -71,6 +73,61 @@ export default function EditPlantsGrowing(props) {
     setMode(false);
   };
 
+  const handleClickUpdate = () => {
+    console.log("click");
+    setMode(true);
+  };
+  
+  const [deletePPValue, setDeletePPValue] = useState(null);
+
+  const plantedPlantDeleteRoute =
+    process.env.REACT_APP_SERVER +
+    ":" +
+    process.env.REACT_APP_SERVER_PORT +
+    "/deletePlantedPlant";
+
+  const plantedPlantDeleteHandler = () => {
+    console.log("delete");
+
+    // e.preventDefault();
+
+    // axios
+    //   .post(tipsDeleteRoute, {
+    //     deleteValue: deleteValue,
+    //     userID: props.userID,
+    //   })
+    //   .then((response) => {
+    //     const newDataTipsArray = [];
+
+    //     for (const obj in response.data) {
+    //       const tip = response.data[obj].tdescription;
+    //       const tipId = response.data[obj].tip_id;
+    //       newDataTipsArray.push([tipId, tip]);
+    //     }
+
+    //     const newTipsArray = removeTipsDuplicates(newDataTipsArray);
+    //     const newData = addTipsToObj(newTipsArray);
+    //     setForm(newData);
+    //     setMode(true);
+    //     setTipMode(false);
+    //     setDeleteValue(null);
+
+    //     return response.data;
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       alert(`Error! ${error.message}`);
+    //     } else if (error.request) {
+    //       console.log("network error");
+    //     } else {
+    //       console.log(error);
+    //     }
+    //   });
+  }
+
+
+  console.log('plantIcons', plantsIcons);
+  console.log('plantsarray', plantsArray);
 
 
   const mappedIcons = plantsIcons.map((array, index) => (
@@ -87,7 +144,12 @@ export default function EditPlantsGrowing(props) {
 
   const editMappedIcons = plantsIcons.map((array, index) => (
     <li className={styles.plantsGrowingLiContainer} key={index}>
-      <span className={styles.roundCircleLi}>&#9679;</span>
+      <button type="submit" onClick={() => {
+        plantedPlantDeleteHandler()
+        setDeletePPValue(array[3])
+        console.log('deleteValue', deletePPValue);
+      }} className={styles.xDeleteLI}>&#10005;</button>
+
       <img
         className={styles.plantsGrowingIconImage}
         src={require(".././../images/PlantIcons/" + array[1] + ".png")}
@@ -101,7 +163,16 @@ export default function EditPlantsGrowing(props) {
 
   return (
     <div className={styles.plantsGrowingContainer}>
-      <h2>Plants Growing:</h2>
+      <div className={styles.editPlantsHeader}>
+      <h2 className={styles.plantsGrowingContainerH2}>Plants Growing:</h2>
+      <button
+            type="create"
+            className={styles.editPlantsButton}
+            onClick={handleClick}
+          >
+            Edit
+          </button>
+      </div>
       <ul>{mappedIcons}</ul>
     </div>
   );
@@ -111,7 +182,14 @@ if (mode === false) {
 
   return (
     <div className={styles.plantsGrowingContainer}>
-      <h2>Plants Growing:</h2>
+      <h2 className={styles.plantsGrowingContainerH2}>Plants Growing:</h2>
+      <button
+            type="create"
+            className={styles.editPlantsButton}
+            onClick={handleClickUpdate}
+          >
+            Update
+          </button>
       <ul>{editMappedIcons}</ul>
     </div>
   );

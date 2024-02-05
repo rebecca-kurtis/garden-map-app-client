@@ -6,7 +6,7 @@ export default async function getPlotProfileInfo(id) {
   // const tipsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/tips/" + id;
 
   const { data } = await axios.get(plantProfileRoute);
-  console.log("test data", data)
+  // console.log("test data", data)
 
   // const promise1 = await axios.get(plantProfileRoute);
   // setData(data);
