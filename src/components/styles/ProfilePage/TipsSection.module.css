@@ -43,6 +43,22 @@
   width: fit-content;
 }
 
+.addTipsButton {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 15px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  /* width: 170px; */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  width: fit-content;
+}
+
 .inputTextTips {
   height: 150px;
   width: 100%;
@@ -66,10 +82,17 @@
   display: flex;
   column-gap: 10px;
   /* row-gap: 10px; */
+  justify-content: left;
+  /* align-content: flex-start; */
+  /* text-align: left; */
 }
 
 .editButtonColumn {
   display: flex;
   /* flex-direction: column; */
   row-gap: 10px;
+}
+
+.addNewTipsSectionForm {
+  padding-top: 10px;
 }

@@ -242,7 +242,7 @@ export default function EditTipsSection(props) {
           {mappedTips}
           <button
             type="create"
-            className={styles.tipsButton}
+            className={styles.addTipsButton}
             onClick={addNewTipHandler}
           >
             Add Tip
@@ -262,7 +262,7 @@ export default function EditTipsSection(props) {
           {mappedTips}
           <form
             onSubmit={handleTipCreation}
-            className={styles.EditTipsSectionForm}
+            className={styles.addNewTipsSectionForm}
           >
             <textarea
               className={styles.inputTextTips}
@@ -283,7 +283,7 @@ export default function EditTipsSection(props) {
               onClick={handleTipDelete}
               className={styles.tipsButton}
             >
-              Delete
+              Cancel
             </button>
             </div>
           </form>
