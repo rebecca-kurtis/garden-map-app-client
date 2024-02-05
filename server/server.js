@@ -250,6 +250,45 @@ app.post("/updateName", (req, res) => {
   });
 });
 
+//add new tip to database
+app.post("/addTip", (req, res) => {
+
+  console.log('new tip creation', req.body);
+
+  // let tipId = '';
+  const userID = req.body.userID;
+  let tipDescription = req.body.description;
+
+  //  for (let tip in req.body) {
+  //   tipId = tip;
+  //   tipDescription = req.body[tip];
+  // }
+
+  db.query(`
+ INSERT INTO tips (user_id, description)
+ VALUES ($1, $2)
+  ;`,[userID,tipDescription])
+  .then(() => {
+    newTips = db.query(`
+    SELECT DISTINCT
+    tips.tips_id AS tip_id,
+    tips.description AS tDescription
+    FROM tips
+    WHERE tips.user_id = $1
+    ;`, [userID]);
+    return newTips;
+  })
+  .then((results) => {
+    console.log("queryResults", results);
+    res.status(200).send(results.rows);
+  })
+  .catch((error) => {
+    if (error) {
+      throw error;
+    }
+  });
+});
+
 //update Tips Section "/updateTips"
 app.post("/updateTips", (req, res) => {
 
