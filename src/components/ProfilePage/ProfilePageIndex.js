@@ -97,7 +97,7 @@ export default function ProfilePageIndex(props) {
               />
               <EditAboutSection profileInfo={profileInfo} />
             </div>
-            <EditTipsSection profileInfo={profileInfo} />
+            <EditTipsSection profileInfo={profileInfo} userID={localStorage.user}/>
             <ShareSection />
             <FileUpload />
             <a href="/">

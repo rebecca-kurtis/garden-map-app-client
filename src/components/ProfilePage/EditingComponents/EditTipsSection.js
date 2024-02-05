@@ -5,14 +5,16 @@ import axios from "axios";
 export default function EditTipsSection(props) {
   const tipsArray = [];
 
+  console.log('props user', props);
+
   //collect all of the tips
   for (const obj in props.profileInfo) {
-    console.log("test obj", props.profileInfo);
+    // console.log("test obj", props.profileInfo);
     const tip = props.profileInfo[obj].tdescription;
     const tipId = props.profileInfo[obj].tip_id;
     tipsArray.push([tipId, tip]);
   }
-  console.log(tipsArray);
+  // console.log(tipsArray);
 
   //create function to remove any tips in tipsArray that are duplicates
   function removeTipsDuplicates(data) {
@@ -23,10 +25,12 @@ export default function EditTipsSection(props) {
 
   //create function to add cleaned up tips to new obj to be used in state
   function addTipsToObj(dataArray) {
+    console.log('dataArray', dataArray);
     const newObj = {};
     dataArray.forEach((tip, index) => {
       newObj[tip[0]] = tip[1];
     });
+    console.log('newObj', newObj);
     return newObj;
   }
   // add tips to obj for state
@@ -87,7 +91,64 @@ export default function EditTipsSection(props) {
   const handleClick = (keyID) => {
     console.log("click");
     setKeyID(keyID);
+    setDeleteValue(keyID);
     setMode(false);
+  };
+
+  const tipsDeleteRoute =
+    process.env.REACT_APP_SERVER +
+    ":" +
+    process.env.REACT_APP_SERVER_PORT +
+    "/deleteTip";
+
+  const [deleteValue, setDeleteValue] = useState(null);
+  console.log('deleteValue', deleteValue);
+
+  const handleTipDelete = (e) => {
+    e.preventDefault();
+
+    // setDeleteValue(keyID)
+
+    console.log('deleteValue', deleteValue);
+
+    axios
+      .post(tipsDeleteRoute, {
+        deleteValue: deleteValue,
+        userID: props.userID})
+      .then((response) => {
+      console.log('response from delete', response);
+      console.log('response data', response.data);
+
+      const newDataTipsArray =[];
+
+      for (const obj in response.data) {
+        // console.log("test obj", props.profileInfo);
+        const tip = response.data[obj].tdescription;
+        const tipId = response.data[obj].tip_id;
+        newDataTipsArray.push([tipId, tip]);
+      }
+
+      console.log('newDataTipsArray', newDataTipsArray);
+
+      const newTipsArray = removeTipsDuplicates(newDataTipsArray);
+      console.log('newTipsArray', newTipsArray);
+
+        const newData = addTipsToObj(newTipsArray);
+        console.log('newData', newData);
+        setForm(newData);
+        setMode(true);
+
+        return response.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(`Error! ${error.message}`);
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   // const tipsArray = [];
@@ -156,13 +217,16 @@ export default function EditTipsSection(props) {
             onChange={(e) => {
               console.log("test test", e.target.value);
               setValue(key, e.target.value);
-              setValueSubmit(key, e.target.value);
+              setValueSubmit(key, e.target.value || key, form[key]);
             }}
             required
           ></textarea>
 
           <button type="submit" className={styles.tipsButton}>
             Update
+          </button>
+          <button type="delete" onClick={handleTipDelete} className={styles.tipsButton}>
+           Delete
           </button>
         </form>
         {/* <p>{form[key]}</p> */}
