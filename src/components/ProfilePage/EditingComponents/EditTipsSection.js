@@ -32,7 +32,7 @@ export default function EditTipsSection(props) {
 
   //tips state form set up using above obj for state tips
   const [form, setForm] = useState(newFormObj);
-  const [submitForm, setSubmitForm] = useState({});
+  const [submitForm, setSubmitForm] = useState(newFormObj);
   const [keyID, setKeyID] = useState(null);
   const [mode, setMode] = useState(true);
 
@@ -208,8 +208,8 @@ export default function EditTipsSection(props) {
             }}
             required
           ></textarea>
-
-          <button type="submit" className={styles.tipsButton}>
+<div className={styles.editButtonRow}>
+<button type="submit" className={styles.tipsButton}>
             Update
           </button>
           <button
@@ -219,6 +219,8 @@ export default function EditTipsSection(props) {
           >
             Delete
           </button>
+</div>
+          
         </form>
       </li>
     );
@@ -260,7 +262,7 @@ export default function EditTipsSection(props) {
           {mappedTips}
           <form
             onSubmit={handleTipCreation}
-            className={styles.EditAboutSectionForm}
+            className={styles.EditTipsSectionForm}
           >
             <textarea
               className={styles.inputTextTips}
@@ -272,7 +274,7 @@ export default function EditTipsSection(props) {
               }}
               required
             ></textarea>
-
+            <div className={styles.editButtonRow}>
             <button type="submit" className={styles.tipsButton}>
               Add Tip
             </button>
@@ -283,6 +285,7 @@ export default function EditTipsSection(props) {
             >
               Delete
             </button>
+            </div>
           </form>
         </ul>
       </div>
