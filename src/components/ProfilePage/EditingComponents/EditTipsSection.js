@@ -60,6 +60,8 @@ export default function EditTipsSection(props) {
       .then((response) => {
         setForm(form);
         setMode(true);
+        setDeleteValue(null);
+
         return response.data;
       })
       .catch((error) => {
@@ -108,6 +110,8 @@ export default function EditTipsSection(props) {
         const newData = addTipsToObj(newTipsArray);
         setForm(newData);
         setMode(true);
+        setTipMode(false);
+        setDeleteValue(null);
 
         return response.data;
       })
@@ -237,9 +241,6 @@ export default function EditTipsSection(props) {
       <div className={styles.tipsSectionContainer}>
         <div className={styles.editTipsHeader}>
           <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
-        </div>
-        <ul>
-          {mappedTips}
           <button
             type="create"
             className={styles.addTipsButton}
@@ -247,6 +248,9 @@ export default function EditTipsSection(props) {
           >
             Add Tip
           </button>
+        </div>
+        <ul>
+          {mappedTips}
         </ul>
       </div>
     );
