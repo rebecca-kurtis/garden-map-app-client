@@ -255,14 +255,8 @@ app.post("/addTip", (req, res) => {
 
   console.log('new tip creation', req.body);
 
-  // let tipId = '';
   const userID = req.body.userID;
   let tipDescription = req.body.description;
-
-  //  for (let tip in req.body) {
-  //   tipId = tip;
-  //   tipDescription = req.body[tip];
-  // }
 
   db.query(`
  INSERT INTO tips (user_id, description)
@@ -279,7 +273,6 @@ app.post("/addTip", (req, res) => {
     return newTips;
   })
   .then((results) => {
-    console.log("queryResults", results);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
@@ -317,7 +310,6 @@ app.post("/deleteTip", (req, res) => {
 
   let deleteValue = req.body.deleteValue;
   const userID = req.body.userID;
-  console.log('req.body', req.body)
   
   db.query(`
   DELETE FROM tips
@@ -348,22 +340,20 @@ app.post("/deleteTip", (req, res) => {
 app.post("/deletePlantedPlant", (req, res) => {
 
   let deleteValue = req.body.deleteValue;
-  const userID = req.body.userID;
+  const plotID = req.body.plotID;
   console.log('req.body', req.body)
   
   db.query(`
-  DELETE FROM tips
-  WHERE tips_id = $1
+  DELETE FROM plantedPlants
+  WHERE plantedPlants_id = $1
   ;`,[deleteValue])
   .then(() => {
-    newTips = db.query(`
-    SELECT DISTINCT
-    tips.tips_id AS tip_id,
-    tips.description AS tDescription
-    FROM tips
-    WHERE tips.user_id = $1
-    ;`, [userID]);
-    return newTips;
+    allPlantedPlants = db.query(`
+    SELECT *
+    FROM plantedPlants
+    WHERE plantedPlants.plot_id = $1
+    ;`, [plotID]);
+    return allPlantedPlants;
   })
   .then((results) => {
     console.log("queryResults", results);
