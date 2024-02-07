@@ -366,6 +366,47 @@ app.post("/deletePlantedPlant", (req, res) => {
   });
 });
 
+//delete plantedPlants item
+app.post("/addPlant", (req, res) => {
+
+  // let deleteValue = req.body.deleteValue;
+  const plantName = req.body.name;
+  const plotID = req.body.plotID;
+  console.log('req.body', req.body)
+  
+  db.query(`
+  SELECT plant_id
+  FROM plants
+  WHERE name = $1
+  ;`,[plantName])
+  .then((response) => {
+    // console.log('response', response)
+    const plantID = response.rows[0].plant_id;
+    // console.log(plantID);
+    db.query(`
+    INSERT INTO plantedPlants (plot_id, plant_id)
+    VALUES ($1, $2)
+    ;`, [plotID, plantID]);
+  })
+  .then((results) => {
+    allPlantedPlants = db.query(`
+    SELECT *
+    FROM plantedPlants
+    WHERE plantedPlants.plot_id = $1
+    ;`, [plotID]);
+    return allPlantedPlants;
+  })
+  .then((results) => {
+    console.log("queryResults", results);
+    res.status(200).send(results.rows);
+  })
+  .catch((error) => {
+    if (error) {
+      throw error;
+    }
+  });
+});
+
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);

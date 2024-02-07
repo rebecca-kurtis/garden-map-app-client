@@ -61,3 +61,10 @@ display: flex;
   background-color: transparent;
   border: none;
 }
+
+.addNewPlantDivContainer {
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  /* justify-content: center; */
+}

@@ -166,13 +166,66 @@ export default function EditPlantsGrowing(props) {
       });
   };
 
-  const tipCreationRoute =
+  const addPlantRoute =
+    process.env.REACT_APP_SERVER +
+    ":" +
+    process.env.REACT_APP_SERVER_PORT +
+    "/addPlant";
+
+    const [addNewPlant, setAddNewPlant] = useState({});
+
+  const handleAddPlantButton = (e) => {
+    e.preventDefault();
+    console.log('test', addNewPlant);
+
+    axios
+      .post(addPlantRoute, {
+        plotID: form.plotID,
+        name: addNewPlant.name,
+      })
+      .then((response) => {
+        console.log('response for add', response);
+        
+        plantIcons = [];
+
+        for (let plotObject in response.data) {
+          // console.log('data', plotObject);
+          for (let plantInfoObject in plantInfoArray) {
+            if (
+              response.data[plotObject].plot_id === plotID &&
+              response.data[plotObject].plant_id ===
+                plantInfoArray[plantInfoObject].plant_id
+            ) {
+              const name = plantInfoArray[plantInfoObject].name;
+              const photo_url = plantInfoArray[plantInfoObject].photo_url;
+              const plantedPlants_id = plantsArray[plotObject].plantedplants_id;
+              plantIcons.push([name, photo_url, plantedPlants_id]);
+            }
+          }
+        }
+
+        setPlantsGrowingState(plantIcons);
+
+        return response.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(`Error! ${error.message}`);
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
+  };
+
+  const createPlantRoute =
     process.env.REACT_APP_SERVER +
     ":" +
     process.env.REACT_APP_SERVER_PORT +
     "/addTip";
 
-  const handleAddNewPlantCreation = (e) => {
+  const handleCreatePlantButton = (e) => {
     e.preventDefault();
 
     // axios
@@ -258,7 +311,7 @@ export default function EditPlantsGrowing(props) {
 
     selectOptions.push(
       <option key={keyID} value={plantInfoArray[keyID].name}>
-        <p>{plantInfoArray[keyID].name}</p>
+        {plantInfoArray[keyID].name}
       </option>
     );
   }
@@ -302,21 +355,38 @@ export default function EditPlantsGrowing(props) {
         </button>
         <ul>
           {editMappedIcons}
-          <form
-            onSubmit={handleAddNewPlantCreation}
+        </ul>
+        <form
+            // onSubmit={handleAddNewPlantCreation}
             className={styles.addNewTipsSectionForm}
           >
             <div className={styles.addNewPlantDivContainer}>
+            <label className="form-label">Add A New Plant:</label>
               <select
                 name={"new-plant"}
                 onChange={(e) => {
-                  // setNewTipCreationForm({ description: e.target.value });
+                  setAddNewPlant({ name: e.target.value });
                   console.log("e", e.target.value);
                 }}
                 required
               >
                 {selectOptions}
               </select>
+              <div className={styles.editButtonRow}>
+              <button 
+              type="submit" 
+              className={styles.tipsButton}
+              onClick={handleAddPlantButton}>
+                Add Plant
+              </button>
+              <button
+                type="delete"
+                // onClick={handleAddPlantButton}
+                className={styles.tipsButton}
+              >
+                Cancel
+              </button>
+            </div>
               <label className="form-label">Create New Plant:</label>
               <input
                 className={styles.inputTextName}
@@ -333,8 +403,11 @@ export default function EditPlantsGrowing(props) {
             </div>
 
             <div className={styles.editButtonRow}>
-              <button type="submit" className={styles.tipsButton}>
-                Add Tip
+              <button 
+              type="submit" 
+              className={styles.tipsButton}
+              onClick={handleCreatePlantButton}>
+                Create Plant
               </button>
               <button
                 type="delete"
@@ -345,7 +418,6 @@ export default function EditPlantsGrowing(props) {
               </button>
             </div>
           </form>
-        </ul>
       </div>
     );
   }
