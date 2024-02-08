@@ -218,6 +218,7 @@ export default function EditPlantsGrowing(props) {
         }
 
         setPlantsGrowingState(plantIcons);
+        setAddNewPlant({});
 
         return response.data;
       })
