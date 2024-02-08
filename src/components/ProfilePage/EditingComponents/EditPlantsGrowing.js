@@ -121,7 +121,7 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER_PORT +
     "/deletePlantedPlant";
 
-    // console.log('plantIcons', plantIcons);
+  // console.log('plantIcons', plantIcons);
 
   const plantedPlantDeleteHandler = (e, num) => {
     // console.log("delete");
@@ -134,20 +134,18 @@ export default function EditPlantsGrowing(props) {
         plotID: form.plotID,
       })
       .then((response) => {
-        console.log('response from delete', response);
+        console.log("response from delete", response);
 
         plantIcons = [];
 
         for (let plotObject in response.data) {
           // console.log('data', response.data[plotObject]);
           for (let plantInfoObject in plantInfoArray) {
-          // console.log('data2',plantInfoArray[plantInfoObject]);
-          // console.log('data2', response.data[plotObject].plot_id);
-          // console.log('data3',response.data[plotObject].plant_id);
-          // console.log('data4', plantsArray[plotObject]);
-          // console.log('data5', plantsArray[plotObject].plantedplants_id);
-          
-
+            // console.log('data2',plantInfoArray[plantInfoObject]);
+            // console.log('data2', response.data[plotObject].plot_id);
+            // console.log('data3',response.data[plotObject].plant_id);
+            // console.log('data4', plantsArray[plotObject]);
+            // console.log('data5', plantsArray[plotObject].plantedplants_id);
 
             if (
               response.data[plotObject].plot_id === plotID &&
@@ -157,7 +155,8 @@ export default function EditPlantsGrowing(props) {
               // console.log('Found');
               const name = plantInfoArray[plantInfoObject].name;
               const photo_url = plantInfoArray[plantInfoObject].photo_url;
-              const plantedPlants_id = response.data[plotObject].plantedplants_id;
+              const plantedPlants_id =
+                response.data[plotObject].plantedplants_id;
               plantIcons.push([name, photo_url, plantedPlants_id]);
               // console.log('plantIcons', plantIcons)
               // console.log('id',plantedPlants_id )
@@ -186,7 +185,7 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER_PORT +
     "/addPlant";
 
-    const [addNewPlant, setAddNewPlant] = useState({});
+  const [addNewPlant, setAddNewPlant] = useState({});
 
   const handleAddPlantButton = (e) => {
     e.preventDefault();
@@ -199,7 +198,7 @@ export default function EditPlantsGrowing(props) {
       })
       .then((response) => {
         // console.log('response for add', response);
-        
+
         plantIcons = [];
 
         for (let plotObject in response.data) {
@@ -240,7 +239,7 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER_PORT +
     "/createPlant";
 
-    const [createNewPlant, setCreateNewPlant] = useState({});
+  const [createNewPlant, setCreateNewPlant] = useState({});
 
   const handleCreatePlantButton = (e) => {
     e.preventDefault();
@@ -248,38 +247,39 @@ export default function EditPlantsGrowing(props) {
     axios
       .post(createPlantRoute, {
         plotID: form.plotID,
-        name: createNewPlant.name
+        name: createNewPlant.name,
       })
       .then((response) => {
-
         getAllPlants()
-        .then((data) => {
-          setPlantInfoArray(data);
-        }).then(() => {
-          plantIcons = [];
+          .then((data) => {
+            setPlantInfoArray(data);
+          })
+          .then(() => {
+            plantIcons = [];
 
-        for (let plotObject in response.data) {
-          for (let plantInfoObject in plantInfoArray) {
-            if (
-              response.data[plotObject].plot_id === plotID &&
-              response.data[plotObject].plant_id ===
-                plantInfoArray[plantInfoObject].plant_id
-            ) {
-              const name = plantInfoArray[plantInfoObject].name;
-              const photo_url = plantInfoArray[plantInfoObject].photo_url;
-              const plantedPlants_id = response.data[plotObject].plantedplants_id;
-              plantIcons.push([name, photo_url, plantedPlants_id]);
+            for (let plotObject in response.data) {
+              for (let plantInfoObject in plantInfoArray) {
+                if (
+                  response.data[plotObject].plot_id === plotID &&
+                  response.data[plotObject].plant_id ===
+                    plantInfoArray[plantInfoObject].plant_id
+                ) {
+                  const name = plantInfoArray[plantInfoObject].name;
+                  const photo_url = plantInfoArray[plantInfoObject].photo_url;
+                  const plantedPlants_id =
+                    response.data[plotObject].plantedplants_id;
+                  plantIcons.push([name, photo_url, plantedPlants_id]);
+                }
+              }
             }
-          }
-        }
 
-        setPlantsGrowingState(plantIcons);
-        setCreateNewPlant({
-          name: ""
-        });
+            setPlantsGrowingState(plantIcons);
+            setCreateNewPlant({
+              name: "",
+            });
 
-        return response.data;
-        });
+            return response.data;
+          });
       })
       .catch((error) => {
         if (error.response) {
@@ -329,7 +329,6 @@ export default function EditPlantsGrowing(props) {
   const selectOptions = [];
 
   for (const keyID in plantInfoArray) {
-
     selectOptions.push(
       <option key={keyID} value={plantInfoArray[keyID].name}>
         {plantInfoArray[keyID].name}
@@ -366,35 +365,26 @@ export default function EditPlantsGrowing(props) {
     return (
       <div className={styles.plantsGrowingContainer}>
         <h2 className={styles.plantsGrowingContainerH2}>Plants Growing:</h2>
-        <button
-          type="create"
-          className={styles.editPlantsButton}
-          onClick={handleClickUpdate}
-        >
-          Update
-        </button>
-        <ul>
-          {editMappedIcons}
-        </ul>
-        <form
-            className={styles.addNewTipsSectionForm}
-          >
-            <div className={styles.addNewPlantDivContainer}>
-            <label className="form-label">Add A New Plant:</label>
-              <select
-                name={"new-plant"}
-                onChange={(e) => {
-                  setAddNewPlant({ name: e.target.value });
-                }}
-                required
+        <ul>{editMappedIcons}</ul>
+        <form className={styles.addNewTipsSectionForm}>
+          <div className={styles.addNewPlantDivContainer}>
+            <label className={styles.addFormLabel}>Add A New Plant:</label>
+            <select
+              name={"new-plant"}
+              className={styles.addNewPlantSelect}
+              onChange={(e) => {
+                setAddNewPlant({ name: e.target.value });
+              }}
+              required
+            >
+              {selectOptions}
+            </select>
+            <div className={styles.editButtonRow}>
+              <button
+                type="submit"
+                className={styles.addButton}
+                onClick={handleAddPlantButton}
               >
-                {selectOptions}
-              </select>
-              <div className={styles.editButtonRow}>
-              <button 
-              type="submit" 
-              className={styles.tipsButton}
-              onClick={handleAddPlantButton}>
                 Add Plant
               </button>
               {/* <button
@@ -405,40 +395,49 @@ export default function EditPlantsGrowing(props) {
                 Cancel
               </button> */}
             </div>
-              <label className="form-label">Create New Plant:</label>
-              <input
-                className={styles.inputTextName}
-                type="text"
-                name="first_name"
-                value={createNewPlant.name}
-                placeholder="Enter plant name"
-                onChange={(e) => {
-                  setCreateNewPlant({name: e.target.value})
-                }}
-                required
-              ></input>
-            </div>
+            <label className={styles.addFormLabel}>Create New Plant:</label>
+            <input
+              className={styles.inputPlantName}
+              type="text"
+              name="first_name"
+              value={createNewPlant.name}
+              placeholder="Enter plant name"
+              onChange={(e) => {
+                setCreateNewPlant({ name: e.target.value });
+              }}
+              required
+            ></input>
+          </div>
 
-            <div className={styles.editButtonRow}>
-              <button 
-              type="submit" 
-              className={styles.tipsButton}
-              onClick={handleCreatePlantButton}>
-                Create Plant
-              </button>
-              <button
-                type="delete"
-                className={styles.tipsButton}
-                onClick={() => {
-                  setCreateNewPlant({
-                    name: ""
-                  });
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+          <div className={styles.editButtonRowAdd}>
+            <button
+              type="submit"
+              className={styles.addButton}
+              onClick={handleCreatePlantButton}
+            >
+              Create Plant
+            </button>
+            <button
+              type="delete"
+              className={styles.addButton}
+              onClick={() => {
+                setCreateNewPlant({
+                  name: "",
+                });
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+        <hr class="solid" className={styles.solidLine}></hr>
+        <button
+          type="create"
+          className={styles.updatePlantsButton}
+          onClick={handleClickUpdate}
+        >
+          Update Plants
+        </button>
       </div>
     );
   }

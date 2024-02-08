@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 500px;
+  padding-top: 15px;
+  /* row-gap: 15px; */
 /* justify-content: center; */
 /* align-content: right; */
 }
@@ -10,6 +12,7 @@
   color: #fff;
   font-size: 25px;
   font-weight: 700;
+  padding-bottom: 10px;
 }
 
 .plantsGrowingLiContainer {
@@ -54,6 +57,22 @@ display: flex;
   /* width: fit-content; */
 }
 
+.updatePlantsButton {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  width: fit-content;
+  /* align-items: center; */
+  margin-top: 10px;
+}
+
 .xDeleteLI {
   font-size: 15px;
   padding-right: 13px;
@@ -65,6 +84,71 @@ display: flex;
 .addNewPlantDivContainer {
   display: flex;
   flex-direction: column;
+  row-gap: 7px;
+  align-items: flex-start;
   /* align-content: center; */
   /* justify-content: center; */
+}
+
+.addFormLabel {
+  text-align: left;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+}
+
+.addNewPlantSelect {
+  /* height: 150px; */
+  width: 80%;
+  padding: 5px;
+  /* flex-wrap: wrap; */
+  font-size: 17px;
+  /* background-color: #57CC99; */
+  border-radius: 10px;
+  border-color: #22577a;
+  border-width: 3px;
+}
+
+.inputPlantName {
+  padding: 5px;
+  width: 78%;
+
+  /* flex-wrap: wrap; */
+  font-size: 17px;
+  /* background-color: #57CC99; */
+  border-radius: 10px;
+  border-color: #22577a;
+  border-width: 3px;
+  color: #000;
+}
+
+.addButton {
+  padding: 10px;
+  /* padding-left: 20px; */
+  /* padding-right: 20px; */
+  background-color: #80ED99;
+  border-radius: 30px;
+  text-shadow: none;
+  border-width: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  width: fit-content;
+  /* justify-content: left;
+  justify-items: flex-start;
+  justify-items: left; */
+}
+
+.editButtonRowAdd {
+  display: flex;
+  align-content: flex-start;
+  padding-top: 7px;
+  column-gap: 5px;
+}
+
+.solidLine {
+  background-color: #22577a;
+  height: 3px;
+  width: 80%;
 }
