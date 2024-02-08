@@ -10,7 +10,6 @@ export default function EditPlantsGrowing(props) {
   const plotID = parseInt(props.plotID);
 
   const [mode, setMode] = useState(true);
-  const [addNewMode, setAddNewMode] = useState(false);
 
   //collect all of the plantedPlants
   for (let plotObject in plantsArray) {
