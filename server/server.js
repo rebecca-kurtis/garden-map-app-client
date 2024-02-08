@@ -326,7 +326,6 @@ app.post("/deleteTip", (req, res) => {
     return newTips;
   })
   .then((results) => {
-    console.log("queryResults", results);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
@@ -341,33 +340,6 @@ app.post("/deletePlantedPlant", (req, res) => {
 
   let deleteValue = req.body.deleteValue;
   const plotID = req.body.plotID;
-  // console.log('req.body', req.body)
-  // console.log("dv", deleteValue)
-
-  // Promise.all([
-  //   db.query(`
-  //   WITH deleted_item AS (
-  //     DELETE FROM plantedPlants
-  //     WHERE plantedPlants_id = $1
-  //     RETURNING *
-  // )
-  // SELECT * 
-  // FROM plantedPlants
-  // WHERE plantedPlants.plot_id = $2
-  //   `,[deleteValue, plotID]),
-
-  // // db.query(`
-  // //   SELECT *
-  // //   FROM plantedPlants
-  // //   WHERE plantedPlants.plot_id = $1
-  // //   ;`, [plotID]),
-  // ])
-  // .then((results) => {
-  //   console.log("queryResults", results[0].rows);
-  //   res.status(200).send(results[0].rows);
-  // }).catch(error => {
-  //   console.log(error);
-  // });
   
   db.query(`
   DELETE FROM plantedPlants
@@ -379,11 +351,9 @@ app.post("/deletePlantedPlant", (req, res) => {
     FROM plantedPlants
     WHERE plantedPlants.plot_id = $1
     ;`, [plotID]);
-    // console.log('res', allPlantedPlants);
     return allPlantedPlants;
   })
   .then((results) => {
-    // console.log("queryResults", results.rows);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
@@ -395,39 +365,22 @@ app.post("/deletePlantedPlant", (req, res) => {
 
 //add new Planted Plant item with already created plants
 app.post("/addPlant", (req, res) => {
-
-  // let deleteValue = req.body.deleteValue;
   const plantName = req.body.name;
   const plotID = req.body.plotID;
-  console.log('req.body', req.body)
-  
+
   db.query(`
   SELECT plant_id
   FROM plants
   WHERE name = $1
   ;`,[plantName])
   .then((response) => {
-    console.log('response', response)
     const plantID = response.rows[0].plant_id;
-    console.log(plantID);
     return db.query(`
     INSERT INTO plantedPlants (plot_id, plant_id)
     VALUES ($1, $2)
-    ;`, [plotID, plantID]);
-  //    return db.query(`
-  //   WITH inserted_item AS (
-  //     INSERT INTO plantedPlants (plot_id, plant_id)
-  //     VALUES ($1, $2)
-  //     RETURNING *
-  // )
-  // SELECT * 
-  // FROM plantedPlants
-  // WHERE plantedPlants.plot_id = $1;`, [plotID, plantID]);
-
-    
+    ;`, [plotID, plantID]);    
   })
   .then((results) => {
-    console.log(results);
     allPlantedPlants = db.query(`
     SELECT *
     FROM plantedPlants
@@ -436,7 +389,6 @@ app.post("/addPlant", (req, res) => {
     return allPlantedPlants;
   })
   .then((results) => {
-    console.log("queryResults", results);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
@@ -450,10 +402,8 @@ app.post("/addPlant", (req, res) => {
 //create new plant and add to plantedPants
 app.post("/createPlant", (req, res) => {
 
-  // let deleteValue = req.body.deleteValue;
   const plantName = req.body.name;
   const plotID = req.body.plotID;
-  console.log('req.body', req.body)
   
   db.query(`
   INSERT INTO plants (name)
@@ -461,28 +411,15 @@ app.post("/createPlant", (req, res) => {
     RETURNING plant_id
   ;`,[plantName])
   .then((response) => {
-    console.log('response', response)
     const plantID = response.rows[0].plant_id;
-    // console.log(plantID);
     return db.query(`
     INSERT INTO plantedPlants (plot_id, plant_id)
     VALUES ($1, $2)
     RETURNING plantedPlants_id
     ;`, [plotID, plantID]);
-  //    return db.query(`
-  //   WITH inserted_item AS (
-  //     INSERT INTO plantedPlants (plot_id, plant_id)
-  //     VALUES ($1, $2)
-  //     RETURNING *
-  // )
-  // SELECT * 
-  // FROM plantedPlants
-  // WHERE plantedPlants.plot_id = $1;`, [plotID, plantID]);
-
     
   })
   .then((results) => {
-    console.log("results2", results);
     allPlantedPlants = db.query(`
     SELECT *
     FROM plantedPlants
@@ -491,7 +428,6 @@ app.post("/createPlant", (req, res) => {
     return allPlantedPlants;
   })
   .then((results) => {
-    console.log("queryResults", results);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
