@@ -154,7 +154,7 @@ export default function EditPlantsGrowing(props) {
               response.data[plotObject].plant_id ===
                 plantInfoArray[plantInfoObject].plant_id
             ) {
-              console.log('Found');
+              // console.log('Found');
               const name = plantInfoArray[plantInfoObject].name;
               const photo_url = plantInfoArray[plantInfoObject].photo_url;
               const plantedPlants_id = response.data[plotObject].plantedplants_id;
@@ -242,8 +242,6 @@ export default function EditPlantsGrowing(props) {
 
     const [createNewPlant, setCreateNewPlant] = useState({});
 
-    // console.log('createnew', createNewPlant);
-
   const handleCreatePlantButton = (e) => {
     e.preventDefault();
 
@@ -257,15 +255,11 @@ export default function EditPlantsGrowing(props) {
         getAllPlants()
         .then((data) => {
           setPlantInfoArray(data);
-          console.log('data from inside', data)
-          // console.log('users from inside', users)
         }).then(() => {
           plantIcons = [];
 
         for (let plotObject in response.data) {
-          console.log('data', response.data[plotObject]);
           for (let plantInfoObject in plantInfoArray) {
-            console.log("w", plantInfoArray);
             if (
               response.data[plotObject].plot_id === plotID &&
               response.data[plotObject].plant_id ===
@@ -275,43 +269,17 @@ export default function EditPlantsGrowing(props) {
               const photo_url = plantInfoArray[plantInfoObject].photo_url;
               const plantedPlants_id = response.data[plotObject].plantedplants_id;
               plantIcons.push([name, photo_url, plantedPlants_id]);
-              console.log('test3', name, photo_url, plantedPlants_id);
-              console.log('plantIcons', plantIcons);
             }
           }
         }
 
         setPlantsGrowingState(plantIcons);
-        setCreateNewPlant({});
+        setCreateNewPlant({
+          name: ""
+        });
 
         return response.data;
         });
-        // console.log('response from create', response);
-        
-        // plantIcons = [];
-
-        // for (let plotObject in response.data) {
-        //   console.log('data', response.data[plotObject]);
-        //   for (let plantInfoObject in plantInfoArray) {
-        //     if (
-        //       response.data[plotObject].plot_id === plotID &&
-        //       response.data[plotObject].plant_id ===
-        //         plantInfoArray[plantInfoObject].plant_id
-        //     ) {
-        //       const name = plantInfoArray[plantInfoObject].name;
-        //       const photo_url = plantInfoArray[plantInfoObject].photo_url;
-        //       const plantedPlants_id = response.data[plotObject].plantedplants_id;
-        //       plantIcons.push([name, photo_url, plantedPlants_id]);
-        //       console.log('test3', name, photo_url, plantedPlants_id);
-        //       console.log('plantIcons', plantIcons);
-        //     }
-        //   }
-        // }
-
-        // setPlantsGrowingState(plantIcons);
-        // setCreateNewPlant({});
-
-        // return response.data;
       })
       .catch((error) => {
         if (error.response) {
@@ -323,12 +291,6 @@ export default function EditPlantsGrowing(props) {
         }
       });
   };
-
-  // console.log("plantIcons", plantIcons);
-  // console.log("plantsarray", plantsArray);
-
-  // const iconArray = setPlantIcons(plantIconsArray);
-  // console.log('iconarray', iconArray);
 
   const mappedIcons = plantsGrowingState.map((array, index) => (
     <li className={styles.plantsGrowingLiContainer} key={index}>
@@ -347,7 +309,6 @@ export default function EditPlantsGrowing(props) {
       <button
         type="submit"
         onClick={(e) => {
-          // setDeletePPValue(array[2]);
           plantedPlantDeleteHandler(e, array[2]);
           console.log("deleteValue", array);
         }}
@@ -365,13 +326,9 @@ export default function EditPlantsGrowing(props) {
     </li>
   ));
 
-  // const selectOptions = plantInfoArray.map((array, ))
-
   const selectOptions = [];
 
   for (const keyID in plantInfoArray) {
-    // console.log("keyID", keyID);
-    // console.log("plantInfoArray[keyID]", plantInfoArray[keyID]);
 
     selectOptions.push(
       <option key={keyID} value={plantInfoArray[keyID].name}>
@@ -379,7 +336,6 @@ export default function EditPlantsGrowing(props) {
       </option>
     );
   }
-  // console.log("sel", selectOptions);
 
   if (mode === true) {
     return (
@@ -421,7 +377,6 @@ export default function EditPlantsGrowing(props) {
           {editMappedIcons}
         </ul>
         <form
-            // onSubmit={handleAddNewPlantCreation}
             className={styles.addNewTipsSectionForm}
           >
             <div className={styles.addNewPlantDivContainer}>
@@ -430,7 +385,6 @@ export default function EditPlantsGrowing(props) {
                 name={"new-plant"}
                 onChange={(e) => {
                   setAddNewPlant({ name: e.target.value });
-                  // console.log("e", e.target.value);
                 }}
                 required
               >
@@ -456,12 +410,10 @@ export default function EditPlantsGrowing(props) {
                 className={styles.inputTextName}
                 type="text"
                 name="first_name"
-                value={form.plant_name}
+                value={createNewPlant.name}
                 placeholder="Enter plant name"
                 onChange={(e) => {
-                  // setValue("first_name", e.target.value)
                   setCreateNewPlant({name: e.target.value})
-                  // console.log("ee", e.target.value);
                 }}
                 required
               ></input>
@@ -476,8 +428,12 @@ export default function EditPlantsGrowing(props) {
               </button>
               <button
                 type="delete"
-                // onClick={handleTipDelete}
                 className={styles.tipsButton}
+                onClick={() => {
+                  setCreateNewPlant({
+                    name: ""
+                  });
+                }}
               >
                 Cancel
               </button>
@@ -486,57 +442,4 @@ export default function EditPlantsGrowing(props) {
       </div>
     );
   }
-
-  // if (addNewMode === true) {
-
-  //   return (
-  //     <div className={styles.plantsGrowingContainer}>
-  //       <h2 className={styles.plantsGrowingContainerH2}>Plants Growing:</h2>
-  //       <button
-  //             type="create"
-  //             className={styles.editPlantsButton}
-  //             onClick={handleClickUpdate}
-  //           >
-  //             Update
-  //           </button>
-  //       {/* <ul>{editMappedIcons} </ul> */}
-  //       <p>test</p>
-  //       {/* <form
-  //             onSubmit={handleAddNewPlantCreation}
-  //             className={styles.addNewTipsSectionForm}
-  //           >
-  //             <textarea
-  //               className={styles.inputTextTips}
-  //               type="text"
-  //               name={"new-tip"}
-  //               placeholder={"Add New Tip Content Here"}
-  //               onChange={(e) => {
-  //                 // setNewTipCreationForm({ description: e.target.value });
-  //                 console.log("e", e.target.value)
-  //               }}
-  //               required
-  //             ></textarea>
-  //             <div className={styles.editButtonRow}>
-  //             <button type="submit" className={styles.tipsButton}>
-  //               Add Tip
-  //             </button>
-  //             <button
-  //               type="delete"
-  //               // onClick={handleTipDelete}
-  //               className={styles.tipsButton}
-  //             >
-  //               Cancel
-  //             </button>
-  //             </div>
-  //           </form> */}
-  //       {/* <button
-  //             type="create"
-  //             className={styles.editPlantsButton}
-  //             onClick={handleClickAddNew}
-  //           >
-  //             Add New Plant
-  //           </button> */}
-  //     </div>
-  //   );
-  // }
 }
