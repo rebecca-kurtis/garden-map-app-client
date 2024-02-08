@@ -1,4 +1,4 @@
-const pg = require('pg');
+const pg = require("pg");
 const express = require("express");
 const cors = require("cors");
 
@@ -15,7 +15,6 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
-
 
 //example code
 // var conString = "INSERT_YOUR_POSTGRES_URL_HERE" //Can be found in the Details page
@@ -35,7 +34,7 @@ app.use(express.json());
 //   });
 // });
 
-// use example that works 
+// use example that works
 // client.connect(function(err) {
 //   if(err) {
 //     return console.error('could not connect to postgres', err);
@@ -63,15 +62,13 @@ app.get("/users", (req, res) => {
 
 // Check if user owns plot
 app.get("/checkUserRoute", (req, res) => {
-
   const plotID = req.query.plotID;
   const userID = req.query.userID;
-  console.log('req body',req.body)
-  console.log('req query',req.query)
+  console.log("req body", req.body);
+  console.log("req query", req.query);
 
-
-
-  db.query(`
+  db.query(
+    `
   SELECT CAST(
     EXISTS (
         SELECT 1
@@ -81,23 +78,23 @@ app.get("/checkUserRoute", (req, res) => {
     ) AS BOOLEAN
   ) AS user_owns_plot;
   ;`,
-  [userID, plotID], (error, results) => {
-    if (error) {
-      throw error;
+    [userID, plotID],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      console.log("Results from checking:", results);
+      res.status(200).send(results.rows);
     }
-    console.log('Results from checking:', results)
-    res.status(200).send(results.rows);
-  });
+  );
 });
 
-
-// Login route 
+// Login route
 app.post("/login", (req, res) => {
-  console.log("req.body", req.body)
+  console.log("req.body", req.body);
 
   const username = req.body.username;
   const password = req.body.password;
-
 
   db.query(
     `SELECT user_id
@@ -106,13 +103,15 @@ app.post("/login", (req, res) => {
     AND users.password = $2
     GROUP BY user_id
     ;`,
-    [username, password], (error, results) => {
-    if (error) {
-      throw error;
+    [username, password],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      // console.log('Results:', results)
+      res.status(200).send(results.rows[0]);
     }
-    // console.log('Results:', results)
-    res.status(200).send(results.rows[0]);
-  });
+  );
 });
 
 // Get all tips
@@ -128,9 +127,8 @@ app.get("/tips", (req, res) => {
 
 // Get all plots/id
 app.get("/plots/:id", (req, res) => {
-
   const plotId = req.params.id;
-  
+
   db.query(
     `SELECT DISTINCT
     users.user_id AS user_id, 
@@ -147,13 +145,15 @@ app.get("/plots/:id", (req, res) => {
     WHERE plots.plot_id = $1
     AND tips.user_id = users.user_id 
     GROUP BY users.user_id, uDescription, ppPlantId, tDescription, tips.user_id, tips.tips_id
-    ORDER BY user_id, tip_id;`, [plotId]
-    , (error, results) => {
+    ORDER BY user_id, tip_id;`,
+    [plotId],
+    (error, results) => {
       if (error) {
         throw error;
       }
       res.status(200).send(results.rows);
-  });
+    }
+  );
 });
 
 // Get all plants
@@ -213,154 +213,177 @@ app.get("/plantedPlants", (req, res) => {
 
 //update About Section "/updateAbout"
 app.post("/updateAbout", (req, res) => {
-
   const userID = req.body.userID;
   const description = req.body.description;
 
-  db.query(`
+  db.query(
+    `
   UPDATE users
   SET description = $1
   WHERE user_id = $2
-  ;`,[description, userID], (error, results) => {
-    if (error) {
-      throw error;
+  ;`,
+    [description, userID],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      // console.log('Results:', results)
+      res.status(200).send(results.rows);
     }
-    // console.log('Results:', results)
-    res.status(200).send(results.rows);
-  });
+  );
 });
 
 //update HeroHeader Section Name "/updateName"
 app.post("/updateName", (req, res) => {
-
   const userID = req.body.userID;
   const firstName = req.body.first_name;
   const lastName = req.body.last_name;
 
-
-  db.query(`
+  db.query(
+    `
   UPDATE users
   SET first_name = $1, last_name = $2
   WHERE user_id = $3
-  ;`,[firstName, lastName, userID], (error, results) => {
-    if (error) {
-      throw error;
+  ;`,
+    [firstName, lastName, userID],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).send(results.rows);
     }
-    res.status(200).send(results.rows);
-  });
+  );
 });
 
 //add new tip to database
 app.post("/addTip", (req, res) => {
-
-  console.log('new tip creation', req.body);
+  console.log("new tip creation", req.body);
 
   const userID = req.body.userID;
   let tipDescription = req.body.description;
 
-  db.query(`
+  db.query(
+    `
  INSERT INTO tips (user_id, description)
  VALUES ($1, $2)
-  ;`,[userID,tipDescription])
-  .then(() => {
-    newTips = db.query(`
+  ;`,
+    [userID, tipDescription]
+  )
+    .then(() => {
+      newTips = db.query(
+        `
     SELECT DISTINCT
     tips.tips_id AS tip_id,
     tips.description AS tDescription
     FROM tips
     WHERE tips.user_id = $1
-    ;`, [userID]);
-    return newTips;
-  })
-  .then((results) => {
-    res.status(200).send(results.rows);
-  })
-  .catch((error) => {
-    if (error) {
-      throw error;
-    }
-  });
+    ;`,
+        [userID]
+      );
+      return newTips;
+    })
+    .then((results) => {
+      res.status(200).send(results.rows);
+    })
+    .catch((error) => {
+      if (error) {
+        throw error;
+      }
+    });
 });
 
 //update Tips Section "/updateTips"
 app.post("/updateTips", (req, res) => {
+  let tipId = "";
+  let tipDescription = "";
 
-  let tipId = '';
-  let tipDescription = '';
-
-   for (let tip in req.body) {
+  for (let tip in req.body) {
     tipId = tip;
     tipDescription = req.body[tip];
   }
 
-  db.query(`
+  db.query(
+    `
   UPDATE tips
   SET description = $1
   WHERE tips_id = $2
-  ;`,[tipDescription, tipId], (error, results) => {
-    if (error) {
-      throw error;
+  ;`,
+    [tipDescription, tipId],
+    (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).send(results.rows);
     }
-    res.status(200).send(results.rows);
-  });
+  );
 });
 
 //delete Tip
 app.post("/deleteTip", (req, res) => {
-
   let deleteValue = req.body.deleteValue;
   const userID = req.body.userID;
-  
-  db.query(`
+
+  db.query(
+    `
   DELETE FROM tips
   WHERE tips_id = $1
-  ;`,[deleteValue])
-  .then(() => {
-    newTips = db.query(`
+  ;`,
+    [deleteValue]
+  )
+    .then(() => {
+      newTips = db.query(
+        `
     SELECT DISTINCT
     tips.tips_id AS tip_id,
     tips.description AS tDescription
     FROM tips
     WHERE tips.user_id = $1
-    ;`, [userID]);
-    return newTips;
-  })
-  .then((results) => {
-    res.status(200).send(results.rows);
-  })
-  .catch((error) => {
-    if (error) {
-      throw error;
-    }
-  });
+    ;`,
+        [userID]
+      );
+      return newTips;
+    })
+    .then((results) => {
+      res.status(200).send(results.rows);
+    })
+    .catch((error) => {
+      if (error) {
+        throw error;
+      }
+    });
 });
 
 //delete plantedPlants item
 app.post("/deletePlantedPlant", (req, res) => {
-
   let deleteValue = req.body.deleteValue;
   const plotID = req.body.plotID;
-  
-  db.query(`
+
+  db.query(
+    `
   DELETE FROM plantedPlants
   WHERE plantedPlants_id = $1
-  ;`,[deleteValue])
-  .then(() => {
-    allPlantedPlants = db.query(`
+  ;`,
+    [deleteValue]
+  )
+    .then(() => {
+      allPlantedPlants = db.query(
+        `
     SELECT *
     FROM plantedPlants
     WHERE plantedPlants.plot_id = $1
-    ;`, [plotID]);
-    return allPlantedPlants;
-  })
-  .then((results) => {
-    res.status(200).send(results.rows);
-  })
-  .catch((error) => {
-    if (error) {
-      throw error;
-    }
-  });
+    ;`,
+        [plotID]
+      );
+      return allPlantedPlants;
+    })
+    .then((results) => {
+      res.status(200).send(results.rows);
+    })
+    .catch((error) => {
+      if (error) {
+        throw error;
+      }
+    });
 });
 
 //add new Planted Plant item with already created plants
@@ -368,75 +391,89 @@ app.post("/addPlant", (req, res) => {
   const plantName = req.body.name;
   const plotID = req.body.plotID;
 
-  db.query(`
+  db.query(
+    `
   SELECT plant_id
   FROM plants
   WHERE name = $1
-  ;`,[plantName])
-  .then((response) => {
-    const plantID = response.rows[0].plant_id;
-    return db.query(`
+  ;`,
+    [plantName]
+  )
+    .then((response) => {
+      const plantID = response.rows[0].plant_id;
+      return db.query(
+        `
     INSERT INTO plantedPlants (plot_id, plant_id)
     VALUES ($1, $2)
-    ;`, [plotID, plantID]);    
-  })
-  .then((results) => {
-    allPlantedPlants = db.query(`
+    ;`,
+        [plotID, plantID]
+      );
+    })
+    .then((results) => {
+      allPlantedPlants = db.query(
+        `
     SELECT *
     FROM plantedPlants
     WHERE plantedPlants.plot_id = $1
-    ;`, [plotID]);
-    return allPlantedPlants;
-  })
-  .then((results) => {
-    res.status(200).send(results.rows);
-  })
-  .catch((error) => {
-    if (error) {
-      throw error;
-    }
-  });
+    ;`,
+        [plotID]
+      );
+      return allPlantedPlants;
+    })
+    .then((results) => {
+      res.status(200).send(results.rows);
+    })
+    .catch((error) => {
+      if (error) {
+        throw error;
+      }
+    });
 });
-
 
 //create new plant and add to plantedPants
 app.post("/createPlant", (req, res) => {
-
   const plantName = req.body.name;
   const plotID = req.body.plotID;
-  
-  db.query(`
+
+  db.query(
+    `
   INSERT INTO plants (name)
     VALUES ($1)
     RETURNING plant_id
-  ;`,[plantName])
-  .then((response) => {
-    const plantID = response.rows[0].plant_id;
-    return db.query(`
+  ;`,
+    [plantName]
+  )
+    .then((response) => {
+      const plantID = response.rows[0].plant_id;
+      return db.query(
+        `
     INSERT INTO plantedPlants (plot_id, plant_id)
     VALUES ($1, $2)
     RETURNING plantedPlants_id
-    ;`, [plotID, plantID]);
-    
-  })
-  .then((results) => {
-    allPlantedPlants = db.query(`
+    ;`,
+        [plotID, plantID]
+      );
+    })
+    .then((results) => {
+      allPlantedPlants = db.query(
+        `
     SELECT *
     FROM plantedPlants
     WHERE plantedPlants.plot_id = $1
-    ;`, [plotID]);
-    return allPlantedPlants;
-  })
-  .then((results) => {
-    res.status(200).send(results.rows);
-  })
-  .catch((error) => {
-    if (error) {
-      throw error;
-    }
-  });
+    ;`,
+        [plotID]
+      );
+      return allPlantedPlants;
+    })
+    .then((results) => {
+      res.status(200).send(results.rows);
+    })
+    .catch((error) => {
+      if (error) {
+        throw error;
+      }
+    });
 });
-
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
