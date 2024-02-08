@@ -32,7 +32,7 @@ export default function EditPlantsGrowing(props) {
       }
     }
   }
-  console.log("plantIcons above state", plantIcons);
+  // console.log("plantIcons above state", plantIcons);
   const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
 
   // const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
@@ -41,7 +41,7 @@ export default function EditPlantsGrowing(props) {
   // setPlantIcons(plantIconsArray);
   // const [plantsIcons, setPlantIcons] = useState([]);
 
-  console.log("plantinfoarray", plantInfoArray);
+  // console.log("plantinfoarray", plantInfoArray);
   const [form, setForm] = useState({
     plotID: plotID,
   });
@@ -92,25 +92,25 @@ export default function EditPlantsGrowing(props) {
   };
 
   const handleClick = () => {
-    console.log("click");
+    // console.log("click");
     setMode(false);
   };
 
   const handleClickUpdate = () => {
-    console.log("click");
+    // console.log("click");
     setMode(true);
   };
 
   const handleClickAddNew = () => {
-    console.log("click");
+    // console.log("click");
     // setMode(false);
     // setMode(false);
 
     setAddNewMode(true);
-    console.log("state", addNewMode);
+    // console.log("state", addNewMode);
   };
 
-  console.log("state", addNewMode);
+  // console.log("state", addNewMode);
 
   const [deletePPValue, setDeletePPValue] = useState(null);
 
@@ -119,6 +119,8 @@ export default function EditPlantsGrowing(props) {
     ":" +
     process.env.REACT_APP_SERVER_PORT +
     "/deletePlantedPlant";
+
+    console.log('plantIcons', plantIcons);
 
   const plantedPlantDeleteHandler = (e, num) => {
     // console.log("delete");
@@ -131,22 +133,33 @@ export default function EditPlantsGrowing(props) {
         plotID: form.plotID,
       })
       .then((response) => {
-        // console.log('response', response);
+        console.log('response from delete', response);
 
         plantIcons = [];
 
         for (let plotObject in response.data) {
-          // console.log('data', plotObject);
+          // console.log('data', response.data[plotObject]);
           for (let plantInfoObject in plantInfoArray) {
+          // console.log('data2',plantInfoArray[plantInfoObject]);
+          // console.log('data2', response.data[plotObject].plot_id);
+          // console.log('data3',response.data[plotObject].plant_id);
+          // console.log('data4', plantsArray[plotObject]);
+          // console.log('data5', plantsArray[plotObject].plantedplants_id);
+          
+
+
             if (
               response.data[plotObject].plot_id === plotID &&
               response.data[plotObject].plant_id ===
                 plantInfoArray[plantInfoObject].plant_id
             ) {
+              console.log('Found');
               const name = plantInfoArray[plantInfoObject].name;
               const photo_url = plantInfoArray[plantInfoObject].photo_url;
-              const plantedPlants_id = plantsArray[plotObject].plantedplants_id;
+              const plantedPlants_id = response.data[plotObject].plantedplants_id;
               plantIcons.push([name, photo_url, plantedPlants_id]);
+              // console.log('plantIcons', plantIcons)
+              // console.log('id',plantedPlants_id )
             }
           }
         }
@@ -176,7 +189,7 @@ export default function EditPlantsGrowing(props) {
 
   const handleAddPlantButton = (e) => {
     e.preventDefault();
-    console.log('test', addNewPlant);
+    // console.log('test', addNewPlant);
 
     axios
       .post(addPlantRoute, {
@@ -184,7 +197,7 @@ export default function EditPlantsGrowing(props) {
         name: addNewPlant.name,
       })
       .then((response) => {
-        console.log('response for add', response);
+        // console.log('response for add', response);
         
         plantIcons = [];
 
@@ -260,8 +273,8 @@ export default function EditPlantsGrowing(props) {
     //   });
   };
 
-  console.log("plantIcons", plantIcons);
-  console.log("plantsarray", plantsArray);
+  // console.log("plantIcons", plantIcons);
+  // console.log("plantsarray", plantsArray);
 
   // const iconArray = setPlantIcons(plantIconsArray);
   // console.log('iconarray', iconArray);
@@ -285,7 +298,7 @@ export default function EditPlantsGrowing(props) {
         onClick={(e) => {
           // setDeletePPValue(array[2]);
           plantedPlantDeleteHandler(e, array[2]);
-          console.log("deleteValue", deletePPValue);
+          console.log("deleteValue", array);
         }}
         className={styles.xDeleteLI}
       >
@@ -366,7 +379,7 @@ export default function EditPlantsGrowing(props) {
                 name={"new-plant"}
                 onChange={(e) => {
                   setAddNewPlant({ name: e.target.value });
-                  console.log("e", e.target.value);
+                  // console.log("e", e.target.value);
                 }}
                 required
               >
@@ -396,7 +409,7 @@ export default function EditPlantsGrowing(props) {
                 placeholder="Enter your username"
                 onChange={(e) => {
                   // setValue("first_name", e.target.value)
-                  console.log("ee", e.target.value);
+                  // console.log("ee", e.target.value);
                 }}
                 required
               ></input>

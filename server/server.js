@@ -341,7 +341,33 @@ app.post("/deletePlantedPlant", (req, res) => {
 
   let deleteValue = req.body.deleteValue;
   const plotID = req.body.plotID;
-  console.log('req.body', req.body)
+  // console.log('req.body', req.body)
+  console.log("dv", deleteValue)
+
+  // Promise.all([
+  //   db.query(`
+  //   WITH deleted_item AS (
+  //     DELETE FROM plantedPlants
+  //     WHERE plantedPlants_id = $1
+  //     RETURNING *
+  // )
+  // SELECT * 
+  // FROM plantedPlants
+  // WHERE plantedPlants.plot_id = $2
+  //   `,[deleteValue, plotID]),
+
+  // // db.query(`
+  // //   SELECT *
+  // //   FROM plantedPlants
+  // //   WHERE plantedPlants.plot_id = $1
+  // //   ;`, [plotID]),
+  // ])
+  // .then((results) => {
+  //   console.log("queryResults", results[0].rows);
+  //   res.status(200).send(results[0].rows);
+  // }).catch(error => {
+  //   console.log(error);
+  // });
   
   db.query(`
   DELETE FROM plantedPlants
@@ -353,10 +379,11 @@ app.post("/deletePlantedPlant", (req, res) => {
     FROM plantedPlants
     WHERE plantedPlants.plot_id = $1
     ;`, [plotID]);
+    console.log('res', allPlantedPlants);
     return allPlantedPlants;
   })
   .then((results) => {
-    console.log("queryResults", results);
+    console.log("queryResults", results.rows);
     res.status(200).send(results.rows);
   })
   .catch((error) => {
