@@ -6,17 +6,11 @@ import getAllPlants from "../../../helpers/getAllPlants";
 export default function EditPlantsGrowing(props) {
   const plantsArray = props.plants;
   const [plantInfoArray, setPlantInfoArray] = useState(props.plantInfo);
-  const plantIconsArray = [];
-  // const [plantsIcons, setPlantIcons] = useState([]);
   let plantIcons = [];
-
-  // const [plantsIcons, setPlantIcons] = useState([plantIconsArray]);
   const plotID = parseInt(props.plotID);
 
   const [mode, setMode] = useState(true);
   const [addNewMode, setAddNewMode] = useState(false);
-  // const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
-  // const [deletePPValue, setDeletePPValue] = useState(null);
 
   //collect all of the plantedPlants
   for (let plotObject in plantsArray) {
@@ -33,87 +27,19 @@ export default function EditPlantsGrowing(props) {
       }
     }
   }
-  // console.log("plantIcons above state", plantIcons);
   const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
 
-  // const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
-  // console.log("plantsgrowingstate below state", plantsGrowingState);
-
-  // setPlantIcons(plantIconsArray);
-  // const [plantsIcons, setPlantIcons] = useState([]);
-
-  // console.log("plantinfoarray", plantInfoArray);
   const [form, setForm] = useState({
     plotID: plotID,
   });
 
-  // const [mode, setMode] = useState(true);
-  // const [addNewMode, setAddNewMode] = useState(false);
-  // const [plantsGrowingState, setPlantsGrowingState] = useState(plantIcons);
-
-  // Set the value of a single element of the object
-  const setValue = (key, value) => {
-    setForm({ ...form, [key]: value });
-  };
-  const aboutEditRoute =
-    process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
-    "/updateAbout/:id";
-
-  const handleUserSubmit = (e) => {
-    e.preventDefault();
-    setForm(form);
-    setMode(true);
-
-    // axios.post(usersRoute, form)
-    // .then((response) => {
-    //   console.log('response', response);
-    //   const data = response.data.loginKey;
-
-    //   // updateUserStorage(data[0]);
-
-    //   setForm(data[0]);
-    //   // toggleAccount();
-    //   // setForm(data[0]);
-    //   // getUserOrderInfo(response.data.cartKey)
-    //   console.log("formData", form);
-
-    //   return response.data
-    // })
-    // .catch((error) => {
-    //   if (error.response) {
-    //     alert(`Error! ${error.message}`);
-    //   } else if (error.request) {
-    //     console.log("network error");
-    //   } else {
-    //     console.log(error);
-    //   }
-    // });
-  };
-
   const handleClick = () => {
-    // console.log("click");
     setMode(false);
   };
 
   const handleClickUpdate = () => {
-    // console.log("click");
     setMode(true);
   };
-
-  const handleClickAddNew = () => {
-    // console.log("click");
-    // setMode(false);
-    // setMode(false);
-
-    setAddNewMode(true);
-    // console.log("state", addNewMode);
-  };
-
-  // console.log("state", addNewMode);
-
-  const [deletePPValue, setDeletePPValue] = useState(null);
 
   const plantedPlantDeleteRoute =
     process.env.REACT_APP_SERVER +
@@ -121,11 +47,7 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER_PORT +
     "/deletePlantedPlant";
 
-  // console.log('plantIcons', plantIcons);
-
   const plantedPlantDeleteHandler = (e, num) => {
-    // console.log("delete");
-
     e.preventDefault();
 
     axios
@@ -134,32 +56,20 @@ export default function EditPlantsGrowing(props) {
         plotID: form.plotID,
       })
       .then((response) => {
-        console.log("response from delete", response);
-
         plantIcons = [];
 
         for (let plotObject in response.data) {
-          // console.log('data', response.data[plotObject]);
           for (let plantInfoObject in plantInfoArray) {
-            // console.log('data2',plantInfoArray[plantInfoObject]);
-            // console.log('data2', response.data[plotObject].plot_id);
-            // console.log('data3',response.data[plotObject].plant_id);
-            // console.log('data4', plantsArray[plotObject]);
-            // console.log('data5', plantsArray[plotObject].plantedplants_id);
-
             if (
               response.data[plotObject].plot_id === plotID &&
               response.data[plotObject].plant_id ===
                 plantInfoArray[plantInfoObject].plant_id
             ) {
-              // console.log('Found');
               const name = plantInfoArray[plantInfoObject].name;
               const photo_url = plantInfoArray[plantInfoObject].photo_url;
               const plantedPlants_id =
                 response.data[plotObject].plantedplants_id;
               plantIcons.push([name, photo_url, plantedPlants_id]);
-              // console.log('plantIcons', plantIcons)
-              // console.log('id',plantedPlants_id )
             }
           }
         }
@@ -189,7 +99,6 @@ export default function EditPlantsGrowing(props) {
 
   const handleAddPlantButton = (e) => {
     e.preventDefault();
-    // console.log('test', addNewPlant);
 
     axios
       .post(addPlantRoute, {
@@ -197,12 +106,9 @@ export default function EditPlantsGrowing(props) {
         name: addNewPlant.name,
       })
       .then((response) => {
-        // console.log('response for add', response);
-
         plantIcons = [];
 
         for (let plotObject in response.data) {
-          // console.log('data', plotObject);
           for (let plantInfoObject in plantInfoArray) {
             if (
               response.data[plotObject].plot_id === plotID &&
@@ -310,7 +216,6 @@ export default function EditPlantsGrowing(props) {
         type="submit"
         onClick={(e) => {
           plantedPlantDeleteHandler(e, array[2]);
-          console.log("deleteValue", array);
         }}
         className={styles.xDeleteLI}
       >
@@ -350,13 +255,6 @@ export default function EditPlantsGrowing(props) {
           </button>
         </div>
         <ul>{mappedIcons}</ul>
-        {/* <button
-            type="submit"
-            className={styles.editPlantsButton}
-            onClick={handleClickAddNew}
-          >
-            Add New Plant
-          </button> */}
       </div>
     );
   }
@@ -387,13 +285,6 @@ export default function EditPlantsGrowing(props) {
               >
                 Add Plant
               </button>
-              {/* <button
-                type="delete"
-                // onClick={handleAddPlantButton}
-                className={styles.tipsButton}
-              >
-                Cancel
-              </button> */}
             </div>
             <label className={styles.addFormLabel}>Create New Plant:</label>
             <input
@@ -430,7 +321,7 @@ export default function EditPlantsGrowing(props) {
             </button>
           </div>
         </form>
-        <hr class="solid" className={styles.solidLine}></hr>
+        <hr className={styles.solidLine}></hr>
         <button
           type="create"
           className={styles.updatePlantsButton}
