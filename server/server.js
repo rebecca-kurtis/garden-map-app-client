@@ -393,7 +393,7 @@ app.post("/deletePlantedPlant", (req, res) => {
   });
 });
 
-//delete plantedPlants item
+//add new Planted Plant item with already created plants
 app.post("/addPlant", (req, res) => {
 
   // let deleteValue = req.body.deleteValue;
@@ -428,6 +428,61 @@ app.post("/addPlant", (req, res) => {
   })
   .then((results) => {
     console.log(results);
+    allPlantedPlants = db.query(`
+    SELECT *
+    FROM plantedPlants
+    WHERE plantedPlants.plot_id = $1
+    ;`, [plotID]);
+    return allPlantedPlants;
+  })
+  .then((results) => {
+    console.log("queryResults", results);
+    res.status(200).send(results.rows);
+  })
+  .catch((error) => {
+    if (error) {
+      throw error;
+    }
+  });
+});
+
+
+//create new plant and add to plantedPants
+app.post("/createPlant", (req, res) => {
+
+  // let deleteValue = req.body.deleteValue;
+  const plantName = req.body.name;
+  const plotID = req.body.plotID;
+  console.log('req.body', req.body)
+  
+  db.query(`
+  INSERT INTO plants (name)
+    VALUES ($1)
+    RETURNING plant_id
+  ;`,[plantName])
+  .then((response) => {
+    console.log('response', response)
+    const plantID = response.rows[0].plant_id;
+    // console.log(plantID);
+    return db.query(`
+    INSERT INTO plantedPlants (plot_id, plant_id)
+    VALUES ($1, $2)
+    RETURNING plantedPlants_id
+    ;`, [plotID, plantID]);
+  //    return db.query(`
+  //   WITH inserted_item AS (
+  //     INSERT INTO plantedPlants (plot_id, plant_id)
+  //     VALUES ($1, $2)
+  //     RETURNING *
+  // )
+  // SELECT * 
+  // FROM plantedPlants
+  // WHERE plantedPlants.plot_id = $1;`, [plotID, plantID]);
+
+    
+  })
+  .then((results) => {
+    console.log("results2", results);
     allPlantedPlants = db.query(`
     SELECT *
     FROM plantedPlants

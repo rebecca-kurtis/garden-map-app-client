@@ -1,10 +1,11 @@
 import styles from "../../styles/ProfilePage/PlantsGrowing.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import getAllPlants from "../../../helpers/getAllPlants";
 
 export default function EditPlantsGrowing(props) {
   const plantsArray = props.plants;
-  const plantInfoArray = props.plantInfo;
+  const [plantInfoArray, setPlantInfoArray] = useState(props.plantInfo);
   const plantIconsArray = [];
   // const [plantsIcons, setPlantIcons] = useState([]);
   let plantIcons = [];
@@ -120,7 +121,7 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER_PORT +
     "/deletePlantedPlant";
 
-    console.log('plantIcons', plantIcons);
+    // console.log('plantIcons', plantIcons);
 
   const plantedPlantDeleteHandler = (e, num) => {
     // console.log("delete");
@@ -237,41 +238,90 @@ export default function EditPlantsGrowing(props) {
     process.env.REACT_APP_SERVER +
     ":" +
     process.env.REACT_APP_SERVER_PORT +
-    "/addTip";
+    "/createPlant";
+
+    const [createNewPlant, setCreateNewPlant] = useState({});
+
+    // console.log('createnew', createNewPlant);
 
   const handleCreatePlantButton = (e) => {
     e.preventDefault();
 
-    // axios
-    //   .post(tipCreationRoute, {
-    //     userID: props.userID,
-    //     description: newTipCreationForm.description,
-    //   })
-    //   .then((response) => {
-    //     const newDataTipsArray = [];
+    axios
+      .post(createPlantRoute, {
+        plotID: form.plotID,
+        name: createNewPlant.name
+      })
+      .then((response) => {
 
-    //     for (const obj in response.data) {
-    //       const tip = response.data[obj].tdescription;
-    //       const tipId = response.data[obj].tip_id;
-    //       newDataTipsArray.push([tipId, tip]);
-    //     }
+        getAllPlants()
+        .then((data) => {
+          setPlantInfoArray(data);
+          console.log('data from inside', data)
+          // console.log('users from inside', users)
+        }).then(() => {
+          plantIcons = [];
 
-    //     const newTipsArray = removeTipsDuplicates(newDataTipsArray);
-    //     const newData = addTipsToObj(newTipsArray);
-    //     setForm(newData);
-    //     setMode(true);
+        for (let plotObject in response.data) {
+          console.log('data', response.data[plotObject]);
+          for (let plantInfoObject in plantInfoArray) {
+            console.log("w", plantInfoArray);
+            if (
+              response.data[plotObject].plot_id === plotID &&
+              response.data[plotObject].plant_id ===
+                plantInfoArray[plantInfoObject].plant_id
+            ) {
+              const name = plantInfoArray[plantInfoObject].name;
+              const photo_url = plantInfoArray[plantInfoObject].photo_url;
+              const plantedPlants_id = response.data[plotObject].plantedplants_id;
+              plantIcons.push([name, photo_url, plantedPlants_id]);
+              console.log('test3', name, photo_url, plantedPlants_id);
+              console.log('plantIcons', plantIcons);
+            }
+          }
+        }
 
-    //     return response.data;
-    //   })
-    //   .catch((error) => {
-    //     if (error.response) {
-    //       alert(`Error! ${error.message}`);
-    //     } else if (error.request) {
-    //       console.log("network error");
-    //     } else {
-    //       console.log(error);
-    //     }
-    //   });
+        setPlantsGrowingState(plantIcons);
+        setCreateNewPlant({});
+
+        return response.data;
+        });
+        // console.log('response from create', response);
+        
+        // plantIcons = [];
+
+        // for (let plotObject in response.data) {
+        //   console.log('data', response.data[plotObject]);
+        //   for (let plantInfoObject in plantInfoArray) {
+        //     if (
+        //       response.data[plotObject].plot_id === plotID &&
+        //       response.data[plotObject].plant_id ===
+        //         plantInfoArray[plantInfoObject].plant_id
+        //     ) {
+        //       const name = plantInfoArray[plantInfoObject].name;
+        //       const photo_url = plantInfoArray[plantInfoObject].photo_url;
+        //       const plantedPlants_id = response.data[plotObject].plantedplants_id;
+        //       plantIcons.push([name, photo_url, plantedPlants_id]);
+        //       console.log('test3', name, photo_url, plantedPlants_id);
+        //       console.log('plantIcons', plantIcons);
+        //     }
+        //   }
+        // }
+
+        // setPlantsGrowingState(plantIcons);
+        // setCreateNewPlant({});
+
+        // return response.data;
+      })
+      .catch((error) => {
+        if (error.response) {
+          alert(`Error! ${error.message}`);
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
   };
 
   // console.log("plantIcons", plantIcons);
@@ -393,23 +443,24 @@ export default function EditPlantsGrowing(props) {
               onClick={handleAddPlantButton}>
                 Add Plant
               </button>
-              <button
+              {/* <button
                 type="delete"
                 // onClick={handleAddPlantButton}
                 className={styles.tipsButton}
               >
                 Cancel
-              </button>
+              </button> */}
             </div>
               <label className="form-label">Create New Plant:</label>
               <input
                 className={styles.inputTextName}
                 type="text"
                 name="first_name"
-                value={form.first_name}
-                placeholder="Enter your username"
+                value={form.plant_name}
+                placeholder="Enter plant name"
                 onChange={(e) => {
                   // setValue("first_name", e.target.value)
+                  setCreateNewPlant({name: e.target.value})
                   // console.log("ee", e.target.value);
                 }}
                 required
