@@ -8,6 +8,7 @@ import GardenSectionTwo from "./GardenSections/GardenSectionTwo";
 import BottomPathVertical from "./Paths/BottomPathVertical";
 import PathHorizontal from "./Paths/PathHorizontal";
 import TopPathVertical from "./Paths/TopPathVertical";
+import HomePageGallery from "./HomePageGallery";
 
 export default function HomePageIndex(props) {
 
@@ -45,6 +46,7 @@ export default function HomePageIndex(props) {
         <PathHorizontal />
         <div className={styles.mapContainerRow}>
           <div className={styles.spaceBlocker} />
+          <HomePageGallery />
           <BottomPathVertical />
           <GardenSectionThree plantInfo={props.plants} plants={plantedPlantsArray}/>
         </div>
