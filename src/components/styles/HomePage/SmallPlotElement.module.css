@@ -20,7 +20,23 @@
 }
 
 .iconElement {
-  padding-top: 15px;
+  /* padding-top: 15px; */
+  padding-left: 17px;
+  /* justify-content: center; */
+  /* align-content: center; */
+  width: 40px;
+ }
+
+ .iconSmallContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+ }
+
+ .iconElementRow {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
   padding-left: 17px;
   /* justify-content: center; */
   /* align-content: center; */

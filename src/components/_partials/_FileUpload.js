@@ -44,7 +44,7 @@ class FileUpload extends Component {
 		if (this.state.selectedFile) {
 			return (
 				<div>
-					<h2>File Details:</h2>
+					<h4>File Details:</h4>
 					<p>
 						File Name:{" "}
 						{this.state.selectedFile.name}
@@ -56,8 +56,8 @@ class FileUpload extends Component {
 					</p>
 
 					<p>
-						Last Modified:{" "}
-						{this.state.selectedFile.lastModifiedDate.toDateString()}
+						{/* Last Modified:{" "} */}
+						{/* {this.state.selectedFile.lastModifiedDate.toDateString()} */}
 					</p>
 				</div>
 			);
@@ -77,8 +77,7 @@ class FileUpload extends Component {
 	render() {
 		return (
 			<div>
-				<h1>GeeksforGeeks</h1>
-				<h3>File Upload using React!</h3>
+				<h3>Upload Photos:</h3>
 				<div>
 					<input
 						type="file"
