@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { Component } from "react";
 
 class FileUpload extends Component {
+
 	state = {
 		// Initially, no file is selected
 		selectedFile: null,
@@ -39,8 +40,13 @@ class FileUpload extends Component {
     process.env.REACT_APP_SERVER +
     ":" +
     process.env.REACT_APP_SERVER_PORT +
-    "/uploadPhoto";
+    `/uploadPhoto/${this.props.plotID}`;
 
+		const formObject = {
+			formData: formData,
+			plotID: this.props.plotID,
+			gardenID: this.props.gardenID
+		}
 
 		axios.post(uploadPhotoRoute, formData);
 	};
@@ -82,6 +88,9 @@ class FileUpload extends Component {
 	};
 
 	render() {
+
+		const props = this.props;
+		console.log("props", props);
 		return (
 			<div>
 				<h3>Upload Photos:</h3>

@@ -242,7 +242,7 @@ app.get("/photos", (req, res) => {
 
 // Upload photos
 
-function saveImagesInDB(images){
+function saveImagesInDB(images, plot_id){
   // console.log('images', images);
   // console.log('images2', images[i].key);
 
@@ -250,16 +250,21 @@ function saveImagesInDB(images){
   for(let i = 0;i < images.length;i++){
   // console.log('images2', images[i].key);
 
-    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", [38,images[i].key, 1], (err, result) => {
+    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", [plot_id,images[i].key, 1], (err, result) => {
       if(err) throw new Error(err)
     })
   }
 }
 
-app.post("/uploadPhoto", (req, res) => {
+app.post("/uploadPhoto/:plotID", (req, res) => {
+  console.log(req.files);
+  console.log("req",req.body);
+  const plotId = req.params.plotID;
+  console.log('plotID', plotId);
+
   upload(req, res, (err) => {
     if(!err && req.files != "") { 
-      saveImagesInDB(req.files)
+      saveImagesInDB(req.files, plotId)
       res.status(200).send()
     } else if (!err && req.files == ""){
       res.statusMessage = "Please select an image to upload";

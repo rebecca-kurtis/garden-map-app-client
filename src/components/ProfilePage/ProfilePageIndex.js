@@ -155,7 +155,7 @@ export default function ProfilePageIndex(props) {
               userID={localStorage.user}
             />
             <ShareSection />
-            <FileUpload />
+            <FileUpload plotID={plot_id} gardenID={1}/>
 
             <FancyboxExample
               options={{
