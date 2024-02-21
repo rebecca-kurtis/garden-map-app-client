@@ -1,6 +1,11 @@
 const pg = require("pg");
 const express = require("express");
+const multer = require("multer");
 const cors = require("cors");
+const path = require("path");
+
+const multerS3 = require("multer-s3-v2")
+const {s3, getImageStream, deleteImage} = require("./s3.js")
 
 // load .env data into process.env
 require("dotenv").config();
@@ -15,6 +20,39 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
+
+const storage = multerS3({
+  s3: s3,
+  bucket: process.env.AWS_BUCKET_NAME,
+  metadata: function(req, file, cb) {
+    cb(null, { originalname: file.originalname });
+  },
+  key: function(req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, uniqueSuffix + path.extname(file.originalname))
+  }
+})
+
+function checkFileType(file, cb){
+  const filetypes = /jpeg|png|jpg/
+  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
+  const mimetype = filetypes.test(file.mimetype)
+
+  if(mimetype && extname){
+    return cb(null,true)
+  } else {
+    cb("Please upload images only")
+  }
+}
+
+const upload = multer({ 
+  storage: storage,
+  // limits: { fileSize: 1000000 },
+  fileFilter: function (req, file, cb) {
+    checkFileType(file, cb)
+  }
+}).any()
 
 //example code
 // var conString = "INSERT_YOUR_POSTGRES_URL_HERE" //Can be found in the Details page
@@ -59,6 +97,7 @@ app.get("/users", (req, res) => {
     res.status(200).send(results.rows);
   });
 });
+
 
 // Check if user owns plot
 app.get("/checkUserRoute", (req, res) => {
@@ -191,6 +230,7 @@ app.get("/plots", (req, res) => {
 
 // Get all photos
 app.get("/photos", (req, res) => {
+  let images = [];
   db.query("SELECT * FROM photos", (error, results) => {
     if (error) {
       throw error;
@@ -199,6 +239,87 @@ app.get("/photos", (req, res) => {
     res.status(200).send(results.rows);
   });
 });
+
+// Upload photos
+
+function saveImagesInDB(images){
+  // console.log('images', images);
+  // console.log('images2', images[i].key);
+
+  
+  for(let i = 0;i < images.length;i++){
+  // console.log('images2', images[i].key);
+
+    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", [38,images[i].key, 1], (err, result) => {
+      if(err) throw new Error(err)
+    })
+  }
+}
+
+app.post("/uploadPhoto", (req, res) => {
+  upload(req, res, (err) => {
+    if(!err && req.files != "") { 
+      saveImagesInDB(req.files)
+      res.status(200).send()
+    } else if (!err && req.files == ""){
+      res.statusMessage = "Please select an image to upload";
+      res.status(400).end()
+    } else {
+      res.statusMessage = (err === "Please upload images only" ? err : "Photo exceeds limit of 1MB") ;
+      res.status(400).end()
+    }
+  })  
+})
+
+
+// Delete photos
+function deleteImagesFromS3(images){
+  for(let i = 0; i < images.length;i++){
+    deleteImage(images[i])
+  }
+}
+
+function deleteImagesFromDb(images){
+  for(let i = 0; i < images.length;i++){
+    db.query("DELETE FROM images WHERE user_id = ? AND image_key = ?", [1, images[i]], (err, result) => {
+      if(err) throw new Error(err)
+    })
+  }
+}
+
+app.get("/deletePhoto", (req, res) => {
+  let images = [];
+  // db.query("SELECT * FROM photos", (error, results) => {
+  //   if (error) {
+  //     throw error;
+  //   }
+  //   // console.log('Results:', results)
+  //   res.status(200).send(results.rows);
+  // });
+
+  const deleteImages = req.body.deleteImages
+
+  if(deleteImages == ""){
+    res.statusMessage = "Please select an image to delete";
+    res.status(400).end()
+  } else {
+    deleteImagesFromS3(deleteImages)
+    deleteImagesFromDb(deleteImages)
+    res.statusMessage = "Succesfully deleted";
+    res.status(200).end()
+  }
+});
+
+// // Get all users
+// app.get("/users", (req, res) => {
+//   db.query("SELECT * FROM users", (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
+//     // console.log('Results:', results)
+//     res.status(200).send(results.rows);
+//   });
+// });
 
 // Get all plantedPlants
 app.get("/plantedPlants", (req, res) => {

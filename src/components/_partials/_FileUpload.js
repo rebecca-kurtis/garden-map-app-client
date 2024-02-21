@@ -35,7 +35,14 @@ class FileUpload extends Component {
 
 		// Request made to the backend api
 		// Send formData object
-		axios.post("api/uploadfile", formData);
+		const uploadPhotoRoute =
+    process.env.REACT_APP_SERVER +
+    ":" +
+    process.env.REACT_APP_SERVER_PORT +
+    "/uploadPhoto";
+
+
+		axios.post(uploadPhotoRoute, formData);
 	};
 
 	// File content to be displayed after
