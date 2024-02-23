@@ -6,12 +6,13 @@ export default function Header(props) {
 
   const updateUserStorage = props.updateUserStorage;
 
-  // console.log(updateUserStorage);
+  console.log(updateUserStorage);
   const clearUserStorage = props.clearUserStorage;
   const user = props.user;
 
   function logoutHandler() {
       clearUserStorage();
+      props.setOwnsPlot(false);
       // navigate('/');
       // closeSide();
 
@@ -27,7 +28,7 @@ export default function Header(props) {
           <a  href="/"><button className={styles.headerButton}>Visit our main website</button></a>
         </div>
         <div className={styles.buttonContainer}>
-        <Login updateUserStorage={updateUserStorage}/>
+        <Login updateUserStorage={updateUserStorage} setOwnsPlot={props.setOwnsPlot}/>
         </div>
         
       </div>

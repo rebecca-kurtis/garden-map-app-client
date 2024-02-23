@@ -23,11 +23,13 @@ import Login from "./components/_partials/_Login";
 import useLocalStorage from "./hooks/useLocalStorage";
 
 
+
 function App() {
-  // let [users, setUsers] = useState([]);
+ 
   const [userID, setUserID] = useState(null);
   let [plantedPlants, setPlantedPlants] = useState([]);
   let [plants, setPlants] = useState([])
+  const [ownsPlot, setOwnsPlot] = useState(null);
 
   // const usersRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/users";
 
@@ -73,7 +75,7 @@ function App() {
   console.log("userID in function", userID);
 }
 
-// console.log(updateUserStorage);
+console.log(updateUserStorage);
 
 
   // Remove current user state
@@ -86,11 +88,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header user={user} updateUserStorage={updateUserStorage} clearUserStorage={clearUserStorage}/>
+        <Header user={user} updateUserStorage={updateUserStorage} clearUserStorage={clearUserStorage} setOwnsPlot={setOwnsPlot}/>
         <Routes>
           <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
-          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} user={user}/>} />
-          {/* <Route path="/login" element={<Login/>} /> */}
+          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} user={user} ownsPlot={ownsPlot} setOwnsPlot={setOwnsPlot}/>} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

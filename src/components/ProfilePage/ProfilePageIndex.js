@@ -22,7 +22,7 @@ export default function ProfilePageIndex(props) {
   console.log("local storage:", localStorage);
   const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [ownsPlot, setOwnsPlot] = useState(null);
+  // const [ownsPlot, setOwnsPlot] = useState(null);
   const [photos, setPhotos] = useState(null);
 
   const id = useParams();
@@ -39,7 +39,7 @@ export default function ProfilePageIndex(props) {
   useEffect(() => {
     checkIfUserOwnsPlot(plotID, user).then((data) => {
       console.log("data inside hook", data);
-      setOwnsPlot(data.user_owns_plot);
+      props.setOwnsPlot(data.user_owns_plot);
     });
 
     getPlotProfileInfo(plot_id).then((data) => {
@@ -55,7 +55,7 @@ export default function ProfilePageIndex(props) {
     // })
   }, []);
 
-  console.log("ownsPlot", ownsPlot);
+  console.log("ownsPlot", props.ownsPlot);
   console.log('photos', photos);
   
 
@@ -120,7 +120,7 @@ export default function ProfilePageIndex(props) {
   } else {
     return (
       <div>
-        {ownsPlot === false && (
+        {props.ownsPlot === false && (
           <div className={styles.profilePageContainer}>
             <HeroHeader profileInfo={profileInfo} />
             <div className={styles.aboutSectionIndexContainer}>
@@ -149,7 +149,7 @@ export default function ProfilePageIndex(props) {
           </div>
         )}
 
-        {ownsPlot === true && (
+        {props.ownsPlot === true && (
           <div className={styles.profilePageContainer}>
             <EditHeroHeader profileInfo={profileInfo} />
             <div className={styles.aboutSectionIndexContainer}>

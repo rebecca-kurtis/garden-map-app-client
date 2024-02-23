@@ -122,7 +122,7 @@ app.get("/checkUserRoute", (req, res) => {
       if (error) {
         throw error;
       }
-      console.log("Results from checking:", results);
+      // console.log("Results from checking:", results);
       res.status(200).send(results.rows);
     }
   );
@@ -135,6 +135,8 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
+  const returnObj = {};
+
   db.query(
     `SELECT user_id
     FROM users
@@ -142,15 +144,52 @@ app.post("/login", (req, res) => {
     AND users.password = $2
     GROUP BY user_id
     ;`,
-    [username, password],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      // console.log('Results:', results)
-      res.status(200).send(results.rows[0]);
-    }
-  );
+    [username, password])
+    .then((result) => {
+
+      res.status(200).send(result.rows);
+    // })
+  // .then((result) => {
+  //   const plotID = result.rows[0].plot_id;
+  //   returnObj = {"plot_id": plotID};
+  //   console.log('return obj', returnObj)
+  //     res.status(200).send(returnObj);
+}).catch((error) => {
+  if (error) {
+    throw error;
+  }
+});
+
+//   db.query(
+//     `SELECT user_id
+//     FROM users
+//     WHERE users.username = $1 
+//     AND users.password = $2
+//     GROUP BY user_id
+//     ;`,
+//     [username, password])
+//     .then((result) => {
+//       const userID = result.rows[0].user_id;
+//       returnObj = {"user_id": userID};
+//       plotID = db.query(
+//         `SELECT plot_id
+//         FROM plots
+//         WHERE user_id = $1 
+//         ;`,
+//         [userID]
+//     )
+//     return plotID })
+//   .then((result) => {
+//     const plotID = result.rows[0].plot_id;
+//     returnObj = {"plot_id": plotID};
+//     console.log('return obj', returnObj)
+//       res.status(200).send(returnObj);
+// }).catch((error) => {
+//   if (error) {
+//     throw error;
+//   }
+// });
+  
 });
 
 // Get all tips
@@ -195,7 +234,7 @@ app.get("/plots/:id", (req, res) => {
     }).then((response) => {
     console.log("test resp", response);
         responseArr.push({photosInfo: response.rows})
-        console.log("response obj", responseArr);
+        // console.log("response obj", responseArr);
         res.status(200).send(responseArr);
       })
       .catch((error) => {

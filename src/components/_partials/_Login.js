@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import axios from "axios";
 import styles from "../styles/Header.module.css";
+import checkIfUserOwnsPlot from "../../helpers/checkIfUserOwnsPlot";
 
 function Login(props) {
 
@@ -26,6 +28,12 @@ function Login(props) {
     setForm({ ...form, [key]: value });
   };
 
+  const id = useParams();
+  const plot_id = id.id;
+  console.log("plpeee", plot_id);
+  // const user = props.user;
+  const plotID = parseInt(plot_id);
+
   const usersRoute =
     process.env.REACT_APP_SERVER +
     ":" +
@@ -40,12 +48,18 @@ function Login(props) {
     axios
       .post(usersRoute, form)
       .then((response) => {
-        console.log("response", response);
+        console.log("login response", response);
         // props.setUserID(response.data.user_id)
         // const data = response.data.loginKey;
 
-        updateUserStorage(response.data.user_id);
+        updateUserStorage(response.data[0].user_id);
         console.log("local storage:", localStorage)
+
+        // checkIfUserOwnsPlot(plotID, response.data.user_id).then((data) => {
+        //   console.log("data inside hook", data);
+        //   props.setOwnsPlot(data.user_owns_plot);
+        // });
+        // props.setOwnsPlot(true);
 
         // setForm(data[0]);
         // toggleAccount();
