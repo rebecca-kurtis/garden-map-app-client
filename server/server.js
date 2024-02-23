@@ -167,6 +167,7 @@ app.get("/tips", (req, res) => {
 // Get all plots/id
 app.get("/plots/:id", (req, res) => {
   const plotId = req.params.id;
+  const responseArr = [];
 
   db.query(
     `SELECT DISTINCT
@@ -185,14 +186,23 @@ app.get("/plots/:id", (req, res) => {
     AND tips.user_id = users.user_id 
     GROUP BY users.user_id, uDescription, ppPlantId, tDescription, tips.user_id, tips.tips_id
     ORDER BY user_id, tip_id;`,
-    [plotId],
-    (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(200).send(results.rows);
-    }
-  );
+    [plotId]
+  ).then((response) => {
+    responseArr.push({profileInfo: response.rows})
+    // console.log("profile", response) \
+    const photosResponse =  db.query("SELECT * FROM photos WHERE plot_id = $1;",[plotId])
+      return photosResponse;
+    }).then((response) => {
+    console.log("test resp", response);
+        responseArr.push({photosInfo: response.rows})
+        console.log("response obj", responseArr);
+        res.status(200).send(responseArr);
+      })
+      .catch((error) => {
+        if (error) {
+          throw error;
+        }
+      });
 });
 
 // Get all plants
@@ -228,17 +238,24 @@ app.get("/plots", (req, res) => {
   });
 });
 
-// Get all photos
-app.get("/photos", (req, res) => {
-  let images = [];
-  db.query("SELECT * FROM photos", (error, results) => {
-    if (error) {
-      throw error;
-    }
-    // console.log('Results:', results)
-    res.status(200).send(results.rows);
-  });
-});
+// // Get all photos
+// app.get("/photos/:id", (req, res) => {
+//   let images = [];
+//   const plotId = req.params.id;
+//   console.log("id for photo", plotId);
+//   db.query("SELECT * FROM photos WHERE plot_id = $1;",[plotId], (error, results) => {
+//     if (error) {
+//       throw error;
+//     }
+//     console.log('Results:', results)
+//     res.status(200).send(results.rows);
+//   });
+// });
+
+app.get("/photos/:image_key", (req, res) => {
+  const readStream = getImageStream(req.params.image_key)
+  readStream.pipe(res)
+})
 
 // Upload photos
 
@@ -246,14 +263,18 @@ function saveImagesInDB(images, plot_id){
   // console.log('images', images);
   // console.log('images2', images[i].key);
 
-  
+  const savedPhotos = [];
   for(let i = 0;i < images.length;i++){
   // console.log('images2', images[i].key);
 
-    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", [plot_id,images[i].key, 1], (err, result) => {
-      if(err) throw new Error(err)
-    })
+    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", 
+    [plot_id,images[i].key, 1])
   }
+    newTips = db.query(
+      "SELECT * FROM photos WHERE plot_id = $1;",[plot_id],
+    );
+    return newTips;
+  
 }
 
 app.post("/uploadPhoto/:plotID", (req, res) => {
@@ -265,11 +286,20 @@ app.post("/uploadPhoto/:plotID", (req, res) => {
   upload(req, res, (err) => {
     if(!err && req.files != "") { 
       saveImagesInDB(req.files, plotId)
-      res.status(200).send()
+      .then((response) => {
+        console.log("saved resp", response)
+        res.status(200).send(response.rows);
+      })
+      .catch((error) => {
+        if (error) {
+          throw error;
+        }
+      });
+      // res.status(200).send()
     } else if (!err && req.files == ""){
       res.statusMessage = "Please select an image to upload";
       res.status(400).end()
-    } else {
+    } else { 
       res.statusMessage = (err === "Please upload images only" ? err : "Photo exceeds limit of 1MB") ;
       res.status(400).end()
     }

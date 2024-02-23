@@ -1,8 +1,10 @@
 // Filename - App.js
 
 import axios from "axios";
+import styles from "../styles/ProfilePage/FileUpload.module.css";
 
 import React, { Component } from "react";
+import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
 
 class FileUpload extends Component {
 
@@ -21,6 +23,14 @@ class FileUpload extends Component {
 
 	// On file upload (click the upload button)
 	onFileUpload = () => {
+
+		//error handling
+
+		if (this.state.selectedFile === null) {
+			alert("You need to choose a file first!")
+			console.log("alert")
+		} else {
+
 		// Create an object of formData
 		const formData = new FormData();
 
@@ -30,7 +40,6 @@ class FileUpload extends Component {
 			this.state.selectedFile,
 			this.state.selectedFile.name
 		);
-
 		// Details of the uploaded file
 		console.log(this.state.selectedFile);
 
@@ -42,13 +51,23 @@ class FileUpload extends Component {
     process.env.REACT_APP_SERVER_PORT +
     `/uploadPhoto/${this.props.plotID}`;
 
-		const formObject = {
-			formData: formData,
-			plotID: this.props.plotID,
-			gardenID: this.props.gardenID
+		// function dealWithUpload (plot)
+		axios
+		.post(uploadPhotoRoute, formData)
+		.then((response) => {
+				this.props.setPhotos(response.data)
+				formData.delete("myFile")
+				// document.getElementById('files-upload').value = "No file chos";
+				this.setState({
+					selectedFile: null,
+				});
+				// document.getElementById('files-upload').value = "No file chos";
+		})
 		}
 
-		axios.post(uploadPhotoRoute, formData);
+		
+		
+
 	};
 
 	// File content to be displayed after
@@ -57,20 +76,15 @@ class FileUpload extends Component {
 		if (this.state.selectedFile) {
 			return (
 				<div>
-					<h4>File Details:</h4>
-					<p>
+					<h4 className={styles.uploadH4}>File Details:</h4>
+					<p className={styles.uploadP}>
 						File Name:{" "}
 						{this.state.selectedFile.name}
 					</p>
 
-					<p>
+					<p className={styles.uploadP}>
 						File Type:{" "}
 						{this.state.selectedFile.type}
-					</p>
-
-					<p>
-						{/* Last Modified:{" "} */}
-						{/* {this.state.selectedFile.lastModifiedDate.toDateString()} */}
 					</p>
 				</div>
 			);
@@ -78,7 +92,7 @@ class FileUpload extends Component {
 			return (
 				<div>
 					<br />
-					<h4>
+					<h4 className={styles.uploadH4}>
 						Choose before Pressing the Upload
 						button
 					</h4>
@@ -93,13 +107,15 @@ class FileUpload extends Component {
 		console.log("props", props);
 		return (
 			<div>
-				<h3>Upload Photos:</h3>
+				<h3 className={styles.uploadH3}>Upload A New Photo:</h3>
 				<div>
 					<input
 						type="file"
 						onChange={this.onFileChange}
+						className={styles.uploadInput}
 					/>
-					<button onClick={this.onFileUpload}>
+					<button onClick={this.onFileUpload}
+					className={styles.uploadButton}>
 						Upload!
 					</button>
 				</div>

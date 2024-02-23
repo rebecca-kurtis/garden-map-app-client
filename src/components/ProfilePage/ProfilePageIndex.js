@@ -16,12 +16,14 @@ import EditTipsSection from "./EditingComponents/EditTipsSection";
 import EditPlantsGrowing from "./EditingComponents/EditPlantsGrowing";
 import checkIfUserOwnsPlot from "../../helpers/checkIfUserOwnsPlot";
 import FancyboxExample from "../HomePage/FancyBox";
+import getPhotos from "../../helpers/getPhotos";
 
 export default function ProfilePageIndex(props) {
   console.log("local storage:", localStorage);
   const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [ownsPlot, setOwnsPlot] = useState(null);
+  const [photos, setPhotos] = useState(null);
 
   const id = useParams();
   const plot_id = id.id;
@@ -42,12 +44,70 @@ export default function ProfilePageIndex(props) {
 
     getPlotProfileInfo(plot_id).then((data) => {
       console.log("data inside func", data);
-      setProfileInfo(data);
+      setProfileInfo(data[0].profileInfo);
+      setPhotos(data[1].photosInfo)
       setLoading(false);
     });
+
+    // getPhotos(plot_id).then((data) => {
+    //   setPhotos(data);
+    //   console.log('look data', data);
+    // })
   }, []);
 
   console.log("ownsPlot", ownsPlot);
+  console.log('photos', photos);
+  
+
+  // const mappedPhotos = photos.map((image) => {
+  //   <a
+  //               data-fancybox="gallery"
+  //               href={`http://localhost:8000/photos/${image.image_key}`}
+  //             >
+  //               <img
+  //                 src={`http://localhost:8000/photos/${image.image_key}`}
+  //                 width="200"
+  //                 height="150"
+  //               />
+  //             </a>
+
+  // });
+
+  const mappedPhotos = [];
+
+  for (const keyID in photos) {
+    mappedPhotos.push(
+      <a
+                data-fancybox="gallery"
+                href={`http://localhost:8000/photos/${photos[keyID].image_key}`}
+              >
+                <img
+                  src={`http://localhost:8000/photos/${photos[keyID].image_key}`}
+                  width="200"
+                  height="150"
+                />
+              </a>
+    );
+  }
+
+  const editMappedPhotos = [];
+
+  for (const keyID in photos) {
+    editMappedPhotos.push(
+      <a
+                data-fancybox="gallery"
+                href={`http://localhost:8000/photos/${photos[keyID].image_key}`}
+                style="margin-left: 20px;"
+              >
+                <img
+                  src={`http://localhost:8000/photos/${photos[keyID].image_key}`}
+                  width="200"
+                  height="150"
+                />
+              </a>
+    );
+  }
+
 
   if (isLoading) {
     return (
@@ -80,56 +140,7 @@ export default function ProfilePageIndex(props) {
                 },
               }}
             >
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/60/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/60/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/61/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/61/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/62/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/62/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/63/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/63/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/64/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/64/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
+              {mappedPhotos}
             </FancyboxExample>
             <ShareSection />
             <a href="/">
@@ -155,7 +166,12 @@ export default function ProfilePageIndex(props) {
               userID={localStorage.user}
             />
             <ShareSection />
-            <FileUpload plotID={plot_id} gardenID={1}/>
+            <FileUpload 
+            plotID={plot_id} 
+            gardenID={1}
+            setProfileInfo={setProfileInfo}
+            setPhotos={setPhotos}
+            setLoading={setLoading}/>
 
             <FancyboxExample
               options={{
@@ -164,56 +180,7 @@ export default function ProfilePageIndex(props) {
                 },
               }}
             >
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/60/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/60/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/61/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/61/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/62/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/62/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/63/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/63/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
-              <a
-                data-fancybox="gallery"
-                href="https://lipsum.app/id/64/1600x1200"
-              >
-                <img
-                  src="https://lipsum.app/id/64/200x150"
-                  width="200"
-                  height="150"
-                />
-              </a>
+              {mappedPhotos}
             </FancyboxExample>
             <a href="/">
               <button className={styles.homeButton}>Back to the Garden</button>
