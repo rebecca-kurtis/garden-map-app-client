@@ -5,10 +5,14 @@
 // import 'react-18-image-lightbox/style.css';
 // import { images } from "./testImages";
 
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import FancyboxExample from "./FancyBox";
+import getPhotos from "../../helpers/getPhotos"
+import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
+import FileUpload from "../_partials/_FileUpload";
+import styles from '../styles/HomePage/HomePageGallery.module.css';
 
 // import 'bs5-lightbox';
 // import Lightbox from 'react-image-lightbox';
@@ -21,117 +25,150 @@ import FancyboxExample from "./FancyBox";
 //   '//placekitten.com/1500/1500',
 // ];
 
-export default function HomePageGallery() {
-  // const [index, setIndex] = useState(-1);
+export default function HomePageGallery(props) {
 
-  // const currentImage = images[index];
-  // const nextIndex = (index + 1) % images.length;
-  // const nextImage = images[nextIndex] || currentImage;
-  // const prevIndex = (index + images.length - 1) % images.length;
-  // const prevImage = images[prevIndex] || currentImage;
 
-  // const handleClick = (index, item) => setIndex(index);
-  // const handleClose = () => setIndex(-1);
-  // const handleMovePrev = () => setIndex(prevIndex);
-  // const handleMoveNext = () => setIndex(nextIndex);
+  useEffect(() => {
+
+  
+    getPlotProfileInfo(45).then((data) => {
+      console.log("data inside func", data);
+      // setProfileInfo(data[0].profileInfo);
+      props.setPhotos(data[1].photosInfo)
+      // setLoading(false);
+    });
+  }, [])
+  
+  const mappedPhotos = [];
+
+  for (const keyID in props.photos) {
+    mappedPhotos.push(
+      <a
+                data-fancybox="gallery"
+                href={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+              >
+                <img
+                  src={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+                  width="200"
+                  height="150"
+                />
+              </a>
+    );
+  }
 
   return (
-    <div >
-      
-      {/* <div class="row">
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=251"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid" />
-        </a>
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=252"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=252" class="img-fluid" />
-        </a>
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=253"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=253" class="img-fluid" />
-        </a>
-      </div>
-      <div class="row">
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=254"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=254" class="img-fluid" />
-        </a>
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=255"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=255" class="img-fluid" />
-        </a>
-        <a
-          href="https://unsplash.it/1200/768.jpg?image=256"
-          data-toggle="lightbox"
-          data-gallery="example-gallery"
-          class="col-sm-4"
-        >
-          <img src="https://unsplash.it/600.jpg?image=256" class="img-fluid" />
-        </a>
-      </div> */}
-{/* 
-<a
-  data-fancybox="gallery"
-  data-src="https://lipsum.app/id/2/1600x1200"
-  data-caption="Optional caption,&lt;br /&gt;that can contain &lt;em&gt;HTML&lt;/em&gt; code"
->
-  <img src="https://lipsum.app/id/2/200x150" width="200" height="150" alt="" />
-</a>
+    <div>
 
-<a data-fancybox="gallery" data-src="https://lipsum.app/id/3/1600x1200">
-  <img src="https://lipsum.app/id/3/200x150" width="200" height="150" alt="" />
-</a>
-
-<a data-fancybox="gallery" data-src="https://lipsum.app/id/4/1600x1200">
-  <img src="https://lipsum.app/id/4/200x150" width="200" height="150" alt="" />
-</a> */}
-
-<FancyboxExample
+{props.user !== 1 && (
+<div className={styles.homePageGalleryContainer}>
+  <FancyboxExample
   options={{
     Carousel: {
       infinite: false,
     },
   }}
 >
-  <a data-fancybox="gallery" href="https://lipsum.app/id/60/1600x1200">
-    <img src="https://lipsum.app/id/60/200x150" width="200" height="150" />
+  {/* <a data-fancybox="gallery" href="https://lipsum.app/id/60/1600x1200">
+    <img
+      src="https://lipsum.app/id/60/200x150"
+      width="200"
+      height="150"
+    />
   </a>
   <a data-fancybox="gallery" href="https://lipsum.app/id/61/1600x1200">
-    <img src="https://lipsum.app/id/61/200x150" width="200" height="150" />
+    <img
+      src="https://lipsum.app/id/61/200x150"
+      width="200"
+      height="150"
+    />
   </a>
   <a data-fancybox="gallery" href="https://lipsum.app/id/62/1600x1200">
-    <img src="https://lipsum.app/id/62/200x150" width="200" height="150" />
+    <img
+      src="https://lipsum.app/id/62/200x150"
+      width="200"
+      height="150"
+    />
   </a>
   <a data-fancybox="gallery" href="https://lipsum.app/id/63/1600x1200">
-    <img src="https://lipsum.app/id/63/200x150" width="200" height="150" />
+    <img
+      src="https://lipsum.app/id/63/200x150"
+      width="200"
+      height="150"
+    />
   </a>
   <a data-fancybox="gallery" href="https://lipsum.app/id/64/1600x1200">
-    <img src="https://lipsum.app/id/64/200x150" width="200" height="150" />
-  </a>
+    <img
+      src="https://lipsum.app/id/64/200x150"
+      width="200"
+      height="150"
+    />
+  </a> */}
+  {mappedPhotos}
 </FancyboxExample>
+</div>
+)}
 
+{props.user === 1 && (
 
+  <div className={styles.homePageGalleryContainer}>
+
+  <div>
+    <FileUpload 
+    plotID={45} 
+    gardenID={1}
+    setProfileInfo={props.setProfileInfo}
+    setPhotos={props.setPhotos}
+    />
+  <FancyboxExample
+  className={styles.galleryFancyBox}
+  options={{
+    Carousel: {
+      infinite: false,
+    },
+  }}
+>
+  
+  {/* <a data-fancybox="gallery" href="https://lipsum.app/id/60/1600x1200">
+    <img
+      src="https://lipsum.app/id/60/200x150"
+      width="200"
+      height="150"
+    />
+  </a>
+  <a data-fancybox="gallery" href="https://lipsum.app/id/61/1600x1200">
+    <img
+      src="https://lipsum.app/id/61/200x150"
+      width="200"
+      height="150"
+    />
+  </a>
+  <a data-fancybox="gallery" href="https://lipsum.app/id/62/1600x1200">
+    <img
+      src="https://lipsum.app/id/62/200x150"
+      width="200"
+      height="150"
+    />
+  </a>
+  <a data-fancybox="gallery" href="https://lipsum.app/id/63/1600x1200">
+    <img
+      src="https://lipsum.app/id/63/200x150"
+      width="200"
+      height="150"
+    />
+  </a>
+  <a data-fancybox="gallery" href="https://lipsum.app/id/64/1600x1200">
+    <img
+      src="https://lipsum.app/id/64/200x150"
+      width="200"
+      height="150"
+    />
+  </a> */}
+  {mappedPhotos}
+</FancyboxExample>
+</div>
+</div>
+)}
+      
     </div>
   );
 }

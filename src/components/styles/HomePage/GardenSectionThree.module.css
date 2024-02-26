@@ -4,6 +4,11 @@
   padding-top: 30px;
   justify-content: center;
   column-gap: 20px;
+  width: 50%;
+  /* margin-left: -100px;
+   */
+   padding-right: 60px;
+   margin-right: 340px;
 }
 
 .sec3Column {

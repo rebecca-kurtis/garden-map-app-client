@@ -6,7 +6,7 @@ export default function Header(props) {
 
   const updateUserStorage = props.updateUserStorage;
 
-  console.log(updateUserStorage);
+  // console.log(updateUserStorage);
   const clearUserStorage = props.clearUserStorage;
   const user = props.user;
 

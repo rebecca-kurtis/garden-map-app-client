@@ -36,6 +36,7 @@ export default function HomePageIndex(props) {
 
 
   return (
+    
     <div className={styles.homePageContainer}>
       <div className={styles.mapContainer}>
         <div className={styles.mapContainerRow}>
@@ -44,9 +45,9 @@ export default function HomePageIndex(props) {
           <GardenSectionTwo plantInfo={props.plants} plants={plantedPlantsArray}/>
         </div>
         <PathHorizontal />
-        <div className={styles.mapContainerRow}>
+        <div className={styles.mapContainerRowBottom}>
           <div className={styles.spaceBlocker} />
-          <HomePageGallery />
+          <HomePageGallery user={props.user} photos={props.photos} setProfileInfo={props.setProfileInfo} setPhotos={props.setPhotos}/>
           <BottomPathVertical />
           <GardenSectionThree plantInfo={props.plants} plants={plantedPlantsArray}/>
         </div>

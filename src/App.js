@@ -1,10 +1,6 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,64 +15,37 @@ import getAllPlants from "./helpers/getAllPlants";
 import getAllPlantedPlants from "./helpers/getAllPlantedPlants";
 import Login from "./components/_partials/_Login";
 
-
 import useLocalStorage from "./hooks/useLocalStorage";
 
-
-
 function App() {
- 
   const [userID, setUserID] = useState(null);
   let [plantedPlants, setPlantedPlants] = useState([]);
-  let [plants, setPlants] = useState([])
+  let [plants, setPlants] = useState([]);
   const [ownsPlot, setOwnsPlot] = useState(null);
+  const [photos, setPhotos] = useState(null);
+  const [profileInfo, setProfileInfo] = useState([]);
 
-  // const usersRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/users";
-
-  // const getAllUsers = async () => {
-  //   const { data } = await axios.get(usersRoute);
-  //   // setData(data);
-  //   console.log('data', data);
-  //       setUsers(data);
-  //       // return usersList;
-
-  // };
   useEffect(() => {
-    // getAllUsers()
-    // .then((data) => {
-    //   setUsers(data);
-    //   // console.log('data from inside', data)
-    //   // console.log('users from inside', users)
-    // });
-
-    getAllPlantedPlants()
-    .then((data) => {
+    getAllPlantedPlants().then((data) => {
       setPlantedPlants(data);
-      // console.log('data from inside', data)
-      // console.log('users from inside', users)
     });
 
-    getAllPlants()
-    .then((data) => {
+    getAllPlants().then((data) => {
       setPlants(data);
-      // console.log('data from inside', data)
-      // console.log('users from inside', users)
     });
-
   }, []);
 
- // Set current user state
- const [user, setUser] = useLocalStorage("user", null);
+  // Set current user state
+  const [user, setUser] = useLocalStorage("user", null);
 
- function updateUserStorage(currentUserID) {
-  setUser(currentUserID);
-  localStorage.clear();
-  localStorage.setItem("userID", JSON.stringify(currentUserID));
-  console.log("userID in function", userID);
-}
+  function updateUserStorage(currentUserID) {
+    setUser(currentUserID);
+    localStorage.clear();
+    localStorage.setItem("userID", JSON.stringify(currentUserID));
+    console.log("userID in function", userID);
+  }
 
-console.log(updateUserStorage);
-
+  console.log(updateUserStorage);
 
   // Remove current user state
   function clearUserStorage() {
@@ -84,22 +53,49 @@ console.log(updateUserStorage);
     setUser(null);
   }
 
-
   return (
     <div className="App">
       <BrowserRouter>
-        <Header user={user} updateUserStorage={updateUserStorage} clearUserStorage={clearUserStorage} setOwnsPlot={setOwnsPlot}/>
+        <Header
+          user={user}
+          updateUserStorage={updateUserStorage}
+          clearUserStorage={clearUserStorage}
+          setOwnsPlot={setOwnsPlot}
+        />
         <Routes>
-          <Route path="/" element={<HomePageIndex plants={plants} plantedPlants={plantedPlants}/>} />
-          <Route path="/plots/:id" element={<ProfilePageIndex plants={plants} plantedPlants={plantedPlants} user={user} ownsPlot={ownsPlot} setOwnsPlot={setOwnsPlot}/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route
+            path="/"
+            element={
+              <HomePageIndex 
+              plants={plants} 
+              plantedPlants={plantedPlants}
+              photos={photos}
+              user={user}
+              setPhotos={setPhotos} />
+            }
+          />
+          <Route
+            path="/plots/:id"
+            element={
+              <ProfilePageIndex
+                plants={plants}
+                plantedPlants={plantedPlants}
+                user={user}
+                ownsPlot={ownsPlot}
+                setOwnsPlot={setOwnsPlot}
+                photos={photos}
+                setPhotos={setPhotos}
+                profileInfo={profileInfo}
+                setProfileInfo={setProfileInfo}
+              />
+            }
+          />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-      {/* <RouterProvider router={router} /> */}
     </div>
   );
 }
-
 
 export default App;
