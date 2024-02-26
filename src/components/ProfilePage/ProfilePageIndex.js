@@ -16,6 +16,7 @@ import EditTipsSection from "./EditingComponents/EditTipsSection";
 import EditPlantsGrowing from "./EditingComponents/EditPlantsGrowing";
 import checkIfUserOwnsPlot from "../../helpers/checkIfUserOwnsPlot";
 import FancyboxExample from "../HomePage/FancyBox";
+import EditPhotos from "./EditingComponents/EditPhotos";
 
 export default function ProfilePageIndex(props) {
   console.log("local storage:", localStorage);
@@ -43,7 +44,7 @@ export default function ProfilePageIndex(props) {
     getPlotProfileInfo(plot_id).then((data) => {
       console.log("data inside func", data);
       props.setProfileInfo(data[0].profileInfo);
-      props.setPhotos(data[1].photosInfo)
+      props.setPhotos(data[1].photosInfo);
       setLoading(false);
     });
   }, []);
@@ -51,21 +52,20 @@ export default function ProfilePageIndex(props) {
   // console.log("ownsPlot", props.ownsPlot);
   // console.log('photos', photos);
 
-
   const mappedPhotos = [];
 
   for (const keyID in props.photos) {
     mappedPhotos.push(
       <a
-                data-fancybox="gallery"
-                href={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
-              >
-                <img
-                  src={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
-                  width="200"
-                  height="150"
-                />
-              </a>
+        data-fancybox="gallery"
+        href={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+      >
+        <img
+          src={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+          width="200"
+          height="150"
+        />
+      </a>
     );
   }
 
@@ -74,19 +74,18 @@ export default function ProfilePageIndex(props) {
   for (const keyID in props.photos) {
     editMappedPhotos.push(
       <a
-                data-fancybox="gallery"
-                href={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
-                style="margin-left: 20px;"
-              >
-                <img
-                  src={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
-                  width="200"
-                  height="150"
-                />
-              </a>
+        data-fancybox="gallery"
+        href={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+        style="margin-left: 20px;"
+      >
+        <img
+          src={`http://localhost:8000/photos/${props.photos[keyID].image_key}`}
+          width="200"
+          height="150"
+        />
+      </a>
     );
   }
-
 
   if (isLoading) {
     return (
@@ -102,6 +101,7 @@ export default function ProfilePageIndex(props) {
         {props.ownsPlot === false && (
           <div className={styles.profilePageContainer}>
             <HeroHeader profileInfo={props.profileInfo} />
+            <div className={styles.topSpacer} />
             <div className={styles.aboutSectionIndexContainer}>
               <PlantsGrowing
                 plotID={plot_id}
@@ -121,6 +121,7 @@ export default function ProfilePageIndex(props) {
             >
               {mappedPhotos}
             </FancyboxExample>
+            <div className={styles.bottomSpacer} />
             <ShareSection />
             <a href="/">
               <button className={styles.homeButton}>Back to the Garden</button>
@@ -131,6 +132,7 @@ export default function ProfilePageIndex(props) {
         {props.ownsPlot === true && (
           <div className={styles.profilePageContainer}>
             <EditHeroHeader profileInfo={props.profileInfo} />
+            <div className={styles.topSpacer} />
             <div className={styles.aboutSectionIndexContainer}>
               <EditPlantsGrowing
                 plotID={plot_id}
@@ -145,12 +147,17 @@ export default function ProfilePageIndex(props) {
               userID={localStorage.user}
             />
             <ShareSection />
-            <FileUpload 
-            plotID={plot_id} 
-            gardenID={1}
-            setProfileInfo={props.setProfileInfo}
-            setPhotos={props.setPhotos}
-            setLoading={setLoading}/>
+            <FileUpload
+              plotID={plot_id}
+              gardenID={1}
+              setProfileInfo={props.setProfileInfo}
+              setPhotos={props.setPhotos}
+              setLoading={setLoading}
+            />
+
+            <EditPhotos />
+
+            <div className={styles.bottomSpacer} />
 
             <FancyboxExample
               options={{
@@ -161,6 +168,7 @@ export default function ProfilePageIndex(props) {
             >
               {mappedPhotos}
             </FancyboxExample>
+            <div className={styles.bottomSpacer} />
             <a href="/">
               <button className={styles.homeButton}>Back to the Garden</button>
             </a>

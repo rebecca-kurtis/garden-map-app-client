@@ -3,13 +3,23 @@
   flex-direction: column;  
   /* justify-content: center; */
   align-items: center;
+  /* padding-bottom: 15px; */
   /* background-color: black; */
+}
+
+.topSpacer {
+  height: 15px;
 }
 
 .aboutSectionIndexContainer {
   display: flex;
   flex-direction: row;
-  /* background-color: aliceblue; */
+  background-color: #57cc99;
+  padding: 20px;
+  padding-right: 30px;
+  /* color: #000; */
+  /* background-color: #c7f9cc; */
+
   /* width: 70%; */
   /* justify-content: space-evenly; */
   /* align-items: top; */
@@ -22,6 +32,9 @@
   top: 50%;
   left:50%;
   transform: translate(-50%,50%);
+}
+.bottomSpacer{
+  height: 25px;
 }
 
 .homeButton {

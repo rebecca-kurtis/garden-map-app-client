@@ -45,7 +45,7 @@ export default function PlantsGrowing(props) {
 
   return (
     <div className={styles.plantsGrowingContainer}>
-      <h2>Plants Growing:</h2>
+      <h2 className={styles.planth2}>Plants Growing:</h2>
       <ul>{mappedIcons}</ul>
     </div>
   );
