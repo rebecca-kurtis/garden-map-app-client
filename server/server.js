@@ -1,13 +1,6 @@
 const express = require("express");
-const multer = require("multer");
 const cors = require("cors");
-const path = require("path");
 
-const multerS3 = require("multer-s3-v2")
-const {s3, getImageStream, deleteImage} = require("./s3.js")
-
-const { Readable } = require('stream');   
-const { ReadableStream } = require("web-streams-polyfill");
 
 // load .env data into process.env
 require("dotenv").config();
@@ -21,39 +14,6 @@ dotenv.config();
 
 app.use(cors());
 app.use(express.json());
-
-
-const storage = multerS3({
-  s3: s3,
-  bucket: process.env.AWS_BUCKET_NAME,
-  metadata: function(req, file, cb) {
-    cb(null, { originalname: file.originalname });
-  },
-  key: function(req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, uniqueSuffix + path.extname(file.originalname))
-  }
-})
-
-function checkFileType(file, cb){
-  const filetypes = /jpeg|png|jpg/
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
-
-  if(mimetype && extname){
-    return cb(null,true)
-  } else {
-    cb("Please upload images only")
-  }
-}
-
-const upload = multer({ 
-  storage: storage,
-  // limits: { fileSize: 1000000 },
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
-  }
-}).any()
 
 
 // Get all users
@@ -195,125 +155,6 @@ app.get("/plots", (req, res) => {
     }
     res.status(200).send(results.rows);
   });
-});
-
-// // Get all photos
-// app.get("/photos/:id", (req, res) => {
-//   let images = [];
-//   const plotId = req.params.id;
-//   console.log("id for photo", plotId);
-//   db.query("SELECT * FROM photos WHERE plot_id = $1;",[plotId], (error, results) => {
-//     if (error) {
-//       throw error;
-//     }
-//     console.log('Results:', results)
-//     res.status(200).send(results.rows);
-//   });
-// });
-
-app.get("/photos/:image_key", (req, res) => {
-  const readStream = getImageStream(req.params.image_key)
-
-  // console.log('readStream', readStream);
-  // console.log('res', res);
-  
-  // const readableStream = readStream.Body.transformToWebStream()
-  // readableStream.pipeTo()
-  // readStream.pipe(res)
-})
-
-// Upload photos
-
-function saveImagesInDB(images, plot_id){
-
-  const savedPhotos = [];
-  for(let i = 0;i < images.length;i++){
-
-    db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", 
-    [plot_id,images[i].key, 1])
-  }
-    newTips = db.query(
-      "SELECT * FROM photos WHERE plot_id = $1;",[plot_id],
-    );
-    return newTips;
-  
-}
-
-app.post("/uploadPhoto/:plotID", (req, res) => {
-  const plotId = req.params.plotID;
-
-  upload(req, res, (err) => {
-    if(!err && req.files != "") { 
-      saveImagesInDB(req.files, plotId)
-      .then((response) => {
-        // console.log("saved resp", response)
-        res.status(200).send(response.rows);
-      })
-      .catch((error) => {
-        if (error) {
-          throw error;
-        }
-      });
-    } else if (!err && req.files == ""){
-      res.statusMessage = "Please select an image to upload";
-      res.status(400).end()
-    } else { 
-      res.statusMessage = (err === "Please upload images only" ? err : "Photo exceeds limit of 1MB") ;
-      res.status(400).end()
-    }
-  })  
-})
-
-
-// Delete photos
-function deleteImagesFromS3(key){
-
-  deleteImage(key)
-
-
-  // for(let i = 0; i < images.length;i++){
-  //   deleteImage(images)
-  // }
-}
-
-function deleteImagesFromDb(key, plot_id){
-
-  db.query("DELETE FROM photos WHERE plot_id = $1 AND image_key = $2", [plot_id, key], (err, result) => {
-    if(err) throw new Error(err)
-  })
-
-
-  // console.log("in db func", images)
-  // for(let i = 0; i < images.length;i++){
-  //   // console.log('images[', images)
-  //   db.query("DELETE FROM photos WHERE plot_id = $1 AND image_key = $2", [plot_id, images], (err, result) => {
-  //     if(err) throw new Error(err)
-  //   })
-  // }
-}
-
-app.post("/deletePhoto/:plotID", (req, res) => {
-  let images = [];
-  // db.query("SELECT * FROM photos", (error, results) => {
-  //   if (error) {
-  //     throw error;
-  //   }
-  //   // console.log('Results:', results)
-  //   res.status(200).send(results.rows);
-  // });
-  const plotId = req.params.plotID;
-  const deleteImages = req.body.deleteImages
-  console.log("dlete", deleteImages);
-
-  if(deleteImages == ""){
-    res.statusMessage = "Please select an image to delete";
-    res.status(400).end()
-  } else {
-    deleteImagesFromS3(deleteImages)
-    deleteImagesFromDb(deleteImages, plotId)
-    res.statusMessage = "Succesfully deleted";
-    res.status(200).end()
-  }
 });
 
 // Get all plantedPlants
