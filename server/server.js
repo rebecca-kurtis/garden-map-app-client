@@ -1,4 +1,3 @@
-const pg = require("pg");
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
@@ -14,8 +13,7 @@ const { ReadableStream } = require("web-streams-polyfill");
 require("dotenv").config();
 const dotenv = require("dotenv");
 const db = require("../db/connection");
-//or native libpq bindings
-//var pg = require('pg').native
+
 
 const app = express();
 
@@ -57,38 +55,6 @@ const upload = multer({
   }
 }).any()
 
-//example code
-// var conString = "INSERT_YOUR_POSTGRES_URL_HERE" //Can be found in the Details page
-// let client = new pg.Client(process.env.POSTGRES_URL);
-
-// client.connect(function(err) {
-//   if(err) {
-//     return console.error('could not connect to postgres', err);
-//   }
-//   client.query('SELECT NOW() AS "theTime"', function(err, result) {
-//     if(err) {
-//       return console.error('error running query', err);
-//     }
-//     console.log(result.rows[0].theTime);
-//     // >> output: 2018-08-23T14:02:57.117Z
-//     client.end();
-//   });
-// });
-
-// use example that works
-// client.connect(function(err) {
-//   if(err) {
-//     return console.error('could not connect to postgres', err);
-//   }
-//   client.query('SELECT * FROM users;', function(err, result) {
-//     if(err) {
-//       return console.error('error running query', err);
-//     }
-//     console.log(result.rows);
-//     // >> output: 2018-08-23T14:02:57.117Z
-//     client.end();
-//   });
-// });
 
 // Get all users
 app.get("/users", (req, res) => {
@@ -96,7 +62,6 @@ app.get("/users", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -106,8 +71,6 @@ app.get("/users", (req, res) => {
 app.get("/checkUserRoute", (req, res) => {
   const plotID = req.query.plotID;
   const userID = req.query.userID;
-  console.log("req body", req.body);
-  console.log("req query", req.query);
 
   db.query(
     `
@@ -125,7 +88,6 @@ app.get("/checkUserRoute", (req, res) => {
       if (error) {
         throw error;
       }
-      // console.log("Results from checking:", results);
       res.status(200).send(results.rows);
     }
   );
@@ -133,13 +95,8 @@ app.get("/checkUserRoute", (req, res) => {
 
 // Login route
 app.post("/login", (req, res) => {
-  console.log("req.body", req.body);
-
   const username = req.body.username;
   const password = req.body.password;
-  console.log("password", password)
-
-  const returnObj = {};
 
   db.query(
     `SELECT user_id
@@ -152,47 +109,12 @@ app.post("/login", (req, res) => {
     .then((result) => {
 
       res.status(200).send(result.rows);
-    // })
-  // .then((result) => {
-  //   const plotID = result.rows[0].plot_id;
-  //   returnObj = {"plot_id": plotID};
-  //   console.log('return obj', returnObj)
-  //     res.status(200).send(returnObj);
 }).catch((error) => {
   if (error) {
     throw error;
   }
 });
 
-//   db.query(
-//     `SELECT user_id
-//     FROM users
-//     WHERE users.username = $1 
-//     AND users.password = $2
-//     GROUP BY user_id
-//     ;`,
-//     [username, password])
-//     .then((result) => {
-//       const userID = result.rows[0].user_id;
-//       returnObj = {"user_id": userID};
-//       plotID = db.query(
-//         `SELECT plot_id
-//         FROM plots
-//         WHERE user_id = $1 
-//         ;`,
-//         [userID]
-//     )
-//     return plotID })
-//   .then((result) => {
-//     const plotID = result.rows[0].plot_id;
-//     returnObj = {"plot_id": plotID};
-//     console.log('return obj', returnObj)
-//       res.status(200).send(returnObj);
-// }).catch((error) => {
-//   if (error) {
-//     throw error;
-//   }
-// });
   
 });
 
@@ -202,7 +124,6 @@ app.get("/tips", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -232,13 +153,10 @@ app.get("/plots/:id", (req, res) => {
     [plotId]
   ).then((response) => {
     responseArr.push({profileInfo: response.rows})
-    // console.log("profile", response) \
     const photosResponse =  db.query("SELECT * FROM photos WHERE plot_id = $1;",[plotId])
       return photosResponse;
     }).then((response) => {
-    // console.log("test resp", response);
         responseArr.push({photosInfo: response.rows})
-        // console.log("response obj", responseArr);
         res.status(200).send(responseArr);
       })
       .catch((error) => {
@@ -255,7 +173,6 @@ app.get("/plants", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -266,7 +183,6 @@ app.get("/gardens", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -277,7 +193,6 @@ app.get("/plots", (req, res) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -310,12 +225,9 @@ app.get("/photos/:image_key", (req, res) => {
 // Upload photos
 
 function saveImagesInDB(images, plot_id){
-  // console.log('images', images);
-  // console.log('images2', images[i].key);
 
   const savedPhotos = [];
   for(let i = 0;i < images.length;i++){
-  // console.log('images2', images[i].key);
 
     db.query("INSERT INTO photos (plot_id, image_key, garden_id) VALUES($1, $2, $3)", 
     [plot_id,images[i].key, 1])
@@ -328,10 +240,7 @@ function saveImagesInDB(images, plot_id){
 }
 
 app.post("/uploadPhoto/:plotID", (req, res) => {
-  // console.log(req.files);
-  // console.log("req",req.body);
   const plotId = req.params.plotID;
-  // console.log('plotID', plotId);
 
   upload(req, res, (err) => {
     if(!err && req.files != "") { 
@@ -345,7 +254,6 @@ app.post("/uploadPhoto/:plotID", (req, res) => {
           throw error;
         }
       });
-      // res.status(200).send()
     } else if (!err && req.files == ""){
       res.statusMessage = "Please select an image to upload";
       res.status(400).end()
@@ -408,24 +316,12 @@ app.post("/deletePhoto/:plotID", (req, res) => {
   }
 });
 
-// // Get all users
-// app.get("/users", (req, res) => {
-//   db.query("SELECT * FROM users", (error, results) => {
-//     if (error) {
-//       throw error;
-//     }
-//     // console.log('Results:', results)
-//     res.status(200).send(results.rows);
-//   });
-// });
-
 // Get all plantedPlants
 app.get("/plantedPlants", (req, res) => {
   db.query("SELECT * FROM plantedPlants", (error, results) => {
     if (error) {
       throw error;
     }
-    // console.log('Results:', results)
     res.status(200).send(results.rows);
   });
 });
@@ -446,7 +342,6 @@ app.post("/updateAbout", (req, res) => {
       if (error) {
         throw error;
       }
-      // console.log('Results:', results)
       res.status(200).send(results.rows);
     }
   );
@@ -476,7 +371,6 @@ app.post("/updateName", (req, res) => {
 
 //add new tip to database
 app.post("/addTip", (req, res) => {
-  console.log("new tip creation", req.body);
 
   const userID = req.body.userID;
   let tipDescription = req.body.description;
