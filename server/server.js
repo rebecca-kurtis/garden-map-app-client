@@ -7,6 +7,9 @@ const path = require("path");
 const multerS3 = require("multer-s3-v2")
 const {s3, getImageStream, deleteImage} = require("./s3.js")
 
+const { Readable } = require('stream');   
+const { ReadableStream } = require("web-streams-polyfill");
+
 // load .env data into process.env
 require("dotenv").config();
 const dotenv = require("dotenv");
@@ -134,6 +137,7 @@ app.post("/login", (req, res) => {
 
   const username = req.body.username;
   const password = req.body.password;
+  console.log("password", password)
 
   const returnObj = {};
 
@@ -232,12 +236,13 @@ app.get("/plots/:id", (req, res) => {
     const photosResponse =  db.query("SELECT * FROM photos WHERE plot_id = $1;",[plotId])
       return photosResponse;
     }).then((response) => {
-    console.log("test resp", response);
+    // console.log("test resp", response);
         responseArr.push({photosInfo: response.rows})
         // console.log("response obj", responseArr);
         res.status(200).send(responseArr);
       })
       .catch((error) => {
+        console.log('error:', error)
         if (error) {
           throw error;
         }
@@ -293,7 +298,13 @@ app.get("/plots", (req, res) => {
 
 app.get("/photos/:image_key", (req, res) => {
   const readStream = getImageStream(req.params.image_key)
-  readStream.pipe(res)
+
+  // console.log('readStream', readStream);
+  // console.log('res', res);
+  
+  // const readableStream = readStream.Body.transformToWebStream()
+  // readableStream.pipeTo()
+  // readStream.pipe(res)
 })
 
 // Upload photos
@@ -317,16 +328,16 @@ function saveImagesInDB(images, plot_id){
 }
 
 app.post("/uploadPhoto/:plotID", (req, res) => {
-  console.log(req.files);
-  console.log("req",req.body);
+  // console.log(req.files);
+  // console.log("req",req.body);
   const plotId = req.params.plotID;
-  console.log('plotID', plotId);
+  // console.log('plotID', plotId);
 
   upload(req, res, (err) => {
     if(!err && req.files != "") { 
       saveImagesInDB(req.files, plotId)
       .then((response) => {
-        console.log("saved resp", response)
+        // console.log("saved resp", response)
         res.status(200).send(response.rows);
       })
       .catch((error) => {
@@ -347,21 +358,33 @@ app.post("/uploadPhoto/:plotID", (req, res) => {
 
 
 // Delete photos
-function deleteImagesFromS3(images){
-  for(let i = 0; i < images.length;i++){
-    deleteImage(images[i])
-  }
+function deleteImagesFromS3(key){
+
+  deleteImage(key)
+
+
+  // for(let i = 0; i < images.length;i++){
+  //   deleteImage(images)
+  // }
 }
 
-function deleteImagesFromDb(images){
-  for(let i = 0; i < images.length;i++){
-    db.query("DELETE FROM images WHERE user_id = ? AND image_key = ?", [1, images[i]], (err, result) => {
-      if(err) throw new Error(err)
-    })
-  }
+function deleteImagesFromDb(key, plot_id){
+
+  db.query("DELETE FROM photos WHERE plot_id = $1 AND image_key = $2", [plot_id, key], (err, result) => {
+    if(err) throw new Error(err)
+  })
+
+
+  // console.log("in db func", images)
+  // for(let i = 0; i < images.length;i++){
+  //   // console.log('images[', images)
+  //   db.query("DELETE FROM photos WHERE plot_id = $1 AND image_key = $2", [plot_id, images], (err, result) => {
+  //     if(err) throw new Error(err)
+  //   })
+  // }
 }
 
-app.get("/deletePhoto", (req, res) => {
+app.post("/deletePhoto/:plotID", (req, res) => {
   let images = [];
   // db.query("SELECT * FROM photos", (error, results) => {
   //   if (error) {
@@ -370,15 +393,16 @@ app.get("/deletePhoto", (req, res) => {
   //   // console.log('Results:', results)
   //   res.status(200).send(results.rows);
   // });
-
+  const plotId = req.params.plotID;
   const deleteImages = req.body.deleteImages
+  console.log("dlete", deleteImages);
 
   if(deleteImages == ""){
     res.statusMessage = "Please select an image to delete";
     res.status(400).end()
   } else {
     deleteImagesFromS3(deleteImages)
-    deleteImagesFromDb(deleteImages)
+    deleteImagesFromDb(deleteImages, plotId)
     res.statusMessage = "Succesfully deleted";
     res.status(200).end()
   }

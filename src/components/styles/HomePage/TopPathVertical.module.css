@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 .topPathVertical {

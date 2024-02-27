@@ -1,13 +1,14 @@
 import { useState } from "react";
+import bcrypt from "bcryptjs-react";
 import { useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import axios from "axios";
 import styles from "../styles/Header.module.css";
+// import bcrypt from "bcrypt";
 import checkIfUserOwnsPlot from "../../helpers/checkIfUserOwnsPlot";
 
 function Login(props) {
-
   const updateUserStorage = props.updateUserStorage;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -33,6 +34,47 @@ function Login(props) {
     e.preventDefault();
     setForm(form);
     console.log("form", form);
+
+    //hash the password
+
+    // bcrypt
+    //   .genSalt(10)
+    //   .then((salt) => {
+    //     console.log("Salt: ", salt);
+    //     return bcrypt.hash(form.password, salt);
+    //   })
+    //   .then((hash) => {
+    //     console.log("Hash: ", hash);
+    //     const submitObj = {
+    //       username: form.username,
+    //       password: hash
+    //     }
+    //     // setForm({ password: hash });
+    //     console.log("in hash", submitObj);
+    //     return submitObj;
+    //   })
+    //   .then((obj) => {
+    //     axios
+    //       .post(usersRoute, obj)
+    //       .then((response) => {
+    //         // console.log("login response", response);
+
+    //         updateUserStorage(response.data[0].user_id);
+    //         // console.log("local storage:", localStorage)
+
+    //         return response.data;
+    //       })
+    //       .catch((error) => {
+    //         if (error.response) {
+    //           alert(`Error! ${error.message}`);
+    //         } else if (error.request) {
+    //           console.log("network error");
+    //         } else {
+    //           console.log(error);
+    //         }
+    //       });
+    //   })
+    //   .catch((err) => console.error(err.message));
 
     axios
       .post(usersRoute, form)
@@ -61,7 +103,12 @@ function Login(props) {
         Login
       </Button>
 
-      <Offcanvas className={styles.offCanvasContainer} show={show} onHide={handleClose} placement="end">
+      <Offcanvas
+        className={styles.offCanvasContainer}
+        show={show}
+        onHide={handleClose}
+        placement="end"
+      >
         <Offcanvas.Header className={styles.closeButton} closeButton>
           {/* <Offcanvas.Title></Offcanvas.Title> */}
         </Offcanvas.Header>
@@ -89,7 +136,21 @@ function Login(props) {
                 name="password"
                 value={form.password}
                 placeholder="Enter your password"
-                onChange={(e) => setValue("password", e.target.value)}
+                onChange={(e) => {
+                  // bcrypt
+                  //   .genSalt(10)
+                  //   .then((salt) => {
+                  //     console.log("Salt: ", salt);
+                  //     return bcrypt.hash(e.target.value, salt);
+                  //   })
+                  //   .then((hash) => {
+                  //     console.log("Hash: ", hash);
+                  //     setValue("password", hash);
+                  //     console.log("in hash", form);
+                  //   })
+                  //   .catch((err) => console.error(err.message));
+                  setValue("password", e.target.value);
+                }}
                 required
               ></input>
 

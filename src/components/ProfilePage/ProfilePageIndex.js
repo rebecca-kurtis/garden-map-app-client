@@ -112,7 +112,7 @@ export default function ProfilePageIndex(props) {
             </div>
             <TipsSection profileInfo={props.profileInfo} />
 
-            <FancyboxExample
+            {/* <FancyboxExample
               options={{
                 Carousel: {
                   infinite: false,
@@ -120,7 +120,7 @@ export default function ProfilePageIndex(props) {
               }}
             >
               {mappedPhotos}
-            </FancyboxExample>
+            </FancyboxExample> */}
             <div className={styles.bottomSpacer} />
             <ShareSection />
             <a href="/">
@@ -147,7 +147,7 @@ export default function ProfilePageIndex(props) {
               userID={localStorage.user}
             />
             <ShareSection />
-            <FileUpload
+            {/* <FileUpload
               plotID={plot_id}
               gardenID={1}
               setProfileInfo={props.setProfileInfo}
@@ -155,7 +155,10 @@ export default function ProfilePageIndex(props) {
               setLoading={setLoading}
             />
 
-            <EditPhotos />
+            <EditPhotos 
+            photos={props.photos}
+            plotID={plot_id}
+            />
 
             <div className={styles.bottomSpacer} />
 
@@ -167,7 +170,7 @@ export default function ProfilePageIndex(props) {
               }}
             >
               {mappedPhotos}
-            </FancyboxExample>
+            </FancyboxExample> */}
             <div className={styles.bottomSpacer} />
             <a href="/">
               <button className={styles.homeButton}>Back to the Garden</button>

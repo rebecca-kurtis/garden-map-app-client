@@ -12,28 +12,7 @@ import HomePageGallery from "./HomePageGallery";
 
 export default function HomePageIndex(props) {
 
-  // console.log('props', props)
   const plantedPlantsArray = props.plantedPlants;
-  // console.log('planttest', plantedPlantsArray)
-  const gardenSectionOneInfo = [];
-  const gardenSectionThreeInfo = [];
-
-  // for (let plantObject in plantedPlantsArray) {
-  //     // console.log('plantedPlantsArray object', plantedPlantsArray[plantObject].plot_id)
-  //     if (plantedPlantsArray[plantObject].plot_id >= 10 && plantedPlantsArray[plantObject].plot_id <= 44) {
-  //       // console.log('num3', plantedPlantsArray[plantObject].plot_id)
-  //       gardenSectionOneInfo.push(plantedPlantsArray[plantObject]);
-        
-  //     }
-  //     if (plantedPlantsArray[plantObject].plot_id >= 11 && plantedPlantsArray[plantObject].plot_id <= 44) {
-  //       // console.log('num3', plantedPlantsArray[plantObject].plot_id)
-  //       gardenSectionOneInfo.push(plantedPlantsArray[plantObject]);
-        
-  //     }
-  //     // console.log(gardenSectionOneInfo);
-  // }
-  // // console.log(gardenSectionOneInfo);
-
 
   return (
     
@@ -47,7 +26,7 @@ export default function HomePageIndex(props) {
         <PathHorizontal />
         <div className={styles.mapContainerRowBottom}>
           <div className={styles.spaceBlocker} />
-          <HomePageGallery user={props.user} photos={props.photos} setProfileInfo={props.setProfileInfo} setPhotos={props.setPhotos}/>
+          {/* <HomePageGallery user={props.user} photos={props.photos} setProfileInfo={props.setProfileInfo} setPhotos={props.setPhotos}/> */}
           <BottomPathVertical />
           <GardenSectionThree plantInfo={props.plants} plants={plantedPlantsArray}/>
         </div>
