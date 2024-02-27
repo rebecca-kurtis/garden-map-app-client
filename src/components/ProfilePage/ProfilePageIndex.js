@@ -9,7 +9,7 @@ import AboutSection from "./AboutSection";
 import TipsSection from "./TipsSection";
 import ShareSection from "./ShareSection";
 import getPlotProfileInfo from "../../helpers/getPlotProfileInfo";
-import FileUpload from "../_partials/_FileUpload";
+// import FileUpload from "../_partials/_FileUpload";
 import EditHeroHeader from "../ProfilePage/EditingComponents/EditHeroHeader";
 import EditAboutSection from "./EditingComponents/EditAboutSection";
 import EditTipsSection from "./EditingComponents/EditTipsSection";
