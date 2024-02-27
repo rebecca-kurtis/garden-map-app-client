@@ -17,10 +17,16 @@ export default function EditHeroHeader(props) {
   const setValue = (key, value) => {
     setForm({ ...form, [key]: value });
   };
-  const nameEditRoute =
+  // const nameEditRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   "/updateName";
+
+    const nameEditRoute =
     process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
+    // ":" +
+    // process.env.REACT_APP_SERVER_PORT +
     "/updateName";
 
   const handleUserSubmit = (e) => {

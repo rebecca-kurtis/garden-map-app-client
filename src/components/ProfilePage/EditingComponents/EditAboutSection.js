@@ -16,7 +16,8 @@ export default function EditAboutSection(props) {
   const setValue = (key, value) => {
     setForm({...form, [key]: value})
   }
-  const aboutEditRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/updateAbout"
+  // const aboutEditRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/updateAbout"
+  const aboutEditRoute =  process.env.REACT_APP_SERVER + "/updateAbout"
 
   const handleUserSubmit = (e) => {
     e.preventDefault();

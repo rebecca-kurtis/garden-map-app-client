@@ -24,11 +24,13 @@ function Login(props) {
     setForm({ ...form, [key]: value });
   };
 
-  const usersRoute =
-    process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
-    "/login";
+  // const usersRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   "/login";
+
+    const usersRoute = process.env.REACT_APP_SERVER + "/login";
 
   const handleUserSubmit = (e) => {
     e.preventDefault();

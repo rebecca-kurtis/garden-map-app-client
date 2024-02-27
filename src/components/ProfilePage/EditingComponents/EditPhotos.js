@@ -27,10 +27,16 @@ function MyVerticallyCenteredModal(props) {
     );
   }
 
-  const deletePhotoRoute =
-    process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
+  // const deletePhotoRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   `/deletePhoto/${props.plotID}`;
+
+    const deletePhotoRoute =
+    // process.env.REACT_APP_SERVER +
+    // ":" +
+    // process.env.REACT_APP_SERVER_PORT +
     `/deletePhoto/${props.plotID}`;
 
 

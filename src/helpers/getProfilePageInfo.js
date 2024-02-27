@@ -21,7 +21,7 @@ import getPlotProfileInfo from './getPlotProfileInfo';
 
 
 
-// const plantedPlantsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/plantedPlants";
+// const plantedPlantsRoute = process.env. + ":" + process.env._PORT + "/plantedPlants";
 
 export default async function getProfilePageInfo(id) {
 

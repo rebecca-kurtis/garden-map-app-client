@@ -69,6 +69,6 @@
       "localhost",
       ".localhost"
     ],
-    "proxy": "https://localhost:8000/"
+    "proxy": "https://ccg-interactive-map-1.onrender.com"
   }
 }

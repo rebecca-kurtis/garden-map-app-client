@@ -1,5 +1,6 @@
 import axios from 'axios';
-const plantsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/plants";
+const plantsRoute = process.env.REACT_APP_SERVER  + "/plants";
+// const plantsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/plants";
 
 export default async function getAllPlants() {
   const { data } = await axios.get(plantsRoute);

@@ -40,10 +40,16 @@ export default function EditPlantsGrowing(props) {
     setMode(true);
   };
 
-  const plantedPlantDeleteRoute =
+  // const plantedPlantDeleteRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   "/deletePlantedPlant";
+
+    const plantedPlantDeleteRoute =
     process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
+    // ":" +
+    // process.env.REACT_APP_SERVER_PORT +
     "/deletePlantedPlant";
 
   const plantedPlantDeleteHandler = (e, num) => {
@@ -88,10 +94,16 @@ export default function EditPlantsGrowing(props) {
       });
   };
 
-  const addPlantRoute =
+  // const addPlantRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   "/addPlant";
+
+    const addPlantRoute =
     process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
+    // ":" +
+    // process.env.REACT_APP_SERVER_PORT +
     "/addPlant";
 
   const [addNewPlant, setAddNewPlant] = useState({});
@@ -138,10 +150,16 @@ export default function EditPlantsGrowing(props) {
       });
   };
 
-  const createPlantRoute =
+  // const createPlantRoute =
+  //   process.env.REACT_APP_SERVER +
+  //   ":" +
+  //   process.env.REACT_APP_SERVER_PORT +
+  //   "/createPlant";
+
+    const createPlantRoute =
     process.env.REACT_APP_SERVER +
-    ":" +
-    process.env.REACT_APP_SERVER_PORT +
+    // ":" +
+    // process.env.REACT_APP_SERVER_PORT +
     "/createPlant";
 
   const [createNewPlant, setCreateNewPlant] = useState({});
