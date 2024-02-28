@@ -53,10 +53,7 @@ export default function EditTipsSection(props) {
   //   "/updateTips";
 
     const tipsEditRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/updateTips";
+    process.env.REACT_APP_SERVER_URL +   "/updateTips";
 
   const handleUserSubmit = (e) => {
     e.preventDefault();
@@ -94,10 +91,7 @@ export default function EditTipsSection(props) {
   //   "/deleteTip";
 
     const tipsDeleteRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/deleteTip";
+    process.env.REACT_APP_SERVER_URL + "/deleteTip";
 
   const [deleteValue, setDeleteValue] = useState(null);
 
@@ -154,10 +148,7 @@ export default function EditTipsSection(props) {
   //   "/addTip";
 
     const tipCreationRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/addTip";
+    process.env.REACT_APP_SERVER_URL + "/addTip";
 
   const handleTipCreation = (e) => {
     e.preventDefault();

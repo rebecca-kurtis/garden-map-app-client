@@ -24,10 +24,7 @@ export default function EditHeroHeader(props) {
   //   "/updateName";
 
     const nameEditRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/updateName";
+    process.env.REACT_APP_SERVER_URL + "/updateName";
 
   const handleUserSubmit = (e) => {
     e.preventDefault();

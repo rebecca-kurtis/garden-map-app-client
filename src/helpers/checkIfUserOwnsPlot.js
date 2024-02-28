@@ -1,5 +1,5 @@
 import axios from 'axios';
-const checkUserRoute = process.env.REACT_APP_SERVER + "/checkUserRoute";
+const checkUserRoute = process.env.REACT_APP_SERVER_URL + "/checkUserRoute";
 // const checkUserRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/checkUserRoute";
 
 

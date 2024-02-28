@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default async function getPlotProfileInfo(id) {
   // const plantProfileRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/plots/" + id;
-  const plantProfileRoute = process.env.REACT_APP_SERVER + "/plots/" + id;
+  const plantProfileRoute = process.env.REACT_APP_SERVER_URL + "/plots/" + id;
 
   // const tipsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/tips/" + id;
 

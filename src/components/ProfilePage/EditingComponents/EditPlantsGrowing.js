@@ -47,10 +47,7 @@ export default function EditPlantsGrowing(props) {
   //   "/deletePlantedPlant";
 
     const plantedPlantDeleteRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/deletePlantedPlant";
+    process.env.REACT_APP_SERVER_URL + "/deletePlantedPlant";
 
   const plantedPlantDeleteHandler = (e, num) => {
     e.preventDefault();
@@ -101,10 +98,7 @@ export default function EditPlantsGrowing(props) {
   //   "/addPlant";
 
     const addPlantRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/addPlant";
+    process.env.REACT_APP_SERVER_URL + "/addPlant";
 
   const [addNewPlant, setAddNewPlant] = useState({});
 
@@ -157,10 +151,7 @@ export default function EditPlantsGrowing(props) {
   //   "/createPlant";
 
     const createPlantRoute =
-    process.env.REACT_APP_SERVER +
-    // ":" +
-    // process.env.REACT_APP_SERVER_PORT +
-    "/createPlant";
+    process.env.REACT_APP_SERVER_URL + "/createPlant";
 
   const [createNewPlant, setCreateNewPlant] = useState({});
 

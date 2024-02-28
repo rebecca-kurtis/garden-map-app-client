@@ -1,8 +1,0 @@
--- DROP and CREATE plants TABLE
-DROP TABLE IF EXISTS plants CASCADE;
-
-CREATE TABLE plants (
-plant_id SERIAL PRIMARY KEY NOT NULL,
-name VARCHAR(255) NOT NULL,
-photo_url VARCHAR(255) DEFAULT 'genericVeg'
-);  

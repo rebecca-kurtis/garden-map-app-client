@@ -30,7 +30,7 @@ function Login(props) {
   //   process.env.REACT_APP_SERVER_PORT +
   //   "/login";
 
-    const usersRoute = process.env.REACT_APP_SERVER + "/login";
+    const usersRoute = process.env.REACT_APP_SERVER_URL + "/login";
 
   const handleUserSubmit = (e) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import axios from 'axios';
 // const usersRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/users";
-const usersRoute = process.env.REACT_APP_SERVER + "/users";
+const usersRoute = process.env.REACT_APP_SERVER_URL + "/users";
 
 
 export default async function getAllUsers() {

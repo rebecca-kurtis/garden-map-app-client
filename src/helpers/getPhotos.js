@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default async function getPhotos(id) {
   // const photoRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/photos/" + id;
-  const photoRoute = process.env.REACT_APP_SERVER + "/photos/" + id;
+  const photoRoute = process.env.REACT_APP_SERVER_URL + "/photos/" + id;
 
   // const tipsRoute = process.env.REACT_APP_SERVER + ":" + process.env.REACT_APP_SERVER_PORT + "/tips/" + id;
 
