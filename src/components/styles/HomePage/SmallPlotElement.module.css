@@ -46,3 +46,57 @@
  .iconImage {
    height: 20px;
  }
+
+
+ @media screen and (max-width: 674.99px) {
+
+  .smallPlotElementContainer {
+    display: flex;
+    /* padding: 20px; */
+    flex-direction: column;
+  }
+  
+  .smallPlotElement {
+    background-image: url("../../images/dirtSMALL.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 50px;
+    background-position: center;
+    justify-content: center;
+    align-content: center;
+    /* -webkit-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1); */
+  }
+  
+  .iconElement {
+    /* padding-top: 15px; */
+    padding-left: 17px;
+    /* justify-content: center; */
+    /* align-content: center; */
+    width: 40px;
+   }
+  
+   .iconSmallContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+   }
+  
+   .iconElementRow {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0px;
+    padding-left: 10px;
+    /* justify-content: center; */
+    /* align-content: center; */
+    width: 40px;
+   }
+   
+   .iconImage {
+     height: 15px;
+   }
+
+ }

@@ -46,3 +46,20 @@
   height: 500px;
   width: 500px;
 }
+
+
+@media screen and (max-width: 674.99px) { 
+
+  .homePageContainer {
+    display: flex;
+    height: fit-content;
+    /* width: 60%; */
+    /* width: 600px; */
+    /* justify-content: center; */
+    /* justify-items: center; */
+    /* align-content: center; */
+    /* align-items: center; */
+    flex-direction: column;
+  }
+
+}

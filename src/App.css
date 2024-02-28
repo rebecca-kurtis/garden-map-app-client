@@ -3,7 +3,35 @@
   background-color: #38A3A5;
   height: fit-content;
   /* width: fit-content; */
+  /* width: 100%; */
   /* width: 140vw; */
+}
+
+@media screen and (min-width: 675px) and (max-width: 950px) { 
+  .App {
+    text-align: center;
+    background-color: #38A3A5;
+    height: fit-content;
+    /* width: fit-content; */
+    /* width: 100%; */
+    width: 140vw;
+  }
+}
+
+
+@media screen and (max-width: 674.99px) {
+
+.App {
+  text-align: center;
+  background-color: #38A3A5;
+  /* height: fit-content; */
+  height: 1800px;
+
+  /* width: fit-content; */
+  /* width: 140vw; */
+  width: 800px;
+}
+
 }
 
 .App-logo {

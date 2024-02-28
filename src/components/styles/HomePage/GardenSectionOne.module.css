@@ -82,3 +82,19 @@
   row-gap: 15px;
   column-gap: 15px;
 }
+
+
+
+@media screen and (max-width: 674.99px) {
+
+
+  .gardenSectionOneContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    column-gap: 20px;
+    row-gap: 20px;
+    /* justify-content: center; */
+  }
+
+ }

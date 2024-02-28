@@ -26,3 +26,43 @@
  .iconImage {
    height: 20px;
  }
+
+
+ @media screen and (max-width: 674.99px) {
+
+
+  .mediumPlotElementContainer {
+    display: flex;
+    /* padding: 20px; */
+    flex-direction: column;
+  }
+  
+  .mediumPlotElement {
+    background-image: url("../../images/Large_plot_updated.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80px;
+    width: 30px;
+    background-position: center;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .iconElement {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    /* padding-left: 5px; */
+    margin-left: 3px;
+    /* padding: 10px; */
+    /* justify-content: center; */
+    /* align-content: center; */
+    width: 20px;
+    /* height: 80px; */
+   }
+   
+   .iconImage {
+     height: 15px;
+   }
+
+}

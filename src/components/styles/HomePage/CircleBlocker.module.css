@@ -16,3 +16,27 @@
   align-self: center;
 
 }
+
+
+
+@media screen and (max-width: 674.99px) {
+  .circleBlockerContainer {
+    display: flex;
+    /* padding: 20px; */
+    flex-direction: column;
+  }
+  
+  .circleBlocker {
+    display: flex;
+    background-image: url("../../images/Circle_blocker.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px;
+    background-position: center;
+    justify-content: center;
+    align-self: center;
+  
+  }
+
+ }
