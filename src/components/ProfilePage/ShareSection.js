@@ -12,7 +12,7 @@ export default function ShareSection() {
   async function copyPageUrl() {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      console.log('Page URL copied to clipboard');
+      alert('Page URL copied to clipboard');
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
@@ -22,9 +22,9 @@ export default function ShareSection() {
 
     if (navigator.share) {
       navigator.share({
-        title: 'web.dev',
-        text: 'Check out web.dev.',
-        url: 'https://web.dev/',
+        title: 'Creekside Community Garden Plot',
+        text: 'Check out this plot!',
+        url: window.location.href,
       })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error));

@@ -22,3 +22,20 @@
  .footerContainer p {
   font-size: 15px;
  }
+
+
+ @media screen and  (max-width: 1110px) {
+
+  .footerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 15px;
+    height: 160px;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    width: 90%;
+  }
+  }
