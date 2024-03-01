@@ -4,8 +4,8 @@ export default function AboutSection(props) {
   const description = props.profileInfo[0].udescription;
   return (
     <div className={styles.aboutSectionContainer}>
-      <h2>About the Plot:</h2>
-      <p>{description}</p>
+      <h2 className={styles.aboutH2}>About the Plot:</h2>
+      <p className={styles.aboutP}>{description}</p>
     </div>
   );
 }

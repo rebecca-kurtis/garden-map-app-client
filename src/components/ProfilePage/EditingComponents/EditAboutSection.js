@@ -51,7 +51,7 @@ if (mode === true) {
       <h2 className={styles.aboutH2}>About the Plot:</h2>
       <button onClick={handleClick} className={styles.saveButton}>Edit</button>
       </div>
-      <p className={styles.aboutP}>{form.description}</p>
+      <p className={styles.editAboutP}>{form.description}</p>
       
       </div>
   );
@@ -59,7 +59,7 @@ if (mode === true) {
 if (mode === false) {
   return (
     <div className={styles.aboutSectionContainer}>
-      <h2 className={styles.aboutH2}>About the Plot:</h2>
+      <h2 className={styles.editAboutH2}>About the Plot:</h2>
 
       <form onSubmit={handleUserSubmit} className={styles.EditAboutSectionForm}>
       <label className="form-label">Update About Section:</label>

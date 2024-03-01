@@ -12,9 +12,11 @@
     text-align: center;
     background-color: #38A3A5;
     height: fit-content;
-    /* width: fit-content; */
+  /* height: 140vh; */
+
+    width: 100%;
     /* width: 100%; */
-    width: 140vw;
+    /* width: 140vw; */
   }
 }
 
@@ -25,11 +27,11 @@
   text-align: center;
   background-color: #38A3A5;
   /* height: fit-content; */
-  height: 1800px;
+  height: 1600px;
 
   /* width: fit-content; */
   /* width: 140vw; */
-  width: 800px;
+  width: 900px;
 }
 
 }
