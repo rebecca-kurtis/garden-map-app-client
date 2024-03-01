@@ -26,12 +26,13 @@
 .App {
   text-align: center;
   background-color: #38A3A5;
-  /* height: fit-content; */
-  height: 1600px;
+  height: fit-content;
+  /* height: 1600px; */
 
   /* width: fit-content; */
+  width: auto;
   /* width: 140vw; */
-  width: 900px;
+  width: 674.99px;
 }
 
 }

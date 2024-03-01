@@ -22,7 +22,7 @@ export default function TipsSection(props) {
   ));
   return (
     <div className={styles.tipsSectionContainer}>
-      <h2>Tips:</h2>
+      <h2 className={styles.tipsSectionContainerH2}>Tips:</h2>
       <ul>{mappedTips}</ul>
     </div>
   );
