@@ -16,7 +16,7 @@ function Login(props) {
 
   const [form, setForm] = useState({
     username: "",
-    password: "",
+    password: ""
   });
 
   // Set the value of a single element of the object
@@ -35,57 +35,19 @@ function Login(props) {
   const handleUserSubmit = (e) => {
     e.preventDefault();
     setForm(form);
-    console.log("form", form);
 
-    //hash the password
-
-    // bcrypt
-    //   .genSalt(10)
-    //   .then((salt) => {
-    //     console.log("Salt: ", salt);
-    //     return bcrypt.hash(form.password, salt);
-    //   })
-    //   .then((hash) => {
-    //     console.log("Hash: ", hash);
-    //     const submitObj = {
-    //       username: form.username,
-    //       password: hash
-    //     }
-    //     // setForm({ password: hash });
-    //     console.log("in hash", submitObj);
-    //     return submitObj;
-    //   })
-    //   .then((obj) => {
-    //     axios
-    //       .post(usersRoute, obj)
-    //       .then((response) => {
-    //         // console.log("login response", response);
-
-    //         updateUserStorage(response.data[0].user_id);
-    //         // console.log("local storage:", localStorage)
-
-    //         return response.data;
-    //       })
-    //       .catch((error) => {
-    //         if (error.response) {
-    //           alert(`Error! ${error.message}`);
-    //         } else if (error.request) {
-    //           console.log("network error");
-    //         } else {
-    //           console.log(error);
-    //         }
-    //       });
-    //   })
-    //   .catch((err) => console.error(err.message));
+    
 
     axios
       .post(usersRoute, form)
       .then((response) => {
-        // console.log("login response", response);
+       
+        if (response === null) {
+          alert("Wrong password, please try again!")
+        }
 
-        updateUserStorage(response.data[0].user_id);
-        // console.log("local storage:", localStorage)
-
+        updateUserStorage(response.data[0][0].user_id);
+      
         return response.data;
       })
       .catch((error) => {
@@ -139,18 +101,6 @@ function Login(props) {
                 value={form.password}
                 placeholder="Enter your password"
                 onChange={(e) => {
-                  // bcrypt
-                  //   .genSalt(10)
-                  //   .then((salt) => {
-                  //     console.log("Salt: ", salt);
-                  //     return bcrypt.hash(e.target.value, salt);
-                  //   })
-                  //   .then((hash) => {
-                  //     console.log("Hash: ", hash);
-                  //     setValue("password", hash);
-                  //     console.log("in hash", form);
-                  //   })
-                  //   .catch((err) => console.error(err.message));
                   setValue("password", e.target.value);
                 }}
                 required
