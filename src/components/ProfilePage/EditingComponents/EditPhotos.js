@@ -47,7 +47,7 @@ function MyVerticallyCenteredModal(props) {
       })
       .then((response) => {
 
-        console.log("delete resp", response)
+        // console.log("delete resp", response)
         // plantIcons = [];
 
         // for (let plotObject in response.data) {

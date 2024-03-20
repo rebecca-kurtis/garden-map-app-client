@@ -7,7 +7,7 @@ export default function SmallPlotElement(props) {
 
 
   const mappedIcons = array.map((url, index) => <img className={styles.iconImage} key={index} src={require('../../images/PlantIcons/' + url + '.png')} alt="icon" />)
-  console.log('test', mappedIcons)
+  // console.log('test', mappedIcons)
   return (
     <div className={styles.smallPlotElementContainer}>
       <div className={styles.smallPlotElement} onClick={() => onClickFunc(props.plotID)}>

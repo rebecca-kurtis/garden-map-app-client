@@ -43,10 +43,10 @@ function App() {
     setUser(currentUserID);
     localStorage.clear();
     localStorage.setItem("userID", JSON.stringify(currentUserID));
-    console.log("userID in function", userID);
+    // console.log("userID in function", userID);
   }
 
-  console.log(updateUserStorage);
+  // console.log(updateUserStorage);
 
   // Remove current user state
   function clearUserStorage() {

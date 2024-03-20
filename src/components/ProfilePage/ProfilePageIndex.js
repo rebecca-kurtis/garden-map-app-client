@@ -19,7 +19,7 @@ import FancyboxExample from "../HomePage/FancyBox";
 import EditPhotos from "./EditingComponents/EditPhotos";
 
 export default function ProfilePageIndex(props) {
-  console.log("local storage:", localStorage);
+  // console.log("local storage:", localStorage);
   // const [profileInfo, setProfileInfo] = useState([]);
   const [isLoading, setLoading] = useState(true);
   // const [photos, setPhotos] = useState(null);
@@ -29,20 +29,20 @@ export default function ProfilePageIndex(props) {
   const user = props.user;
   const plotID = parseInt(plot_id);
 
-  console.log(user);
-  console.log({
-    plotID,
-    user,
-  });
+  // console.log(user);
+  // console.log({
+  //   plotID,
+  //   user,
+  // });
 
   useEffect(() => {
     checkIfUserOwnsPlot(plotID, user).then((data) => {
-      console.log("data inside hook", data);
+      // console.log("data inside hook", data);
       props.setOwnsPlot(data.user_owns_plot);
     });
 
     getPlotProfileInfo(plot_id).then((data) => {
-      console.log("data inside func", data);
+      // console.log("data inside func", data);
       props.setProfileInfo(data[0].profileInfo);
       props.setPhotos(data[1].photosInfo);
       setLoading(false);
