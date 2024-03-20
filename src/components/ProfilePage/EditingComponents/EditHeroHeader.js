@@ -1,5 +1,5 @@
 import styles from "../../styles/ProfilePage/HeroHeader.module.css";
-import userImage from "../../images/user-image.png";
+import userImage from "../../images/plantpots.jpg";
 import { useState, useEffect } from "react";
 import axios from "axios";
 

@@ -1,5 +1,5 @@
 import styles from "../styles/ProfilePage/HeroHeader.module.css";
-import userImage from "../images/user-image.png";
+import userImage from "../../components/images/plantpots.jpg";
 
 export default function HeroHeader(props) {
   const fName = props.profileInfo[0].fname;
